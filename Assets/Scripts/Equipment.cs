@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Equipment : Item
 {
-    ItemSlot slot;  // What slot to attach the item to when equipped
+    //=============================================================================
+    // Author: Kevin Charron
+    //=============================================================================
 
-    public enum ItemSlot
+    [SerializeField] EquipSlot slot;  // What slot to attach the item to when equipped
+
+    public enum EquipSlot
     {
         Right_hand, Left_hand, Head, Boots, Chest, Two_hand, Pants
     }
