@@ -9,7 +9,7 @@ public class Character_PLACEHOLDER : MonoBehaviour
     //=============================================================================
 
     public Inventory inventory;
-    // Start is called before the first frame update
+   
     private void OnCollisionEnter(Collision collision)
     {
         if (TryGetComponent(out Item item))

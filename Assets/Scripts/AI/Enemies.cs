@@ -1,0 +1,76 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class Enemies : NPC
+{
+    //=============================================================================
+    // Author: Kevin Charron
+    //=============================================================================
+
+    //Attack variables
+    [SerializeField] float aggroRadius;
+    [SerializeField] float SightRadius;
+    [SerializeField] float attackdamage;
+    [SerializeField] float attackRadius;
+    [SerializeField] float attackInterval;
+    [SerializeField] float attackCoolDown = 0f;
+
+    //Distance Variables
+    [SerializeField] Transform eyeTransfrom; //Where the monsters eyes are located
+    float distanceFromPlayer; // distance between the enemie and the player
+    bool playerSight; // if the player is in SightRadius
+    bool playerSeen; // if the player is in SightRadius and sight is not blocked
+    bool playerAggro; // if the player is in aggroRadius
+    bool attackPlayer; // if the enemie will attack the player
+    bool isDead; // might move to npc 
+
+    //other
+    Animator animator;
+
+    private void Awake()
+    {
+        base.player = GameObject.Find("Player");
+        base.agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        distanceFromPlayer = Vector3.Distance(player.transform.position, agent.transform.position);
+
+        if (distanceFromPlayer < SightRadius)
+        {
+            playerSeen = true;
+        }
+        if (distanceFromPlayer < aggroRadius)
+        {
+            playerAggro = true;
+        }
+        if (distanceFromPlayer < attackRadius)
+        {
+            attackPlayer = true;
+        }
+    }
+    void FixedUpdate()
+    {
+        if (!isDead)
+        {
+            RaycastHit hit;
+            Vector3 rayDirection = player.transform.GetChild(0).position - eyeTransfrom.position;
+            Physics.Raycast(eyeTransfrom.position, rayDirection, out hit, 500f);
+            if (hit.collider.gameObject.tag == "Player" || playerSeen)
+            {
+                transform.LookAt(player.transform);
+            }
+
+            if (playerAggro)
+            {
+                animator.SetBool("move", true);
+                agent.SetDestination(player.transform.position);
+            }
+        }
+
+    }
+}
