@@ -41,7 +41,7 @@ public class RootMotionCharacterController : MonoBehaviour
             }
         }
 
-        Debug.Log(controller.isGrounded);
+        //Debug.Log(controller.isGrounded);
 
     }
 

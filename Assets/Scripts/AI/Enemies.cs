@@ -22,12 +22,13 @@ public class Enemies : NPC
     float distanceFromPlayer; // distance between the enemie and the player
     bool playerSight; // if the player is in SightRadius
     bool playerSeen; // if the player is in SightRadius and sight is not blocked
-    bool playerAggro; // if the player is in aggroRadius
     bool attackPlayer; // if the enemie will attack the player
-    bool isDead; // might move to npc 
+    bool isDead = false; // might move to npc 
 
     //other
     Animator animator;
+    RaycastHit hit;
+    Vector3 rayDirection;
 
     private void Awake()
     {
@@ -43,34 +44,47 @@ public class Enemies : NPC
         if (distanceFromPlayer < SightRadius)
         {
             playerSeen = true;
+            transform.LookAt(player.transform);
         }
-        if (distanceFromPlayer < aggroRadius)
+        else { playerSeen = false; }
+        if (distanceFromPlayer < aggroRadius && playerSight)
         {
-            playerAggro = true;
+            PlayerAggro();
         }
-        if (distanceFromPlayer < attackRadius)
-        {
-            attackPlayer = true;
-        }
+        //if (distanceFromPlayer < attackRadius)
+        //{
+        //    attackPlayer = true;
+        //}
+        //else { attackPlayer = false; }
     }
     void FixedUpdate()
     {
         if (!isDead)
         {
-            RaycastHit hit;
-            Vector3 rayDirection = player.transform.GetChild(0).position - eyeTransfrom.position;
-            Physics.Raycast(eyeTransfrom.position, rayDirection, out hit, 500f);
-            if (hit.collider.gameObject.tag == "Player" || playerSeen)
+            rayDirection = player.transform.GetChild(0).position - eyeTransfrom.position;
+            Physics.Raycast(eyeTransfrom.position, rayDirection, out hit, 1000f);
+            if (hit.collider != null)
             {
-                transform.LookAt(player.transform);
-            }
-
-            if (playerAggro)
-            {
-                animator.SetBool("move", true);
-                agent.SetDestination(player.transform.position);
+                if (hit.collider.gameObject.tag == "Player" && playerSeen)
+                {
+                    playerSight = true;
+                }
+                else
+                {
+                    playerSight = false;
+                }
             }
         }
+    }
+    void PlayerAggro()
+    {
+        //animator.SetBool("move", true);
+        agent.SetDestination(player.transform.position);
+        Debug.Log("aggro");
+    }
 
+    void AttackPlayer()
+    {
+        //TBD
     }
 }
