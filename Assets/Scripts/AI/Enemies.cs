@@ -10,6 +10,7 @@ public class Enemies : NPC
     //=============================================================================
 
     //Attack variables
+    [Header("Attack variables")]
     [SerializeField] float aggroRadius;
     [SerializeField] float SightRadius;
     [SerializeField] float attackdamage;
@@ -20,10 +21,10 @@ public class Enemies : NPC
     //Distance Variables
     [SerializeField] Transform eyeTransfrom; //Where the monsters eyes are located
     float distanceFromPlayer; // distance between the enemie and the player
-    bool playerSight; // if the player is in SightRadius
-    bool playerSeen; // if the player is in SightRadius and sight is not blocked
+    bool playerSight; // if the player is in LOS (can hide from enemies with this)
+    bool playerSeen; // if the player is in SightRadius and sight is not blocked (probably don't need actually)
     bool attackPlayer; // if the enemie will attack the player
-    bool isDead = false; // might move to npc 
+    bool isDead; // might move to npc 
 
     //other
     Animator animator;
@@ -37,20 +38,36 @@ public class Enemies : NPC
         animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+        //Animation variables
+        animator.SetFloat("Speed", agent.velocity.magnitude);     
+   
+
+        // AI States
         distanceFromPlayer = Vector3.Distance(player.transform.position, agent.transform.position);
 
-        if (distanceFromPlayer < SightRadius)
+        //Watch
+        //if (distanceFromPlayer < SightRadius)
+        //{
+        //    playerSeen = true;
+        //    transform.LookAt(player.transform);
+        //    Debug.Log("Seen");
+        //}
+        //else { playerSeen = false; }
+        //Patrolling
+        if (distanceFromPlayer > aggroRadius || !playerSight)
         {
-            playerSeen = true;
-            transform.LookAt(player.transform);
+            base.Patrolling = true; agent.speed = 1f; 
         }
-        else { playerSeen = false; }
+        else { base.Patrolling = false; agent.speed = 3f; }
+        //Aggro
         if (distanceFromPlayer < aggroRadius && playerSight)
         {
             PlayerAggro();
         }
+        //Attack
         //if (distanceFromPlayer < attackRadius)
         //{
         //    attackPlayer = true;
@@ -65,7 +82,7 @@ public class Enemies : NPC
             Physics.Raycast(eyeTransfrom.position, rayDirection, out hit, 1000f);
             if (hit.collider != null)
             {
-                if (hit.collider.gameObject.tag == "Player" && playerSeen)
+                if (hit.collider.gameObject.tag == "Player")
                 {
                     playerSight = true;
                 }
@@ -78,9 +95,9 @@ public class Enemies : NPC
     }
     void PlayerAggro()
     {
-        //animator.SetBool("move", true);
+        transform.LookAt(player.transform);
         agent.SetDestination(player.transform.position);
-        Debug.Log("aggro");
+        Debug.Log("Aggro");
     }
 
     void AttackPlayer()
