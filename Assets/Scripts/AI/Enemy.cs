@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemies : NPC
+public class Enemy : NPC
 {
     //=============================================================================
     // Author: Kevin Charron
