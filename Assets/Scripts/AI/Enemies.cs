@@ -12,12 +12,17 @@ public class Enemies : NPC
     //Attack variables
     [Header("Attack variables")]
     [SerializeField] float aggroRadius;
-    [SerializeField] float SightRadius;
+    // [SerializeField] float SightRadius;
     [SerializeField] float attackdamage;
     [SerializeField] float attackRadius;
     [SerializeField] float attackInterval;
-    [SerializeField] float attackCoolDown = 0f;
+    [SerializeField] Collider atkCollider;
 
+    [Header("Agent variables")]
+    [SerializeField] float agentWalkSpeed;
+    [SerializeField] float agentRunSpeed;
+
+    [Header(" ")]
     //Distance Variables
     [SerializeField] Transform eyeTransfrom; //Where the monsters eyes are located
     float distanceFromPlayer; // distance between the enemie and the player
@@ -25,16 +30,16 @@ public class Enemies : NPC
     bool playerSeen; // if the player is in SightRadius and sight is not blocked (probably don't need actually)
     bool attackPlayer; // if the enemie will attack the player
     bool isDead; // might move to npc 
+    bool alreadyattacked;
 
     //other
     Animator animator;
     RaycastHit hit;
     Vector3 rayDirection;
+    [SerializeField] LayerMask playermask;
 
     private void Awake()
     {
-        base.player = GameObject.Find("Player");
-        base.agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
     }
 
@@ -48,7 +53,7 @@ public class Enemies : NPC
         // AI States
         distanceFromPlayer = Vector3.Distance(player.transform.position, agent.transform.position);
 
-        //Watch
+        //Watch // might use for something else (Scream, Charge ... )
         //if (distanceFromPlayer < SightRadius)
         //{
         //    playerSeen = true;
@@ -56,24 +61,20 @@ public class Enemies : NPC
         //    Debug.Log("Seen");
         //}
         //else { playerSeen = false; }
+
         //Patrolling
         if (distanceFromPlayer > aggroRadius || !playerSight)
         {
-            base.Patrolling = true; agent.speed = 1f; 
+            base.Patrolling = true; agent.speed = agentWalkSpeed; 
         }
-        else { base.Patrolling = false; agent.speed = 3f; }
+        else { base.Patrolling = false; agent.speed = agentRunSpeed; }
         //Aggro
         if (distanceFromPlayer < aggroRadius && playerSight)
         {
             PlayerAggro();
         }
-        //Attack
-        //if (distanceFromPlayer < attackRadius)
-        //{
-        //    attackPlayer = true;
-        //}
-        //else { attackPlayer = false; }
     }
+
     void FixedUpdate()
     {
         if (!isDead)
@@ -93,15 +94,26 @@ public class Enemies : NPC
             }
         }
     }
+
     void PlayerAggro()
     {
-        transform.LookAt(player.transform);
         agent.SetDestination(player.transform.position);
-        Debug.Log("Aggro");
+        if (!alreadyattacked)
+        {
+            alreadyattacked = true;
+            animator.SetTrigger("Attack");
+            Invoke(nameof(AttackCD), attackInterval);
+            Collider[] colliders = Physics.OverlapBox(atkCollider.bounds.center, atkCollider.bounds.extents, atkCollider.transform.rotation, playermask);   
+            foreach (Collider col in colliders)
+            {
+                //if (col.gameObject.TryGetComponent<CharacterHealth>().takedamage()) //example implementation
+            }     
+        }
+        
     }
 
-    void AttackPlayer()
+    void AttackCD()
     {
-        //TBD
+        alreadyattacked = false;
     }
 }

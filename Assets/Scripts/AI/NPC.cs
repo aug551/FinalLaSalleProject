@@ -12,16 +12,19 @@ public class NPC : MonoBehaviour
     // Patrol points
     [Header("Patrol points")]
     public Transform[] points;
-    [Header("")]
-
     int destPoint = 0;
-    public NavMeshAgent agent;
-    public GameObject player;
+
+    [Header(" ")]
+    protected NavMeshAgent agent;
+    protected GameObject player;
     protected bool Patrolling;
 
     private void Awake()
     {
+        agent = GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player");
         agent.autoBraking = false;
+        //agent.stoppingDistance = 5f;
     }
 
     // https://docs.unity3d.com/Manual/nav-AgentPatrol.html i copy pasted a lot from this lul
@@ -30,8 +33,7 @@ public class NPC : MonoBehaviour
         if (points.Length == 0)
             return;
         agent.destination = points[destPoint].position;
-        destPoint = (destPoint + 1) % points.Length; 
-        
+        destPoint = (destPoint + 1) % points.Length;     
     }
     protected virtual void Update()
     {
@@ -44,9 +46,8 @@ public class NPC : MonoBehaviour
                     Patrol();
                 }
             }
-            if (!agent.pathPending && agent.remainingDistance < 0.5f)
+            if (!agent.pathPending && agent.remainingDistance < 1.35f)
                 Patrol();
-            Debug.Log("patrolling");
         }
     }
 
