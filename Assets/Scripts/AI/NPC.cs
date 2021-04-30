@@ -19,16 +19,16 @@ public class NPC : MonoBehaviour
     protected GameObject player;
     protected bool Patrolling;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.Find("Player");
         agent.autoBraking = false;
         //agent.stoppingDistance = 5f;
     }
 
     // https://docs.unity3d.com/Manual/nav-AgentPatrol.html i copy pasted a lot from this lul
-    protected virtual void Patrol()
+    protected void Patrol()
     {
         if (points.Length == 0)
             return;

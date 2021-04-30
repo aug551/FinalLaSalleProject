@@ -38,8 +38,9 @@ public class Enemy : NPC
     Vector3 rayDirection;
     [SerializeField] LayerMask playermask;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         animator = GetComponent<Animator>();
     }
 
