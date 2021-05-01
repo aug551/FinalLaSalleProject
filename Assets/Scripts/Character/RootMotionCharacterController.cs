@@ -7,7 +7,6 @@ public class RootMotionCharacterController : MonoBehaviour
     private Animator anim;
     private CharacterController controller;
 
-    [SerializeField] private float jumpForce = 8f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 1.0f;
     private bool isJumping = false;
@@ -17,6 +16,10 @@ public class RootMotionCharacterController : MonoBehaviour
     [SerializeField] private float slopeForceRayLength;
 
     private Vector3 playerVelocity = Vector3.zero;
+
+
+    private bool isDashing = false;
+    private bool canDash = false;
 
 
     // Start is called before the first frame update
@@ -32,7 +35,6 @@ public class RootMotionCharacterController : MonoBehaviour
         // Apply gravity if not grounded
         if (controller.isGrounded)
         {
-            anim.applyRootMotion = true;
             anim.SetBool("Jumping", false);
             isJumping = false;
             canJump = true;
@@ -82,9 +84,26 @@ public class RootMotionCharacterController : MonoBehaviour
         if (this.isJumping)
         {
             controller.Move(new Vector3(playerVelocity.x, playerVelocity.y, 0) * Time.deltaTime);
-
+        }
+        else
+        {
+            anim.applyRootMotion = true;
         }
 
+
+        // Dash
+        if (Input.GetButtonDown("Dash"))
+        {
+            anim.applyRootMotion = false;
+            Invoke("FinishedDashing", 0.25f);
+            this.isDashing = true;
+            this.canDash = false;
+        }
+
+        if (this.isDashing)
+        {
+            controller.Move(new Vector3(playerVelocity.x * 10, this.transform.position.y, 0) * Time.deltaTime);
+        }
 
 
 
@@ -94,7 +113,7 @@ public class RootMotionCharacterController : MonoBehaviour
             controller.Move(Vector3.down * controller.height / 2 * slopeForce * Time.deltaTime);
         }
 
-        Debug.Log(playerVelocity.x);
+        //Debug.Log(playerVelocity.x);
 
     }
 
@@ -115,6 +134,12 @@ public class RootMotionCharacterController : MonoBehaviour
 
         return false;
 
+    }
+
+    private void FinishedDashing()
+    {
+        canDash = true;
+        isDashing = false;
     }
 
 }
