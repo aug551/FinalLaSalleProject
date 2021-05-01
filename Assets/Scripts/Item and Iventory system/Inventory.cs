@@ -8,27 +8,43 @@ public class Inventory : MonoBehaviour
     // Author: Kevin Charron
     //=============================================================================
 
-    List<Item> itemsList = new List<Item>();
+    
+    [SerializeField] List<ItemUI> itemsUIList = new List<ItemUI>();
 
-    public void AddItem(Item item)
+    private void Awake()
     {
-        itemsList.Add(item);
+        //Get all the itemUIs
+        GetComponentsInChildren<ItemUI>(itemsUIList);
+        foreach (ItemUI item in itemsUIList)
+        {
+            item.gameObject.SetActive(false);
+        }
     }
-
     public void AddCapped(Item itemToSearch)
     {
-        foreach (Item item in itemsList)
+        foreach (ItemUI item in itemsUIList)
         {
             if (itemToSearch == item)
             {
-                if (item.CanAdd())
+                if (itemToSearch.CanAdd())
                 {
-                    item.Add(1);
+                    itemToSearch.Add(1);
                 }
                 else
                 {
-                    itemsList.Add(itemToSearch);
+                    AddItem(itemToSearch);
                 }
+            }
+        }
+    }
+    public void AddItem(Item item) 
+    {
+        foreach (ItemUI itemui in itemsUIList)
+        {
+            if (itemui.gameObject.activeInHierarchy == false)
+            {
+                itemui.gameObject.SetActive(true);
+                itemui.Add(item);
             }
         }
     }

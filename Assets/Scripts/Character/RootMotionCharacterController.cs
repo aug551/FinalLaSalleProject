@@ -16,7 +16,7 @@ public class RootMotionCharacterController : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        controller = GetComponent <CharacterController>();
+        controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
