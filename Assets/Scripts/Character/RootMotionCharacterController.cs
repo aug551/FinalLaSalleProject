@@ -32,6 +32,8 @@ public class RootMotionCharacterController : MonoBehaviour
         // Apply gravity if not grounded
         if (controller.isGrounded)
         {
+            anim.applyRootMotion = true;
+            anim.SetBool("Jumping", false);
             isJumping = false;
             canJump = true;
             if (playerVelocity.y < 0) playerVelocity.y = 0f;
@@ -52,22 +54,36 @@ public class RootMotionCharacterController : MonoBehaviour
             this.transform.eulerAngles =
                 (Input.GetAxis("Horizontal") > 0) ? new Vector3(0, -90, 0) : new Vector3(0, 90, 0);
 
+            if (!isJumping)
+            {
+                playerVelocity.x = anim.velocity.x;
+            }
         }
         else
         {
             anim.SetBool("Move", false);
+            if (!isJumping)
+                playerVelocity.x = 0;
         }
 
         
         // Jumping
         if (Input.GetButtonDown("Jump") && (canJump || OnSlope()))
         {
+            anim.applyRootMotion = false;
+            anim.SetBool("Jumping", true);
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
             this.isJumping = true;
             canJump = false;
+
         }
 
-        controller.Move(playerVelocity * Time.deltaTime);
+        // Only use controller for vertical jumping
+        if (this.isJumping)
+        {
+            controller.Move(new Vector3(playerVelocity.x, playerVelocity.y, 0) * Time.deltaTime);
+
+        }
 
 
 
@@ -78,6 +94,7 @@ public class RootMotionCharacterController : MonoBehaviour
             controller.Move(Vector3.down * controller.height / 2 * slopeForce * Time.deltaTime);
         }
 
+        Debug.Log(playerVelocity.x);
 
     }
 

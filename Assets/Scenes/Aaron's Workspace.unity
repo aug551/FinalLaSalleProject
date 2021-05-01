@@ -374,6 +374,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 0d7e5e6aea86f654ca418af56deecd0e, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 8621e22ab3200f049887a95621f788d3, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7833114641849259454, guid: 8621e22ab3200f049887a95621f788d3, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -498,7 +502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 8
   gravity: -9.81
-  jumpHeight: 3
+  jumpHeight: 1.5
   slopeForce: 100
   slopeForceRayLength: 1.5
 --- !u!143 &1402254857
