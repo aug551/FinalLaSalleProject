@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Material : Item
 {
-    [SerializeField] MaterialType type;
+    [SerializeField] public MaterialType type;
     public enum MaterialType
     {
         Stone, Metal, Leather, ore

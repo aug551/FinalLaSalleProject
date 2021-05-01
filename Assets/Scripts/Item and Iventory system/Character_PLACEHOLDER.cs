@@ -9,19 +9,23 @@ public class Character_PLACEHOLDER : MonoBehaviour
     //=============================================================================
 
     public Inventory inventory;
-   
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (TryGetComponent(out Item item))
+
+        if (other.gameObject.TryGetComponent(out Item item))
         {
             if (item.IsCapped)
             {
                 inventory.AddCapped(item);
+                other.gameObject.SetActive(false);
             }
             else
             {
+                Debug.Log("entered");
                 inventory.AddItem(item);
             }
         }
     }
+
 }

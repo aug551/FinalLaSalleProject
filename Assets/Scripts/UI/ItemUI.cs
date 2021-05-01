@@ -11,7 +11,7 @@ public class ItemUI : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEn
     Vector2 beginTransform;
     CanvasGroup canvasGroup;
     Image image;
-    Item item;
+    public Item item;
 
     private void Awake()
     {
@@ -42,9 +42,19 @@ public class ItemUI : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEn
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor; //https://www.google.com/search?q=how+to+drag+items+unity+ui+&rlz=1C1CHBF_enCA706CA706&sxsrf=ALeKk03h92i_Lengv4GYZWwmHt1kltkNkw%3A1619880734359&ei=HmuNYOOpFb3R5NoPnYWy8AQ&oq=how+to+drag+items+unity+ui+&gs_lcp=Cgdnd3Mtd2l6EAMyCAghEBYQHRAeMggIIRAWEB0QHjIICCEQFhAdEB46BAgjECc6BAguECc6BQgAEJECOggIABCxAxCDAToOCC4QsQMQgwEQxwEQowI6CAguEMcBEKMCOgsILhCxAxDHARCjAjoFCAAQsQM6BAgAEEM6AggAOgcIABCHAhAUOgYIABAWEB5QtjVYxVhg9lloAHACeACAAWCIAfAPkgECMjiYAQCgAQGqAQdnd3Mtd2l6wAEB&sclient=gws-wiz&ved=0ahUKEwjjsP_93ajwAhW9KFkFHZ2CDE4Q4dUDCA4&uact=5#kpvalbx=_8muNYMPRD9Wp1QHPiqHoDA18
+        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor; //https://www.youtube.com/watch?v=BGr-7GZJNXg&t=2s&ab_channel=CodeMonkey
     }
 
+    //public void Add(Armor _item)
+    //{
+    //    item = _item;
+    //    image.sprite = _item.Icon;
+    //}
+    //public void Add(Material _item)
+    //{
+    //    item = _item;
+    //    image.sprite = _item.Icon;
+    //}
     public void Add(Item _item)
     {
         item = _item;

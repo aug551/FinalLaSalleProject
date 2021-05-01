@@ -22,9 +22,10 @@ public class Inventory : MonoBehaviour
     }
     public void AddCapped(Item itemToSearch)
     {
+        
         foreach (ItemUI item in itemsUIList)
         {
-            if (itemToSearch == item)
+            if (itemToSearch == item.item)
             {
                 if (itemToSearch.CanAdd())
                 {
@@ -32,8 +33,16 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
+                    
                     AddItem(itemToSearch);
+                    return;
                 }
+            }
+            else
+            {
+
+                AddItem(itemToSearch);
+                return;
             }
         }
     }
@@ -43,8 +52,10 @@ public class Inventory : MonoBehaviour
         {
             if (itemui.gameObject.activeInHierarchy == false)
             {
+                Debug.Log("what");
                 itemui.gameObject.SetActive(true);
-                itemui.Add(item);
+                itemui.Add(item);        
+                return;      
             }
         }
     }

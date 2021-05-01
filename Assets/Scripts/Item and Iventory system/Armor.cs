@@ -9,7 +9,7 @@ public class Armor : Equipment
     //=============================================================================
 
 
-    int Stamina; // May do a stats system for the character ?
+    public int Stamina; // May do a stats system for the character ?
     [SerializeField] Sprite ArmorSprite; // What the armor looks like on the character
 
 }

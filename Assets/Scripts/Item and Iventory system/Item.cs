@@ -16,6 +16,7 @@ public class Item : MonoBehaviour
     [SerializeField] int value; // value in game currency
     [SerializeField] public bool IsCapped; // Materials and Potions for example will have a max capcity, while equipment or crafting stations do not 
     [SerializeField] float weight; //for inventory system
+    
 
     public Sprite Icon { get => icon; set => icon = value; }
 
