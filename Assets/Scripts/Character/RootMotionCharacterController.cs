@@ -19,7 +19,10 @@ public class RootMotionCharacterController : MonoBehaviour
 
 
     private bool isDashing = false;
-    private bool canDash = false;
+    private bool canDash = true;
+    [SerializeField] private float dashDistance = 5f;
+    [SerializeField] private float dashDuration = 0.20f;
+    [SerializeField] private float dashStopForce = 3f;
 
 
     // Start is called before the first frame update
@@ -92,17 +95,18 @@ public class RootMotionCharacterController : MonoBehaviour
 
 
         // Dash
-        if (Input.GetButtonDown("Dash"))
+        if (Input.GetButtonDown("Dash") && canDash)
         {
             anim.applyRootMotion = false;
-            Invoke("FinishedDashing", 0.25f);
+            Invoke("FinishedDashing", dashDuration);
             this.isDashing = true;
             this.canDash = false;
         }
 
         if (this.isDashing)
         {
-            controller.Move(new Vector3(playerVelocity.x * 10, this.transform.position.y, 0) * Time.deltaTime);
+            playerVelocity.x = (isJumping) ? (this.transform.forward.x * dashDistance) / 2 : this.transform.forward.x * dashDistance;
+            controller.Move(new Vector3(playerVelocity.x, this.transform.position.y, 0) * Time.deltaTime);
         }
 
 
@@ -140,6 +144,7 @@ public class RootMotionCharacterController : MonoBehaviour
     {
         canDash = true;
         isDashing = false;
+        this.playerVelocity.x = this.playerVelocity.x / dashStopForce;
     }
 
 }

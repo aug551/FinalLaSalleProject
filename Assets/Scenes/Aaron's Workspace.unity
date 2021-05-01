@@ -500,11 +500,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa2ddddfe5971e4eaafd8a8216e99c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 8
   gravity: -9.81
   jumpHeight: 1.5
   slopeForce: 100
   slopeForceRayLength: 1.5
+  dashDistance: 50
+  dashDuration: 0.15
+  dashStopForce: 10
 --- !u!143 &1402254857
 CharacterController:
   m_ObjectHideFlags: 0
