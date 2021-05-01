@@ -213,7 +213,7 @@ Transform:
   m_GameObject: {fileID: 103933318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.18, y: -2.621, z: 0}
-  m_LocalScale: {x: 28.491287, y: 1, z: 1}
+  m_LocalScale: {x: 1355.0171, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -366,12 +366,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: ganfaul_m_aure
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8621e22ab3200f049887a95621f788d3, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 8621e22ab3200f049887a95621f788d3, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 0d7e5e6aea86f654ca418af56deecd0e, type: 2}
     - target: {fileID: 7833114641849259454, guid: 8621e22ab3200f049887a95621f788d3, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8279239330272192641, guid: 8621e22ab3200f049887a95621f788d3, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -464,13 +472,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 991405962}
-  m_LocalRotation: {x: -0, y: -0, z: -0.21887222, w: 0.97575355}
-  m_LocalPosition: {x: -3.15, y: -0.94, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.26319152, w: 0.9647436}
+  m_LocalPosition: {x: -3.102, y: -1.162, z: 0}
   m_LocalScale: {x: 7.9675207, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -25.286}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30.519}
 --- !u!1 &1402254851 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8621e22ab3200f049887a95621f788d3, type: 3}
@@ -489,7 +497,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 8
-  gravity: -9.8
+  gravity: -9.81
+  jumpHeight: 3
+  slopeForce: 100
+  slopeForceRayLength: 1.5
 --- !u!143 &1402254857
 CharacterController:
   m_ObjectHideFlags: 0
