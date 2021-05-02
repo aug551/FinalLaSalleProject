@@ -39,13 +39,13 @@ public class NPC : MonoBehaviour
     {
         if (Patrolling)
         {
-            foreach (Transform point in points)
+            foreach (Transform point in points) //
             {
                 if (agent.destination != point.position)
                 {
                     Patrol();
                 }
-            }
+            } // me
             if (!agent.pathPending && agent.remainingDistance < 1.35f)
                 Patrol();
         }

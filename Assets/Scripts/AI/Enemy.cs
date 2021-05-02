@@ -110,7 +110,6 @@ public class Enemy : NPC
                 //if (col.gameObject.TryGetComponent<CharacterHealth>().takedamage()) //example implementation
             }     
         }
-        
     }
 
     void AttackCD()

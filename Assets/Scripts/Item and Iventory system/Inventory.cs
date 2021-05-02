@@ -52,7 +52,6 @@ public class Inventory : MonoBehaviour
         {
             if (itemui.gameObject.activeInHierarchy == false)
             {
-                Debug.Log("what");
                 itemui.gameObject.SetActive(true);
                 itemui.Add(item);        
                 return;      
