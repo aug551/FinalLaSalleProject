@@ -24,7 +24,6 @@ public class RootMotionCharacterController : MonoBehaviour
     [SerializeField] private float dashDuration = 0.20f;
     [SerializeField] private float dashStopForce = 3f;
 
-    public Inventory inventory;
     // Start is called before the first frame update
     void Start()
     {
@@ -147,21 +146,5 @@ public class RootMotionCharacterController : MonoBehaviour
         this.playerVelocity.x = this.playerVelocity.x / dashStopForce;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
 
-        if (other.gameObject.TryGetComponent(out Item item))
-        {
-            if (item.IsCapped)
-            {
-                inventory.AddCapped(item);
-                other.gameObject.SetActive(false);
-            }
-            else
-            {
-                Debug.Log("entered");
-                inventory.AddItem(item);
-            }
-        }
-    }
 }
