@@ -9,57 +9,53 @@ public class Item : MonoBehaviour
     //=============================================================================
 
     [SerializeField] string itemName; // Name of the item
-    [SerializeField] int MaxCapacity; // Max number the player can carry in a stack
     [SerializeField] Sprite icon; // Sprite used to display the item (UI, When dopped in game...)
-    int amountOwned; // how many the player owns
     [SerializeField] string description; // description of the item
     [SerializeField] int value; // value in game currency
-    [SerializeField] public bool IsCapped; // Materials and Potions for example will have a max capcity, while equipment or crafting stations do not 
+    [SerializeField] private bool isCapped; // Materials and Potions for example will have a max capcity, while equipment or crafting stations do not 
     [SerializeField] float weight; //for inventory system
     
     public Sprite Icon { get => icon; set => icon = value; }
+    public string ItemName { get => itemName; set => itemName = value; }
+    public string Description { get => description; set => description = value; }
+    public int Value { get => value; set => this.value = value; }
+    public bool IsCapped { get => isCapped; set => isCapped = value; }
+    public float Weight { get => weight; set => weight = value; }
 
-    public void Add(int amount)
+    public Item(string _itemName, Sprite _icon, string _description, int _value, bool _IsCapped, float _weight)
     {
-        amountOwned += amount;
-        if (amountOwned > MaxCapacity)
-        { amountOwned = MaxCapacity; }
+        ItemName = _itemName;
+        icon = _icon;
+        Description = _description;
+        Value = _value;
+        IsCapped = _IsCapped;
+        Weight = _weight;
+    }
+    public virtual void Add(int amount)
+    {
+
     }
 
-    public bool CanAdd()
+    public virtual bool CanAdd()
     {
-        return MaxCapacity == 0 || amountOwned < MaxCapacity;
+        return false;
     }
 
-    public int GetAmountOwned()
+    public virtual bool HasAny()
     {
-        return amountOwned;
-    }
-
-    public bool HasAny()
-    {
-        return amountOwned > 0;
+        return true;
     }
 
     // Use and UseAll will be called when working with the crafting system
-    public int UseAll()
+    public virtual int Use(int count)
     {
-        int amountUsed = amountOwned;
-        amountOwned = 0;
-        return amountUsed;
+        //Destroy(this);
+        return 1;
     }
-
-    public int Use(int count)
+    public virtual int UseAll()
     {
-        if (amountOwned >= count)
-        {
-            amountOwned -= count;
-        }
-        else
-        {
-            amountOwned = 0;
-        }
-        return amountOwned;
+        //Destroy(this);
+        return 1;
     }
 
 }

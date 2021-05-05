@@ -5,25 +5,18 @@ using UnityEngine.EventSystems;
 
 public class ItemSlot : MonoBehaviour, IDropHandler
 {
+
+    //=============================================================================
+    // Author: https://www.youtube.com/watch?v=BGr-7GZJNXg&t=2s&ab_channel=CodeMonkey
+    //=============================================================================
+
+
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null && !eventData.pointerEnter.gameObject.TryGetComponent<ItemUI>(out ItemUI itemui)) //
+        if (eventData.pointerDrag != null && !eventData.pointerEnter.gameObject.TryGetComponent<ItemUI>(out ItemUI itemui)) // me 
         {
             Debug.Log("dropped");
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

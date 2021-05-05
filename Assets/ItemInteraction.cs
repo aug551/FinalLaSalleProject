@@ -4,23 +4,17 @@ using UnityEngine;
 
 public class ItemInteraction : MonoBehaviour
 {
+    //=============================================================================
+    // Author: Kevin Charron
+    //=============================================================================
+
     public Inventory inventory;
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.gameObject.TryGetComponent(out Item item))
         {
-            if (item.IsCapped)
-            {
-                inventory.AddCapped(item);
-                other.gameObject.SetActive(false);
-            }
-            else
-            {
-                Debug.Log("entered");
-                inventory.AddItem(item);
-            }
+            inventory.AddItem(item);
         }
     }
 }
