@@ -26,6 +26,8 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Item item) 
     {
+        if (itemsUIList.Count == 0)
+            return;
         Type itemType = item.GetType();
 
         if (itemType == typeof(Material))
@@ -41,7 +43,7 @@ public class Inventory : MonoBehaviour
                         return;
                     }
                 }          
-            }          
+            }                 
             items.Add(AddToUI(item as Material));
             return;
         }
@@ -58,6 +60,7 @@ public class Inventory : MonoBehaviour
         {
             if (itemui.gameObject.activeInHierarchy == false)
             {
+                itemsUIList.Remove(itemui);
                 itemui.gameObject.SetActive(true);
                 itemui.UpdateUI(item);
                 return CopyItem(item, itemui);
@@ -67,10 +70,12 @@ public class Inventory : MonoBehaviour
     }
     public Item AddToUI(Material item)
     {
+
         foreach (ItemUI itemui in itemsUIList)
         {
             if (itemui.gameObject.activeInHierarchy == false)
             {
+                itemsUIList.Remove(itemui);
                 itemui.gameObject.SetActive(true);
                 itemui.UpdateUI(item);
                 return CopyItem(item, itemui);
