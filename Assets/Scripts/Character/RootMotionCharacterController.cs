@@ -7,6 +7,8 @@ public class RootMotionCharacterController : MonoBehaviour
     private Animator anim;
     private CharacterController controller;
 
+    [SerializeField] private float runningSpeed = 1f;
+
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private bool airControl = true;
@@ -32,6 +34,7 @@ public class RootMotionCharacterController : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        anim.SetFloat("RunSpeed", runningSpeed);
         controller = GetComponent<CharacterController>();
     }
 
@@ -51,13 +54,10 @@ public class RootMotionCharacterController : MonoBehaviour
             playerVelocity.y += gravity * Time.deltaTime;
         }
 
-
-
-
-
         // Move Left-Right or Idle
         if (Input.GetButton("Horizontal"))
         {
+            anim.SetFloat("RunSpeed", runningSpeed);
             anim.SetBool("Move", true);
             this.transform.eulerAngles =
                 (Input.GetAxis("Horizontal") > 0) ? new Vector3(0, -90, 0) : new Vector3(0, 90, 0);
