@@ -11,24 +11,21 @@ public class Item : MonoBehaviour
     [SerializeField] string itemName; // Name of the item
     [SerializeField] Sprite icon; // Sprite used to display the item (UI, When dopped in game...)
     [SerializeField] string description; // description of the item
-    [SerializeField] int value; // value in game currency
-    [SerializeField] private bool isCapped; // Materials and Potions for example will have a max capcity, while equipment or crafting stations do not 
+    [SerializeField] int value; // value in game currency 
     [SerializeField] float weight; //for inventory system
     
     public Sprite Icon { get => icon; set => icon = value; }
     public string ItemName { get => itemName; set => itemName = value; }
     public string Description { get => description; set => description = value; }
     public int Value { get => value; set => this.value = value; }
-    public bool IsCapped { get => isCapped; set => isCapped = value; }
     public float Weight { get => weight; set => weight = value; }
 
-    public Item(string _itemName, Sprite _icon, string _description, int _value, bool _IsCapped, float _weight)
+    public Item(string _itemName, Sprite _icon, string _description, int _value, float _weight)
     {
         ItemName = _itemName;
         icon = _icon;
         Description = _description;
         Value = _value;
-        IsCapped = _IsCapped;
         Weight = _weight;
     }
     public virtual void Add(int amount)

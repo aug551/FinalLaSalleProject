@@ -12,7 +12,7 @@ public class Material : Item
     public int AmountOwned { get => amountOwned; set => amountOwned = value; }
 
     //constructor
-    public Material(string _itemName, int _MaxCapacity, Sprite _icon, string _description, int _value, bool _IsCapped, float _weight, MaterialType _type) : base(_itemName, _icon, _description,_value, _IsCapped,_weight)
+    public Material(string _itemName, int _MaxCapacity, Sprite _icon, string _description, int _value, float _weight, MaterialType _type) : base(_itemName, _icon, _description, _value, _weight)
     {
         type = _type;
     }
