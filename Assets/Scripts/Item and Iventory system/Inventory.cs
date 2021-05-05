@@ -11,7 +11,8 @@ public class Inventory : MonoBehaviour
 
     
     [SerializeField] List<ItemUI> itemsUIList = new List<ItemUI>();
-    Dictionary<Type, Item> items = new Dictionary<Type, Item>();
+    //Dictionary<Type, Item> items = new Dictionary<Type, Item>();
+    List<Item> items = new List<Item>();
 
     private void Awake()
     {
@@ -29,24 +30,24 @@ public class Inventory : MonoBehaviour
 
         if (itemType == typeof(Material))
         {
-            foreach (KeyValuePair<Type, Item> kvp in items)
+            foreach (Item kvp in items)
             {               
-                if (kvp.Value.CanAdd())
-                {
-                    if (kvp.Value.ItemName == item.ItemName)
+                if (kvp.CanAdd())
+                {                    
+                    if (kvp.ItemName == item.ItemName)
                     {
-                        kvp.Value.Add(1);
+                        kvp.Add(1);
                         Destroy(item.gameObject);
                         return;
                     }
                 }          
             }          
-            items.Add(itemType, AddToUI(item as Material));
+            items.Add(AddToUI(item as Material));
             return;
         }
         if (itemType == typeof(Armor))
         {
-            items.Add(itemType, AddToUI(item as Armor));
+            items.Add(AddToUI(item as Armor));
             return;
         }
     }
