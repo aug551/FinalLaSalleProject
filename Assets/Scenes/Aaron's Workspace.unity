@@ -502,11 +502,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravity: -9.81
   jumpHeight: 1.5
+  airControl: 1
+  jumpInputInfluence: 0.85
   slopeForce: 100
   slopeForceRayLength: 1.5
   dashDistance: 50
   dashDuration: 0.15
   dashStopForce: 10
+  dashCooldown: 5
 --- !u!143 &1402254857
 CharacterController:
   m_ObjectHideFlags: 0
@@ -578,7 +581,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10.22
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -602,8 +605,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495274678}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.26540503, y: 0.91114426, z: 1.3186193}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 2.31, y: 0.48, z: 4.14}
+  m_LocalScale: {x: 1.1753, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

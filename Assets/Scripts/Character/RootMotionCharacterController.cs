@@ -9,6 +9,8 @@ public class RootMotionCharacterController : MonoBehaviour
 
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 1.0f;
+    [SerializeField] private bool airControl = true;
+    [SerializeField] [Range(0,1)] private float jumpInputInfluence = 1.0f;
     private bool isJumping = false;
     private bool canJump = false;
 
@@ -16,6 +18,7 @@ public class RootMotionCharacterController : MonoBehaviour
     [SerializeField] private float slopeForceRayLength;
 
     private Vector3 playerVelocity = Vector3.zero;
+    private Vector3 currNVel = Vector3.zero;
 
 
     private bool isDashing = false;
@@ -23,6 +26,7 @@ public class RootMotionCharacterController : MonoBehaviour
     [SerializeField] private float dashDistance = 5f;
     [SerializeField] private float dashDuration = 0.20f;
     [SerializeField] private float dashStopForce = 3f;
+    [SerializeField] private float dashCooldown = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -59,13 +63,12 @@ public class RootMotionCharacterController : MonoBehaviour
                 (Input.GetAxis("Horizontal") > 0) ? new Vector3(0, -90, 0) : new Vector3(0, 90, 0);
 
             if (!isJumping)
-            {
                 playerVelocity.x = anim.velocity.x;
-            }
         }
         else
         {
             anim.SetBool("Move", false);
+
             if (!isJumping)
                 playerVelocity.x = 0;
         }
@@ -77,14 +80,29 @@ public class RootMotionCharacterController : MonoBehaviour
             anim.applyRootMotion = false;
             anim.SetBool("Jumping", true);
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            currNVel = playerVelocity;
             this.isJumping = true;
             canJump = false;
-
         }
 
         // Only use controller for vertical jumping
         if (this.isJumping)
         {
+            // For controlling mid-air
+            if (airControl)
+            {
+                if (Input.GetButton("Horizontal"))
+                {
+                    // If you press the opposite direction
+                    if (playerVelocity.x / Mathf.Abs(playerVelocity.x) != -Input.GetAxis("Horizontal"))
+                    {
+                        playerVelocity.x = -currNVel.x * jumpInputInfluence;
+                        currNVel = playerVelocity;
+                    }
+
+                }
+            }
+
             controller.Move(new Vector3(playerVelocity.x, playerVelocity.y, 0) * Time.deltaTime);
         }
         else
@@ -93,11 +111,13 @@ public class RootMotionCharacterController : MonoBehaviour
         }
 
 
+
         // Dash
         if (Input.GetButtonDown("Dash") && canDash)
         {
             anim.applyRootMotion = false;
             Invoke("FinishedDashing", dashDuration);
+            Invoke("DashCooldown", dashCooldown);
             this.isDashing = true;
             this.canDash = false;
         }
@@ -141,10 +161,13 @@ public class RootMotionCharacterController : MonoBehaviour
 
     private void FinishedDashing()
     {
-        canDash = true;
         isDashing = false;
         this.playerVelocity.x = this.playerVelocity.x / dashStopForce;
     }
 
+    private void DashCooldown()
+    {
+        canDash = true;
+    }
 
 }
