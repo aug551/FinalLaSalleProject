@@ -20,7 +20,7 @@ public class Inventory : MonoBehaviour
         GetComponentsInChildren<ItemUI>(itemsUIList);
         foreach (ItemUI item in itemsUIList)
         {
-            item.gameObject.SetActive(false);
+            ChangeAlpha(0, item);
         }
     }
 
@@ -58,10 +58,10 @@ public class Inventory : MonoBehaviour
     {
         foreach (ItemUI itemui in itemsUIList)
         {
-            if (itemui.gameObject.activeInHierarchy == false)
+            if (itemui.image.sprite == null)
             {
+                ChangeAlpha(1, itemui);
                 itemsUIList.Remove(itemui);
-                itemui.gameObject.SetActive(true);
                 itemui.UpdateUI(item);
                 return CopyItem(item, itemui);
             }
@@ -73,10 +73,10 @@ public class Inventory : MonoBehaviour
 
         foreach (ItemUI itemui in itemsUIList)
         {
-            if (itemui.gameObject.activeInHierarchy == false)
+            if (itemui.image.sprite == null)
             {
+                ChangeAlpha(1, itemui);
                 itemsUIList.Remove(itemui);
-                itemui.gameObject.SetActive(true);
                 itemui.UpdateUI(item);
                 return CopyItem(item, itemui);
             }
@@ -109,5 +109,12 @@ public class Inventory : MonoBehaviour
         newItem.Type = _item.Type;
         Destroy(_item.gameObject);
         return newItem;
+    }
+
+    public static void ChangeAlpha(int alpha, ItemUI item)
+    {
+        Color color = item.image.color;
+        color.a = alpha;
+        item.image.color = color;
     }
 }

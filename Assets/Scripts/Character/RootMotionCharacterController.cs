@@ -57,7 +57,7 @@ public class RootMotionCharacterController : MonoBehaviour
         // Move Left-Right or Idle
         if (Input.GetButton("Horizontal"))
         {
-            anim.SetFloat("RunSpeed", runningSpeed);
+            //anim.SetFloat("RunSpeed", runningSpeed);
             anim.SetBool("Move", true);
             this.transform.eulerAngles =
                 (Input.GetAxis("Horizontal") > 0) ? new Vector3(0, -90, 0) : new Vector3(0, 90, 0);

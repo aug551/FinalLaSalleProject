@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
+public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler 
 {
 
     //=============================================================================
@@ -15,19 +15,15 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
     RectTransform rectTransform;
     Vector2 beginTransform;
     CanvasGroup canvasGroup;
-    Image image;
-    [SerializeField] GameObject panel;
-    [SerializeField] float deltaX;
-    [SerializeField] float deltaY;
-
+    public Image image;
     public Inventory inventory;
+    public ItemDisplay itemDisplay;
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         image = GetComponent<Image>();
-        panel.SetActive(false);
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -73,12 +69,14 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        panel.SetActive(true);
-        panel.GetComponent<Transform>().position = new Vector3(transform.position.x + deltaX, transform.position.y + deltaY, transform.position.y);
+        if (image.sprite != null) 
+        {
+            itemDisplay.hovered = true;
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        panel.SetActive(false);
+        itemDisplay.hovered = false;
     }
 }
