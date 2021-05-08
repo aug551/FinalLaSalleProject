@@ -129,6 +129,15 @@ public class RootMotionCharacterController : MonoBehaviour
         }
 
 
+        // Attack
+        if (Input.GetButtonDown("Attack 1"))
+        {
+            anim.SetTrigger("Attack");
+        }
+
+
+
+
 
         // No jitter/bouncing on slopes
         if (anim.velocity.x != 0 && OnSlope())
