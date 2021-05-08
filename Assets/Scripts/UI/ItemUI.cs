@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler 
 {
@@ -18,6 +19,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
     public Image image;
     public Inventory inventory;
     public ItemDisplay itemDisplay;
+    public DisplayPanel displayPanel;
 
     private void Awake()
     {
@@ -71,6 +73,8 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
     {
         if (image.sprite != null) 
         {
+            if (eventData.pointerEnter.gameObject.TryGetComponent<ItemUI>(out ItemUI itemui))
+            displayPanel.DisplayInfo(itemui);
             itemDisplay.hovered = true;
         }
     }

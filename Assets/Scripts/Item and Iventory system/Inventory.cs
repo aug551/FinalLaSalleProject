@@ -54,7 +54,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public Item AddToUI(Armor item)
+    Item AddToUI(Armor item)
     {
         foreach (ItemUI itemui in itemsUIList)
         {
@@ -68,7 +68,7 @@ public class Inventory : MonoBehaviour
         }
         return null;
     }
-    public Item AddToUI(Material item)
+    Item AddToUI(Material item)
     {
 
         foreach (ItemUI itemui in itemsUIList)
@@ -83,7 +83,7 @@ public class Inventory : MonoBehaviour
         }
         return null;
     }
-    public Item CopyItem(Armor _item, ItemUI itemUI)
+    Item CopyItem(Armor _item, ItemUI itemUI)
     {
         Armor newItem = itemUI.gameObject.AddComponent<Armor>();
         newItem.ItemName = _item.ItemName;
@@ -96,7 +96,7 @@ public class Inventory : MonoBehaviour
         Destroy(_item.gameObject);
         return newItem;
     }
-    public Item CopyItem(Material _item, ItemUI itemUI)
+    Item CopyItem(Material _item, ItemUI itemUI)
     {
         Material newItem = itemUI.gameObject.AddComponent<Material>();
         newItem.ItemName = _item.ItemName;
@@ -111,7 +111,7 @@ public class Inventory : MonoBehaviour
         return newItem;
     }
 
-    public static void ChangeAlpha(int alpha, ItemUI item)
+    void ChangeAlpha(int alpha, ItemUI item)
     {
         Color color = item.image.color;
         color.a = alpha;
