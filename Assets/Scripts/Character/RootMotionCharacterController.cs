@@ -6,6 +6,7 @@ public class RootMotionCharacterController : MonoBehaviour
 {
     private Animator anim;
     private CharacterController controller;
+    private Attack atk;
 
     [SerializeField] private float runningSpeed = 1f;
 
@@ -36,6 +37,7 @@ public class RootMotionCharacterController : MonoBehaviour
         anim = GetComponent<Animator>();
         anim.SetFloat("RunSpeed", runningSpeed);
         controller = GetComponent<CharacterController>();
+        atk = GetComponentInChildren<Attack>();
     }
 
     // Update is called once per frame
@@ -179,4 +181,22 @@ public class RootMotionCharacterController : MonoBehaviour
         canDash = true;
     }
 
+    private void Attack()
+    {
+        List<GameObject> toRemove = new List<GameObject>();
+        Debug.Log(atk.objectsInRange.Count);
+        foreach (GameObject inRange in atk.objectsInRange)
+        {
+            if (inRange.CompareTag("Enemy"))
+            {
+                Destroy(inRange);
+                toRemove.Add(inRange);
+            }
+        }
+
+        foreach (GameObject obj in toRemove)
+        {
+            atk.objectsInRange.Remove(obj);
+        }
+    }
 }

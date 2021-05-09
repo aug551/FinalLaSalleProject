@@ -8,6 +8,7 @@ TagManager:
   - Eye
   - ItemSlot
   - DamageBox
+  - Enemy
   layers:
   - Default
   - TransparentFX
