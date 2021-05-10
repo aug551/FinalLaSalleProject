@@ -8,6 +8,8 @@ public class RootMotionCharacterController : MonoBehaviour
     private CharacterController controller;
     private Attack atk;
 
+    [SerializeField] GameObject whip;
+
     [SerializeField] private float runningSpeed = 1f;
 
     [SerializeField] private float gravity = -9.81f;
@@ -183,6 +185,8 @@ public class RootMotionCharacterController : MonoBehaviour
 
     private void Attack()
     {
+        whip.SetActive(true);
+
         List<GameObject> toRemove = new List<GameObject>();
         Debug.Log(atk.objectsInRange.Count);
         foreach (GameObject inRange in atk.objectsInRange)
@@ -199,4 +203,10 @@ public class RootMotionCharacterController : MonoBehaviour
             atk.objectsInRange.Remove(obj);
         }
     }
+
+    private void FinishedAttack()
+    {
+        whip.SetActive(false);
+    }
+
 }
