@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ItemDisplay : MonoBehaviour
 {
+    //=============================================================================
+    // Author: Kevin Charron
+    //=============================================================================
+
     [SerializeField] float deltaX = -60;
     [SerializeField] float deltaY = 30;
     [SerializeField] GameObject panel;

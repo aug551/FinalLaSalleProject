@@ -9,7 +9,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
 {
 
     //=============================================================================
-    // Author: Kevin Charron
+    // Author: Kevin Charron and https://www.youtube.com/watch?v=BGr-7GZJNXg&t=2s&ab_channel=CodeMonkey
     //=============================================================================
 
     [SerializeField] Canvas canvas;
@@ -33,13 +33,11 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
         canvasGroup.blocksRaycasts = true; //
         if (eventData.pointerEnter.gameObject.TryGetComponent<ItemUI>(out ItemUI itemui))
         {
-            Debug.Log("swap");
             Swap(itemui);
             return;
         }
         if (eventData.pointerEnter.gameObject.tag != "ItemSlot") 
         {
-            Debug.Log("no shot");
             rectTransform.anchoredPosition = beginTransform; 
         }
     }
@@ -75,12 +73,12 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
         {
             if (eventData.pointerEnter.gameObject.TryGetComponent<ItemUI>(out ItemUI itemui))
             displayPanel.DisplayInfo(itemui);
-            itemDisplay.hovered = true;
+            if (itemDisplay) itemDisplay.hovered = true;
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        itemDisplay.hovered = false;
+        if (itemDisplay) itemDisplay.hovered = false;
     }
 }

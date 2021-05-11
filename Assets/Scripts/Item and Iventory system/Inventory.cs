@@ -32,13 +32,13 @@ public class Inventory : MonoBehaviour
 
         if (itemType == typeof(Material))
         {
-            foreach (Item kvp in items)
+            foreach (Item items in items)
             {               
-                if (kvp.CanAdd())
+                if (items.CanAdd())
                 {                    
-                    if (kvp.ItemName == item.ItemName)
+                    if (items.ItemName == item.ItemName)
                     {
-                        kvp.Add(1);
+                        items.Add(1);
                         Destroy(item.gameObject);
                         return;
                     }
@@ -116,5 +116,18 @@ public class Inventory : MonoBehaviour
         Color color = item.image.color;
         color.a = alpha;
         item.image.color = color;
+    }
+
+    public bool ContainsItem(List<Item> item)
+    {
+        return false;
+    }
+    bool RemoveItem(Item item)
+    {
+        return false;
+    }
+    bool IsFull()
+    {
+        return false;
     }
 }

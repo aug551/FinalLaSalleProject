@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Material : Item
 {
+    //=============================================================================
+    // Author: Kevin Charron
+    //=============================================================================
+
     [SerializeField] private MaterialType type;
     [SerializeField] int amountOwned = 1; // how many the player owns
     [SerializeField] int maxCapacity; // Max number the player can carry in a stack

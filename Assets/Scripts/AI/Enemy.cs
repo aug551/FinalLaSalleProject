@@ -10,6 +10,7 @@ public class Enemy : NPC
     //=============================================================================
 
     //Attack variables
+
     [Header("Attack variables")]
     [SerializeField] float aggroRadius;
     // [SerializeField] float SightRadius;

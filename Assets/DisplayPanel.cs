@@ -7,6 +7,10 @@ using System;
 
 public class DisplayPanel : MonoBehaviour
 {
+    //=============================================================================
+    // Author: Kevin Charron
+    //=============================================================================
+
     [SerializeField] List<TextMeshProUGUI> textBoxes;
     [SerializeField] Image image;
 
