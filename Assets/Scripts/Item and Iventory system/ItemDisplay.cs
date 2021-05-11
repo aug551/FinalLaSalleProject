@@ -19,7 +19,7 @@ public class ItemDisplay : MonoBehaviour
         if (hovered)
         {
             panel.gameObject.SetActive(true);
-            panel.transform.position = new Vector2(Input.mousePosition.x + deltaX, Input.mousePosition.y + deltaY);
+            panel.transform.position = new Vector2(Input.mousePosition.x + deltaX , Input.mousePosition.y + deltaY);
         }
         else panel.gameObject.SetActive(false);
     }
