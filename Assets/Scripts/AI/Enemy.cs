@@ -111,7 +111,6 @@ public class Enemy : NPC
                 if (col.tag == "Player")
                 {
                     col.gameObject.GetComponent<CharacterHealth>().TakeDamage(20);
-                    return;
                 }
             }     
         }
