@@ -183,20 +183,40 @@ public class RootMotionCharacterController : MonoBehaviour
 
     private void Attack()
     {
-        List<GameObject> toRemove = new List<GameObject>();
+        //List<GameObject> toRemove = new List<GameObject>();
+        //Debug.Log(atk.objectsInRange.Count);
+        //foreach (GameObject inRange in atk.objectsInRange)
+        //{
+        //    if (inRange.CompareTag("Enemy"))
+        //    {
+        //        Destroy(inRange);
+        //        toRemove.Add(inRange);
+        //    }
+        //}
+
+        //foreach (GameObject obj in toRemove)
+        //{
+        //    atk.objectsInRange.Remove(obj);
+        //}
+
+        List<GameObject> enemies = new List<GameObject>();
         Debug.Log(atk.objectsInRange.Count);
         foreach (GameObject inRange in atk.objectsInRange)
         {
             if (inRange.CompareTag("Enemy"))
             {
-                Destroy(inRange);
-                toRemove.Add(inRange);
+                enemies.Add(inRange);
             }
         }
 
-        foreach (GameObject obj in toRemove)
+        foreach (GameObject obj in enemies)
         {
-            atk.objectsInRange.Remove(obj);
+            EnemyHealth zombie = obj.GetComponentInParent<EnemyHealth>();
+            zombie.TakeDamage(20);
+            if(zombie.currentHealth<=0)
+            {
+                Destroy(zombie.gameObject);
+            }
         }
     }
 }

@@ -67,7 +67,7 @@ public class Enemy : NPC
         //Patrolling
         if (distanceFromPlayer > aggroRadius || !playerSight)
         {
-            base.Patrolling = true; agent.speed = agentWalkSpeed; 
+            base.Patrolling = true; agent.speed = agentWalkSpeed;
         }
         else { base.Patrolling = false; agent.speed = agentRunSpeed; }
         //Aggro
@@ -108,7 +108,10 @@ public class Enemy : NPC
             Collider[] colliders = Physics.OverlapBox(atkCollider.bounds.center, atkCollider.bounds.extents, atkCollider.transform.rotation, playermask);   
             foreach (Collider col in colliders)
             {
-                //if (col.gameObject.TryGetComponent<CharacterHealth>().takedamage()) //example implementation
+                if (col.tag == "Player")
+                {
+                    col.gameObject.GetComponent<CharacterHealth>().TakeDamage(20);
+                }
             }     
         }
     }

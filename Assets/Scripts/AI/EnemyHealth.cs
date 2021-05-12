@@ -6,6 +6,8 @@ public class EnemyHealth : MonoBehaviour
 {
     public int MaxHealth;
     public int currentHealth;
+    public GameObject item;
+    public GameObject zombie;
 
     void Start()
     {
@@ -16,9 +18,10 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
-            Debug.Log("Died");
+            Instantiate(item, zombie.transform.position, Quaternion.identity);
         }
     }
 }
