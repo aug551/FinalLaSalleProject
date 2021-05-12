@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Armor
   m_EditorClassIdentifier: 
   craftingUI: {fileID: 0}
-  material: []
-  results: []
+  material:
+  - {fileID: 5654311649778276709, guid: a58e645e4cb343b4da8918a6e60b8810, type: 3}
+  - {fileID: 6333688308734409057, guid: f8d612cdf5cf52546a4fab5d9a3bca4b, type: 3}
+  results:
+  - {fileID: 5715502957091664629, guid: f1453c1079e294e4ea350641359df824, type: 3}
