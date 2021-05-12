@@ -118,9 +118,16 @@ public class Inventory : MonoBehaviour
         item.image.color = color;
     }
 
-    public bool ContainsItem(List<Item> item)
+    public bool ContainsItems(List<Item> item)
     {
-        return false;
+        foreach (Item item1 in item)
+        {
+            if (!items.Contains(item1))
+            {
+                return false;
+            }
+        }
+        return true;
     }
     bool RemoveItem(Item item)
     {
