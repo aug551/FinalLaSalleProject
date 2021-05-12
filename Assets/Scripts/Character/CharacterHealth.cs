@@ -36,7 +36,8 @@ public class CharacterHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        if(currentHealth<=0)
+        UpdateHpSlider();
+        if (currentHealth<=0)
         {
             Debug.Log("You suck");
         }
