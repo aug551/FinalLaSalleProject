@@ -17,7 +17,7 @@ public class CraftingRecipe : ScriptableObject
 
     public bool CanCraft(Inventory inventory)
     {
-        if (inventory.ContainsItem(material)) return true;
+        if (inventory.ContainsItems(material)) return true;
         else return false;
     }
 
