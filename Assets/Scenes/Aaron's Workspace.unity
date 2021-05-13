@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -713,6 +713,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1731270607 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a81933cd2803faf49be5e57386a36e74, type: 3}
+  m_PrefabInstance: {fileID: 2065081693}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1731270610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731270607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa2ddddfe5971e4eaafd8a8216e99c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runningSpeed: 1
+  gravity: -9.81
+  jumpHeight: 1.5
+  airControl: 1
+  jumpInputInfluence: 0.85
+  slopeForce: 100
+  slopeForceRayLength: 1.5
+  dashDistance: 50
+  dashDuration: 0.5
+  dashStopForce: 10
+  dashCooldown: 5
+--- !u!143 &1731270611
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731270607}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.9
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!1001 &2065081693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -730,7 +776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a81933cd2803faf49be5e57386a36e74, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a81933cd2803faf49be5e57386a36e74, type: 3}
       propertyPath: m_LocalPosition.z
@@ -768,6 +814,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: elVampiro
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: a81933cd2803faf49be5e57386a36e74, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0d7e5e6aea86f654ca418af56deecd0e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a81933cd2803faf49be5e57386a36e74, type: 3}
 --- !u!1001 &9028591920638318938
@@ -777,9 +827,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1402254857, guid: 1a596085fa6aa284f99256e0b9a6e8ac, type: 3}
+      propertyPath: m_StepOffset
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8182311915427735385, guid: 1a596085fa6aa284f99256e0b9a6e8ac, type: 3}
       propertyPath: m_Name
       value: ganfaul_m_aure
+      objectReference: {fileID: 0}
+    - target: {fileID: 8182311915427735385, guid: 1a596085fa6aa284f99256e0b9a6e8ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8846962998224649699, guid: 1a596085fa6aa284f99256e0b9a6e8ac, type: 3}
       propertyPath: m_RootOrder
