@@ -183,23 +183,12 @@ public class RootMotionCharacterController : MonoBehaviour
 
     private void Attack()
     {
-        //List<GameObject> toRemove = new List<GameObject>();
-        //Debug.Log(atk.objectsInRange.Count);
-        //foreach (GameObject inRange in atk.objectsInRange)
-        //{
-        //    if (inRange.CompareTag("Enemy"))
-        //    {
-        //        Destroy(inRange);
-        //        toRemove.Add(inRange);
-        //    }
-        //}
+        if (Input.GetButton("Attack 1"))
+        {
+            anim.SetFloat("AtkSpeed", 0);
+        }
 
-        //foreach (GameObject obj in toRemove)
-        //{
-        //    atk.objectsInRange.Remove(obj);
-        //}
-
-        List<GameObject> enemies = new List<GameObject>();
+        List<GameObject> toRemove = new List<GameObject>();
         EnemyHealth zombie = null;
 
         foreach (GameObject inRange in atk.objectsInRange)
@@ -208,12 +197,26 @@ public class RootMotionCharacterController : MonoBehaviour
             {
                 zombie = inRange.GetComponentInParent<EnemyHealth>();
                 zombie.TakeDamage(20);
+                // Debug.Log(Vector3.Distance(this.transform.position, zombie.transform.position));
+
                 if (zombie.currentHealth <= 0)
                 {
                     Destroy(zombie.gameObject);
-                    atk.objectsInRange.Remove(inRange);
+                    toRemove.Add(inRange);
                 }
             }
         }
+
+        foreach (GameObject delete in toRemove)
+        {
+            atk.objectsInRange.Remove(delete);
+        }
+
+        Invoke("FinishedAttacking", 3);
+    }
+
+    private void FinishedAttacking()
+    {
+        anim.SetFloat("AtkSpeed", 2);
     }
 }
