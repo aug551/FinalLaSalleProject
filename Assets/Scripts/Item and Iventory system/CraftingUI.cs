@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CraftingUI : MonoBehaviour
 {
+    [SerializeField] List<ItemUI> itemsUIList = new List<ItemUI>();
     // Start is called before the first frame update
     void Start()
     {

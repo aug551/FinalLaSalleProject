@@ -9,7 +9,7 @@ public class CraftingRecipe : ScriptableObject
 {
     public CraftingUI craftingUI;
     //=============================================================================
-    // Author: Kevin Charron
+    // Author: Kevin Charron https://www.youtube.com/watch?v=gZsJ_rG5hdo
     //=============================================================================
 
     [SerializeField] public List<Item> material;
