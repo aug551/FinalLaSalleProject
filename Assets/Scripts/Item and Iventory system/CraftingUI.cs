@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class CraftingUI : MonoBehaviour
 {
-    [SerializeField] List<ItemUI> itemsUIList = new List<ItemUI>();
+    [SerializeField] List<CraftingRecipe> recipeList = new List<CraftingRecipe>();
+    [SerializeField] GameObject craftingrecipeUI;
+    [SerializeField] GameObject craftingrecipeUIList;
+    GameObject instantiatedObject;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,5 +19,11 @@ public class CraftingUI : MonoBehaviour
     public void CurrentRecipe(CraftingRecipe recipe)
     {
         
+    }
+
+    void AddToRecipeList(CraftingRecipe recipe)
+    {
+        instantiatedObject = Instantiate(craftingrecipeUI, craftingrecipeUIList.transform);
+        instantiatedObject.GetComponent<CraftingRecipeUI>().Recipe = recipe;
     }
 }

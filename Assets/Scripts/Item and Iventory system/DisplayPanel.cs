@@ -14,7 +14,6 @@ public class DisplayPanel : MonoBehaviour
     [SerializeField] List<TextMeshProUGUI> textBoxes;
     [SerializeField] Image image;
 
-    // Start is called before the first frame update
     private void Awake()
     {
         GetComponentsInChildren<TextMeshProUGUI>(textBoxes);
