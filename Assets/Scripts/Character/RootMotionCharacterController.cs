@@ -31,6 +31,8 @@ public class RootMotionCharacterController : MonoBehaviour
     [SerializeField] private float dashStopForce = 3f;
     [SerializeField] private float dashCooldown = 5f;
 
+    private bool isAttacking = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -137,6 +139,18 @@ public class RootMotionCharacterController : MonoBehaviour
             anim.SetTrigger("Attack");
         }
 
+        if (isAttacking)
+        {
+            if (Input.GetButtonDown("Horizontal"))
+            {
+                Debug.Log("Go");
+            }
+            else if (Input.GetButtonUp("Attack 1"))
+            {
+                isAttacking = false;
+            }
+        }
+
 
 
 
@@ -183,18 +197,26 @@ public class RootMotionCharacterController : MonoBehaviour
 
     private void Attack()
     {
-        if (Input.GetButton("Attack 1"))
-        {
-            anim.SetFloat("AtkSpeed", 0);
-        }
-
         List<GameObject> toRemove = new List<GameObject>();
+        GameObject minDistance = null;
         EnemyHealth zombie = null;
 
         foreach (GameObject inRange in atk.objectsInRange)
         {
             if (inRange.CompareTag("Enemy"))
             {
+                if (minDistance == null)
+                {
+                    minDistance = inRange;
+                }
+                else
+                {
+                    if (Vector3.Distance(this.transform.position, inRange.transform.position)
+                        < Vector3.Distance(this.transform.position, minDistance.transform.position))
+                    {
+                        minDistance = inRange;
+                    }
+                }
                 zombie = inRange.GetComponentInParent<EnemyHealth>();
                 zombie.TakeDamage(20);
                 // Debug.Log(Vector3.Distance(this.transform.position, zombie.transform.position));
@@ -212,11 +234,22 @@ public class RootMotionCharacterController : MonoBehaviour
             atk.objectsInRange.Remove(delete);
         }
 
-        Invoke("FinishedAttacking", 3);
+        if (Input.GetButton("Attack 1"))
+        {
+            if (minDistance)
+            {
+                Debug.Log(minDistance.gameObject.name);
+            }
+
+            Invoke("FinishedAttacking", 3);
+            isAttacking = true;
+        }
+
+
     }
 
     private void FinishedAttacking()
     {
-        anim.SetFloat("AtkSpeed", 2);
+        isAttacking = false;
     }
 }
