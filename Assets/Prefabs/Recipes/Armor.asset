@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b9cf8ffd96f2194b89a2f4562a9f179, type: 3}
+  m_Name: Armor
+  m_EditorClassIdentifier: 
+  material:
+  - {fileID: 6333688308734409057, guid: f8d612cdf5cf52546a4fab5d9a3bca4b, type: 3}
+  - {fileID: 5654311649778276709, guid: a58e645e4cb343b4da8918a6e60b8810, type: 3}
+  results:
+  - {fileID: 5715502957091664629, guid: f1453c1079e294e4ea350641359df824, type: 3}
