@@ -9,7 +9,9 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     //=============================================================================
     // Author: https://www.youtube.com/watch?v=BGr-7GZJNXg&t=2s&ab_channel=CodeMonkey
     //=============================================================================
+    ItemUI item;
 
+    public ItemUI Item { get => item; set => item = value; }
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -17,6 +19,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         {
             Debug.Log("dropped");
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            item = itemui;
         }
     }
 }
