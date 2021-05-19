@@ -7,6 +7,7 @@ public class RootMotionCharacterController : MonoBehaviour
     private Animator anim;
     private CharacterController controller;
     private Attack atk;
+    private TeleAttackDetect teleAtk;
 
     [SerializeField] private float runningSpeed = 1f;
 
@@ -32,8 +33,10 @@ public class RootMotionCharacterController : MonoBehaviour
     [SerializeField] private float dashCooldown = 5f;
 
     private bool isAttacking = false;
+    private bool isGrabbing = false;
 
     public bool IsAttacking { get => isAttacking; }
+    public bool IsGrabbing { get => isGrabbing; set => isGrabbing = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -41,12 +44,15 @@ public class RootMotionCharacterController : MonoBehaviour
         anim = GetComponent<Animator>();
         anim.SetFloat("RunSpeed", runningSpeed);
         controller = GetComponent<CharacterController>();
+        
         atk = GetComponentInChildren<Attack>();
+        teleAtk = GetComponentInChildren<TeleAttackDetect>();
+
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {        
         // Apply gravity if not grounded
         if (controller.isGrounded)
         {
@@ -54,6 +60,12 @@ public class RootMotionCharacterController : MonoBehaviour
             isJumping = false;
             canJump = true;
             if (playerVelocity.y < 0) playerVelocity.y = 0f;
+
+
+            if (Input.GetButton("Attack 2"))
+            {
+                isGrabbing = true;
+            }
         }
         else
         {
@@ -61,7 +73,7 @@ public class RootMotionCharacterController : MonoBehaviour
         }
 
         // Move Left-Right or Idle
-        if (Input.GetButton("Horizontal"))
+        if (Input.GetButton("Horizontal") && !IsGrabbing)
         {
             //anim.SetFloat("RunSpeed", runningSpeed);
             anim.SetBool("Move", true);
@@ -154,11 +166,27 @@ public class RootMotionCharacterController : MonoBehaviour
             }
         }
 
-
         // No jitter/bouncing on slopes
         if (anim.velocity.x != 0 && OnSlope())
         {
             controller.Move(Vector3.down * controller.height / 2 * slopeForce * Time.deltaTime);
+        }
+
+        // Reset z position to 0 to avoid falling off
+        if (!anim.applyRootMotion)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+        }
+
+        if (this.IsGrabbing)
+        {
+            anim.applyRootMotion = false;
+            controller.Move(Vector3.zero);
+
+            if (teleAtk.Closest)
+            {
+                teleAtk.Closest.GetComponent<MeshRenderer>().material.color = Color.red;
+            }
         }
 
         //Debug.Log(playerVelocity.x);

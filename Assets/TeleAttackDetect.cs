@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class TeleAttackDetect : MonoBehaviour
 {
+    private RootMotionCharacterController rmc;
+
     public List<GameObject> enemiesInRange = new List<GameObject>();
     private GameObject closest = null;
     private float distance = 0f;
+
+    public GameObject Closest { get => closest;  }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,9 +28,14 @@ public class TeleAttackDetect : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        rmc = GetComponentInParent<RootMotionCharacterController>();
+    }
+
     void Update()
     {
-        if (Input.GetButton("Attack 2"))
+        if (rmc.IsGrabbing)
         {
             if (enemiesInRange.Count > 0)
             {
@@ -46,8 +55,16 @@ public class TeleAttackDetect : MonoBehaviour
                     }
                 }
             }
+        }
 
-            Debug.Log(closest);
-        }        
+        if (Input.GetButtonUp("Attack 2"))
+        {
+            if (closest)
+            {
+                closest.GetComponent<MeshRenderer>().material.color = Color.white;
+                closest = null;
+                rmc.IsGrabbing = false;
+            }
+        }
     }
 }
