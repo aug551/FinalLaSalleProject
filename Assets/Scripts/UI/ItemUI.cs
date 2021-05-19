@@ -72,7 +72,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
         if (image.sprite != null) 
         {
             if (eventData.pointerEnter.gameObject.TryGetComponent<ItemUI>(out ItemUI itemui))
-            displayPanel.DisplayInfo(itemui);
+            { displayPanel.DisplayInfo(itemui); }
             if (itemDisplay) itemDisplay.hovered = true;
         }
     }

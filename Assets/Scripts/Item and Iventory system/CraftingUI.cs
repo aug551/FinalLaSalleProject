@@ -8,42 +8,39 @@ public class CraftingUI : MonoBehaviour
     // Author: Kevin Charron
     //=============================================================================
 
-    [SerializeField] List<CraftingRecipe> recipeList = new List<CraftingRecipe>();
+    //[SerializeField] List<CraftingRecipe> recipeList = new List<CraftingRecipe>();
     [SerializeField] GameObject craftingrecipeUI;
     [SerializeField] GameObject craftingrecipeUIList;
-    ItemUI instantiatedObject;
+    GameObject instantiatedObject;
+    [SerializeField] List<ItemUI> itemsUIList = new List<ItemUI>();
     [SerializeField] ItemSlot materialSlot1, materialSlot2, ResultSlot;
-    [SerializeField] CraftingRecipe recipe;
-    List<Item> items;
+    [SerializeField] CraftingRecipe currentRecipe;
+    List<Item> items = new List<Item>();
+    [SerializeField] GameObject ItemUIPrefab;
+    [SerializeField] GameObject ItemUIParent;
 
-
-    void Start()
+    public void Craft()
     {
-        
-    }
-
-    void Craft()
-    {
-        if (ResultSlot.TryGetComponent(out Item itemResult))
-        {
-            if (recipe.CanCraft(items))
-            {
-                //instantiatedObject = Instantiate(itemResult, transform);
-                instantiatedObject.GetComponent<RectTransform>().anchoredPosition = ResultSlot.GetComponent<RectTransform>().anchoredPosition;
-            }
-        }
-
-    }
-    public void CurrentRecipe(CraftingRecipe recipe)
-    {
-        if (materialSlot1.TryGetComponent(out Item itemMaterial1)) 
+        if (materialSlot1.Item.TryGetComponent(out Item itemMaterial1))
         {
             items.Add(itemMaterial1);
         }
-        if (materialSlot2.TryGetComponent(out Item itemMaterial2))
+        if (materialSlot2.Item.TryGetComponent(out Item itemMaterial2))
         {
             items.Add(itemMaterial2);
         }
+        Debug.Log(currentRecipe.CanCraft(items));
+        if (currentRecipe.CanCraft(items))
+        {
+            instantiatedObject = Instantiate(ItemUIPrefab);
+            instantiatedObject.transform.SetParent(ItemUIParent.transform);
+            instantiatedObject.GetComponent<RectTransform>().anchoredPosition = ResultSlot.GetComponent<RectTransform>().anchoredPosition;
+        }
+    }
+
+    public void CurrentRecipe(CraftingRecipe recipe)
+    {
+        currentRecipe = recipe;
     }
 
     void AddToRecipeList(CraftingRecipe recipe)
