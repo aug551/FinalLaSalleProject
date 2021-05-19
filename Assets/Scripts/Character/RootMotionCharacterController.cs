@@ -33,6 +33,8 @@ public class RootMotionCharacterController : MonoBehaviour
 
     private bool isAttacking = false;
 
+    public bool IsAttacking { get => isAttacking; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -144,9 +146,11 @@ public class RootMotionCharacterController : MonoBehaviour
         }
         else
         {
+            isAttacking = false;
             if (Input.GetButtonDown("Attack 1"))
             {
                 anim.SetTrigger("Attack");
+                isAttacking = true;
             }
         }
 
