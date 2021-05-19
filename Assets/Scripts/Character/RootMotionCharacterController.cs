@@ -134,25 +134,21 @@ public class RootMotionCharacterController : MonoBehaviour
 
 
         // Attack
-        if (Input.GetButtonDown("Attack 1"))
+        if (anim.GetCurrentAnimatorClipInfo(1).Length > 0)
         {
-            anim.SetTrigger("Attack");
-        }
+            if (Input.GetButtonDown("Attack 1"))
+            {
+                anim.SetBool("isAttacking", true);
+            }
 
-        if (isAttacking)
+        }
+        else
         {
-            if (Input.GetButtonDown("Horizontal"))
+            if (Input.GetButtonDown("Attack 1"))
             {
-                Debug.Log("Go");
-            }
-            else if (Input.GetButtonUp("Attack 1"))
-            {
-                isAttacking = false;
+                anim.SetTrigger("Attack");
             }
         }
-
-
-
 
 
         // No jitter/bouncing on slopes
@@ -195,61 +191,8 @@ public class RootMotionCharacterController : MonoBehaviour
         canDash = true;
     }
 
-    private void Attack()
+    private void ResetAttack()
     {
-        List<GameObject> toRemove = new List<GameObject>();
-        GameObject minDistance = null;
-        EnemyHealth zombie = null;
-
-        foreach (GameObject inRange in atk.objectsInRange)
-        {
-            if (inRange.CompareTag("Enemy"))
-            {
-                if (minDistance == null)
-                {
-                    minDistance = inRange;
-                }
-                else
-                {
-                    if (Vector3.Distance(this.transform.position, inRange.transform.position)
-                        < Vector3.Distance(this.transform.position, minDistance.transform.position))
-                    {
-                        minDistance = inRange;
-                    }
-                }
-                zombie = inRange.GetComponentInParent<EnemyHealth>();
-                zombie.TakeDamage(20);
-                // Debug.Log(Vector3.Distance(this.transform.position, zombie.transform.position));
-
-                if (zombie.currentHealth <= 0)
-                {
-                    Destroy(zombie.gameObject);
-                    toRemove.Add(inRange);
-                }
-            }
-        }
-
-        foreach (GameObject delete in toRemove)
-        {
-            atk.objectsInRange.Remove(delete);
-        }
-
-        if (Input.GetButton("Attack 1"))
-        {
-            if (minDistance)
-            {
-                Debug.Log(minDistance.gameObject.name);
-            }
-
-            Invoke("FinishedAttacking", 3);
-            isAttacking = true;
-        }
-
-
-    }
-
-    private void FinishedAttacking()
-    {
-        isAttacking = false;
+        anim.SetBool("isAttacking", false);
     }
 }
