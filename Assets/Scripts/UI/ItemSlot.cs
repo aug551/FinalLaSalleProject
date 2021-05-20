@@ -9,18 +9,18 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     //=============================================================================
     // Author: https://www.youtube.com/watch?v=BGr-7GZJNXg&t=2s&ab_channel=CodeMonkey
     //=============================================================================
-    ItemUI item;
-
-    public ItemUI Item { get => item; set => item = value; }
+    [SerializeField] public ItemUI Item;
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null && !eventData.pointerEnter.gameObject.TryGetComponent<ItemUI>(out ItemUI itemui)) // me 
+        if (eventData.pointerDrag != null ) // me 
         {
             Debug.Log("dropped");
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
-            eventData.pointerDrag.transform.SetParent(this.transform.parent);
-            item = itemui;
+            eventData.pointerDrag.gameObject.TryGetComponent<ItemUI>(out ItemUI itemui);
+            //eventData.pointerDrag.transform.SetParent(this.transform.parent);
+            Debug.Log(itemui);
+            Item = itemui;
         }
     }
 }

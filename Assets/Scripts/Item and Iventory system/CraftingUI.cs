@@ -13,7 +13,7 @@ public class CraftingUI : MonoBehaviour
     [SerializeField] GameObject craftingrecipeUIList;
     GameObject instantiatedObject;
     [SerializeField] List<ItemUI> itemsUIList = new List<ItemUI>();
-    [SerializeField] ItemSlot materialSlot1, materialSlot2, ResultSlot;
+    [SerializeField] ItemUI materialSlot1, materialSlot2, ResultSlot;
     [SerializeField] CraftingRecipe currentRecipe;
     List<Item> items = new List<Item>();
     [SerializeField] GameObject ItemUIPrefab;
@@ -21,15 +21,15 @@ public class CraftingUI : MonoBehaviour
 
     public void Craft()
     {
-        if (materialSlot1.Item.TryGetComponent(out Item itemMaterial1))
+        items = new List<Item>();
+        if (materialSlot1.TryGetComponent(out Item itemMaterial1))
         {
             items.Add(itemMaterial1);
         }
-        if (materialSlot2.Item.TryGetComponent(out Item itemMaterial2))
+        if (materialSlot2.TryGetComponent(out Item itemMaterial2))
         {
             items.Add(itemMaterial2);
         }
-        Debug.Log(currentRecipe.CanCraft(items));
         if (currentRecipe.CanCraft(items))
         {
             instantiatedObject = Instantiate(ItemUIPrefab);

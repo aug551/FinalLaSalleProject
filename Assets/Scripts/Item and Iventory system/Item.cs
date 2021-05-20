@@ -55,4 +55,19 @@ public class Item : MonoBehaviour
         return 1;
     }
 
+    public bool Equals(Item obj)
+    {
+
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+        Debug.Log(itemName + " " + obj.itemName);
+        if (itemName == obj.itemName) 
+        {
+            return true;
+        }
+        return false;
+    }
+
 }
