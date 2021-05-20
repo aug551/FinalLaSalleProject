@@ -19,6 +19,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         {
             Debug.Log("dropped");
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            eventData.pointerDrag.transform.SetParent(this.transform.parent);
             item = itemui;
         }
     }
