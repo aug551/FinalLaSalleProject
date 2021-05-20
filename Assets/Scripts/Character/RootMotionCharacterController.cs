@@ -145,6 +145,7 @@ public class RootMotionCharacterController : MonoBehaviour
             playerVelocity.x = (isJumping) ? (this.transform.forward.x * dashDistance) / 2 : this.transform.forward.x * dashDistance;
             controller.Move(new Vector3(playerVelocity.x, this.transform.position.y, 0) * Time.deltaTime);
         }
+        
 
 
         // Attack
@@ -187,6 +188,11 @@ public class RootMotionCharacterController : MonoBehaviour
             {
                 teleAtk.Closest.GetComponent<MeshRenderer>().material.color = Color.red;
             }
+
+            if (Input.GetButtonDown("Horizontal"))
+            {
+                Vector3 dir = (teleAtk.Closest.transform.position - this.transform.position).normalized;
+            } 
         }
 
         //Debug.Log(playerVelocity.x);
