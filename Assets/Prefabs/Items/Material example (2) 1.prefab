@@ -115,7 +115,7 @@ MonoBehaviour:
   value: 12
   weight: 0.05
   type: 0
-  amountOwned: 5
+  amountOwned: 1
   maxCapacity: 5
 --- !u!54 &5211629744176997229
 Rigidbody:

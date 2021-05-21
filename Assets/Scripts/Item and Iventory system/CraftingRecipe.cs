@@ -40,7 +40,6 @@ public class CraftingRecipe : ScriptableObject
                         Material newMaterialNeeded = materialNeeded as Material;                      
                         if (newMaterial.Equals(materialNeeded) && (newMaterial.AmountOwned >= newMaterialNeeded.AmountOwned))
                         {
-                            Debug.Log(newMaterial.AmountOwned + " " + newMaterialNeeded.AmountOwned);
                             check++;
                         }
                     }
@@ -54,7 +53,6 @@ public class CraftingRecipe : ScriptableObject
                     if (material.Equals(materialNeeded))
                     {
                         check++;
-                        Debug.Log("shoudnt be here");
                     }
                 }
             }

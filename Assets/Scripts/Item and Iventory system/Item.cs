@@ -62,7 +62,6 @@ public class Item : MonoBehaviour
         {
             return false;
         }
-        Debug.Log(itemName + " " + obj.itemName);
         if (itemName == obj.itemName) 
         {
             return true;

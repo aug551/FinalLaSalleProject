@@ -25,6 +25,4 @@ public class CraftingRecipeUI : MonoBehaviour
     {
         recipe.SelectRecipe(craftingUI);
     }
-
-
 }

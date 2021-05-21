@@ -12,8 +12,7 @@ public class CraftingUI : MonoBehaviour
     [SerializeField] GameObject craftingrecipeUI;
     [SerializeField] GameObject craftingrecipeUIList;
     GameObject instantiatedObject;
-    [SerializeField] List<ItemUI> itemsUIList = new List<ItemUI>();
-    [SerializeField] ItemUI materialSlot1, materialSlot2, ResultSlot;
+    [SerializeField] ItemSlot materialSlot1, materialSlot2, ResultSlot;
     [SerializeField] CraftingRecipe currentRecipe;
     List<Item> items = new List<Item>();
     [SerializeField] GameObject ItemUIPrefab;
@@ -21,15 +20,15 @@ public class CraftingUI : MonoBehaviour
 
     public void Craft()
     {
-        items = new List<Item>();
-        if (materialSlot1.TryGetComponent(out Item itemMaterial1))
-        {
-            items.Add(itemMaterial1);
-        }
-        if (materialSlot2.TryGetComponent(out Item itemMaterial2))
-        {
-            items.Add(itemMaterial2);
-        }
+        //items = new List<Item>();
+        ////if (materialSlot1.Item.TryGetComponent(out Item itemMaterial1))
+        ////{
+        ////    items.Add(itemMaterial1);
+        ////}
+        ////if (materialSlot2.Item.TryGetComponent(out Item itemMaterial2))
+        ////{
+        ////    items.Add(itemMaterial2);
+        ////}
         if (currentRecipe.CanCraft(items))
         {
             instantiatedObject = Instantiate(ItemUIPrefab);
@@ -47,5 +46,19 @@ public class CraftingUI : MonoBehaviour
     {
         //instantiatedObject = Instantiate(craftingrecipeUI, craftingrecipeUIList.transform);
         //instantiatedObject.GetComponent<CraftingRecipeUI>().Recipe = recipe;
+    }
+    public bool AddToMaterials(Item item)
+    {
+        if (items.Count == 2) return false;
+        if (items.Contains(item))
+        {
+            return false;
+        }
+        items.Add(item);
+        return true;
+    }
+    public bool RemoveFromMaterials(Item item)
+    {
+        return false;
     }
 }

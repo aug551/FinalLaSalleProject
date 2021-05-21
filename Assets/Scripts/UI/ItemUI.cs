@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler 
+public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
 
     //=============================================================================
@@ -20,12 +20,14 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
     public Inventory inventory;
     public ItemDisplay itemDisplay;
     public DisplayPanel displayPanel;
+    public CraftingUI craftingUI;
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         image = GetComponent<Image>();
+        Color startColor = image.color;
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -36,7 +38,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
             Swap(itemui);
             return;
         }
-        if (eventData.pointerEnter.gameObject.tag != "ItemSlot") 
+        else
         {
             rectTransform.anchoredPosition = beginTransform; 
         }
@@ -81,4 +83,16 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
     {
         if (itemDisplay) itemDisplay.hovered = false;
     }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            if (TryGetComponent<Item>(out Item item)) craftingUI.RemoveFromMaterials(item);
+        }
+        else if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            if (TryGetComponent<Item>(out Item item)) craftingUI.AddToMaterials(item);
+        }
+    }
+
 }
