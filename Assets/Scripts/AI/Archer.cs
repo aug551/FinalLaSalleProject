@@ -7,7 +7,7 @@ public class Archer : MonoBehaviour
     Transform player;
     float firingDelay= 2.0f;
     float distance;
-    bool alreadyShot = false;
+    //bool alreadyShot = false;
     bool playerInRange;
     [SerializeField] GameObject arrow;
 

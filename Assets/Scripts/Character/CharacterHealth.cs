@@ -11,12 +11,15 @@ public class CharacterHealth : MonoBehaviour
     public GameObject colliderDamage;
     public Slider hpSLider;
 
+    public CharacterStats characterStats;
+
 
     void Start()
     {
+        characterStats = GetComponent<CharacterStats>();
         maxHealth = 100;
         currentHealth = maxHealth;
-        InvokeRepeating("RegenHealth", 0.0f, regenRateSeconds); //soruce:https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
+        //InvokeRepeating("RegenHealth", 0.0f, regenRateSeconds); //soruce:https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
     }
 
     void Update()
@@ -24,19 +27,19 @@ public class CharacterHealth : MonoBehaviour
        
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.tag == ("DamageBox"))
-    //    {
-    //        TakeDamage(24);
-    //        UpdateHpSlider();
-    //        colliderDamage.SetActive(false);
-    //    }
-    //}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == ("DamageBox"))
+        {
+            TakeDamage(24);
+            UpdateHpSlider();
+            colliderDamage.SetActive(false);
+        }
+    }
 
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
+        currentHealth -= damage * characterStats.defence;
         UpdateHpSlider();
         if (currentHealth<=0)
         {
