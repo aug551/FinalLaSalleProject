@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class CharacterHealth : MonoBehaviour
 {
-    public int maxHealth;
-    public int currentHealth;
+    public float maxHealth;
+    public float currentHealth;
     public float regenRateSeconds = 3.0f;
     public GameObject colliderDamage;
     public Slider hpSLider;
+
 
     void Start()
     {
@@ -23,17 +24,17 @@ public class CharacterHealth : MonoBehaviour
        
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == ("DamageBox"))
-        {
-            TakeDamage(24);
-            UpdateHpSlider();
-            colliderDamage.SetActive(false);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == ("DamageBox"))
+    //    {
+    //        TakeDamage(24);
+    //        UpdateHpSlider();
+    //        colliderDamage.SetActive(false);
+    //    }
+    //}
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         UpdateHpSlider();

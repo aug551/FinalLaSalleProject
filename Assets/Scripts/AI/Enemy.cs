@@ -38,11 +38,13 @@ public class Enemy : NPC
     RaycastHit hit;
     Vector3 rayDirection;
     [SerializeField] LayerMask playermask;
+    public EnemyHealth enemy;
 
     protected override void Awake()
     {
         base.Awake();
         animator = GetComponent<Animator>();
+        enemy = GetComponent<EnemyHealth>();
     }
 
     protected override void Update()
@@ -112,7 +114,7 @@ public class Enemy : NPC
                 {
                     if (col.gameObject.TryGetComponent<CharacterHealth>(out CharacterHealth playerhealth))
                     {
-                        playerhealth.TakeDamage(20);
+                        playerhealth.TakeDamage(enemy.attack);
                         return;
                     }
                 }

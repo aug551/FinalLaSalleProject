@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int MaxHealth;
-    public int currentHealth;
+    public float MaxHealth;
+    public float currentHealth;
     public GameObject item;
     public GameObject zombie;
+
+    public float attack = 10;
 
     void Start()
     {
@@ -15,7 +17,7 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = MaxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         Debug.Log(currentHealth);
