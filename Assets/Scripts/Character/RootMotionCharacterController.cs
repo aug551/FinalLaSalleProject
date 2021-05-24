@@ -73,7 +73,7 @@ public class RootMotionCharacterController : MonoBehaviour
         }
 
         // Move Left-Right or Idle
-        if (Input.GetButton("Horizontal") && !IsGrabbing)
+        if (Input.GetButton("Horizontal") ) // && !IsGrabbing
         {
             //anim.SetFloat("RunSpeed", runningSpeed);
             anim.SetBool("Move", true);
@@ -181,18 +181,23 @@ public class RootMotionCharacterController : MonoBehaviour
 
         if (this.IsGrabbing)
         {
-            anim.applyRootMotion = false;
-            controller.Move(Vector3.zero);
+            // anim.applyRootMotion = false;
+            // controller.Move(Vector3.zero);
 
-            if (teleAtk.Closest)
+            if (teleAtk.Closest != null)
             {
+                Rigidbody enemyRigid = teleAtk.Closest.GetComponent<Rigidbody>();
                 teleAtk.Closest.GetComponent<MeshRenderer>().material.color = Color.red;
+                enemyRigid.isKinematic = false;
+                enemyRigid.transform.LookAt(this.transform);
+                // enemyRigid.AddForce(Vector3.forward, ForceMode.Impulse);
+                enemyRigid.velocity += Vector3.right * 10f * Time.deltaTime;
             }
 
-            if (Input.GetButtonDown("Horizontal"))
-            {
-                Vector3 dir = (teleAtk.Closest.transform.position - this.transform.position).normalized;
-            } 
+            //if (Input.GetButtonDown("Horizontal"))
+            //{
+            //    Vector3 dir = (teleAtk.Closest.transform.position - this.transform.position).normalized;
+            //} 
         }
 
         //Debug.Log(playerVelocity.x);

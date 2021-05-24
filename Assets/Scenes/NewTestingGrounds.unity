@@ -144,6 +144,7 @@ MonoBehaviour:
   currentHealth: 0
   item: {fileID: 2053950620749284211, guid: 12cf5922309ea2e4689cb1eac632fb4c, type: 3}
   zombie: {fileID: 38677733}
+  attack: 10
 --- !u!54 &38677739
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -570,7 +571,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 666153018}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -962,6 +963,7 @@ MonoBehaviour:
   regenRateSeconds: 3
   colliderDamage: {fileID: 0}
   hpSLider: {fileID: 1999682016}
+  characterStats: {fileID: 0}
 --- !u!1 &1171573340
 GameObject:
   m_ObjectHideFlags: 0
