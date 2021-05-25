@@ -133,7 +133,7 @@ public class Inventory : MonoBehaviour
     {
         return false;
     }
-    bool IsFull()
+    public bool IsFull()
     {
         return false;
     }

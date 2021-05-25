@@ -11,10 +11,14 @@ public class MaterialSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public ItemDisplay itemDisplay;
     public DisplayPanel displayPanel;
     public CraftingUI craftingUI;
+    ItemUI itemui;
+    CanvasGroup group;
 
     private void Awake()
     {
         image = GetComponent<Image>();
+        group = GetComponent<CanvasGroup>();
+        group.alpha = 0;
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -42,11 +46,19 @@ public class MaterialSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            
+            if (itemui.TryGetComponent<Item>(out Item item))
+            {
+                craftingUI.RemoveFromMaterials(item);
+                group.alpha = 0;
+            }
         }
         else if (eventData.button == PointerEventData.InputButton.Right)
         {
-            
+            if (itemui.TryGetComponent<Item>(out Item item))
+            {
+                craftingUI.RemoveFromMaterials(item);
+                group.alpha = 0;
+            }
         }
     }
 }

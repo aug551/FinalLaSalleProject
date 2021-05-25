@@ -18,7 +18,7 @@ public class CraftingRecipeUI : MonoBehaviour
         GetComponentsInChildren<Image>(images);
         images[1].sprite = recipe.materialNeeded[0].Icon;
         images[2].sprite = recipe.materialNeeded[1].Icon;
-        images[3].sprite = recipe.results[0].Icon;
+        images[3].sprite = recipe.result.Icon;
     }
 
     public void SelectRecipe()
