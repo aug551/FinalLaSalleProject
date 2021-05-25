@@ -27,7 +27,7 @@ public class EnemyHealth : MonoBehaviour
         Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
-            //Destroy(gameObject.GetComponent<Enemy>());
+            // Destroy(gameObject.GetComponent<Enemy>());
             enemy.AgentRunSpeed = 0; enemy.AgentWalkSpeed = 0;
             animator.Play("Z_FallingBack");
             Instantiate(item, gameObject.transform.position, Quaternion.identity);

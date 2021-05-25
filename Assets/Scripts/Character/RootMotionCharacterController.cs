@@ -32,11 +32,15 @@ public class RootMotionCharacterController : MonoBehaviour
     [SerializeField] private float dashStopForce = 3f;
     [SerializeField] private float dashCooldown = 5f;
 
+    private GameObject lastWall = null;
+
     private bool isAttacking = false;
     private bool isGrabbing = false;
+    private bool canWalljump = false;
 
     public bool IsAttacking { get => isAttacking; }
     public bool IsGrabbing { get => isGrabbing; set => isGrabbing = value; }
+    public bool CanWalljump { get => canWalljump; set => canWalljump = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -97,10 +101,16 @@ public class RootMotionCharacterController : MonoBehaviour
         {
             anim.applyRootMotion = false;
             anim.SetBool("Jumping", true);
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+
+            if (canWalljump && isJumping)
+            {
+                lastWall = GetComponentInChildren<WallJumpDetection>().Wall;
+            }
+
+            playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+
             currNVel = playerVelocity;
             this.isJumping = true;
-            canJump = false;
         }
 
         // Only use controller for vertical jumping
@@ -111,8 +121,13 @@ public class RootMotionCharacterController : MonoBehaviour
             {
                 if (Input.GetButton("Horizontal"))
                 {
-                    // If you press the opposite direction
-                    if (playerVelocity.x / Mathf.Abs(playerVelocity.x) != -Input.GetAxis("Horizontal"))
+
+                    if (playerVelocity.x == 0)
+                    {
+
+                        playerVelocity.x = -Input.GetAxis("Horizontal") * 6f * runningSpeed;
+                    }
+                    else if (playerVelocity.x / Mathf.Abs(playerVelocity.x) != -Input.GetAxis("Horizontal"))
                     {
                         playerVelocity.x = -currNVel.x * jumpInputInfluence;
                         currNVel = playerVelocity;
@@ -121,10 +136,19 @@ public class RootMotionCharacterController : MonoBehaviour
                 }
             }
 
+            canJump = false;
+
+
+            if (canWalljump && lastWall != GetComponentInChildren<WallJumpDetection>().Wall)
+            {
+                canJump = true;
+            }
+
             controller.Move(new Vector3(playerVelocity.x, playerVelocity.y, 0) * Time.deltaTime);
         }
         else
         {
+            lastWall = null;
             anim.applyRootMotion = true;
         }
 
@@ -179,26 +203,28 @@ public class RootMotionCharacterController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
         }
 
-        if (this.IsGrabbing)
-        {
-            // anim.applyRootMotion = false;
-            // controller.Move(Vector3.zero);
+        // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
 
-            if (teleAtk.Closest != null)
-            {
-                Rigidbody enemyRigid = teleAtk.Closest.GetComponent<Rigidbody>();
-                teleAtk.Closest.GetComponent<MeshRenderer>().material.color = Color.red;
-                enemyRigid.isKinematic = false;
-                enemyRigid.transform.LookAt(this.transform);
-                // enemyRigid.AddForce(Vector3.forward, ForceMode.Impulse);
-                enemyRigid.velocity += Vector3.right * 10f * Time.deltaTime;
-            }
+        //if (this.IsGrabbing)
+        //{
+        //    // anim.applyRootMotion = false;
+        //    // controller.Move(Vector3.zero);
 
-            //if (Input.GetButtonDown("Horizontal"))
-            //{
-            //    Vector3 dir = (teleAtk.Closest.transform.position - this.transform.position).normalized;
-            //} 
-        }
+        //    if (teleAtk.Closest != null)
+        //    {
+        //        Rigidbody enemyRigid = teleAtk.Closest.GetComponent<Rigidbody>();
+        //        teleAtk.Closest.GetComponent<MeshRenderer>().material.color = Color.red;
+        //        enemyRigid.isKinematic = false;
+        //        enemyRigid.transform.LookAt(this.transform);
+        //        // enemyRigid.AddForce(Vector3.forward, ForceMode.Impulse);
+        //        enemyRigid.velocity += Vector3.right * 10f * Time.deltaTime;
+        //    }
+
+        //    //if (Input.GetButtonDown("Horizontal"))
+        //    //{
+        //    //    Vector3 dir = (teleAtk.Closest.transform.position - this.transform.position).normalized;
+        //    //} 
+        //}
 
         //Debug.Log(playerVelocity.x);
 
@@ -247,6 +273,7 @@ public class RootMotionCharacterController : MonoBehaviour
         {
             foreach (EnemyHealth enemy in atk.Enemy)
             {
+                if(enemy)
                 enemy.TakeDamage(atk.CharacterStats.attack);
             }
         }
