@@ -205,26 +205,27 @@ public class RootMotionCharacterController : MonoBehaviour
 
         // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
 
-        //if (this.IsGrabbing)
-        //{
-        //    // anim.applyRootMotion = false;
-        //    // controller.Move(Vector3.zero);
+        if (this.isGrabbing)
+        {
+            if (teleAtk.Closest != null)
+            {
+                Rigidbody enemyrigid = teleAtk.Closest.GetComponent<Rigidbody>();
+                teleAtk.Closest.GetComponent<MeshRenderer>().material.color = Color.red;
 
-        //    if (teleAtk.Closest != null)
-        //    {
-        //        Rigidbody enemyRigid = teleAtk.Closest.GetComponent<Rigidbody>();
-        //        teleAtk.Closest.GetComponent<MeshRenderer>().material.color = Color.red;
-        //        enemyRigid.isKinematic = false;
-        //        enemyRigid.transform.LookAt(this.transform);
-        //        // enemyRigid.AddForce(Vector3.forward, ForceMode.Impulse);
-        //        enemyRigid.velocity += Vector3.right * 10f * Time.deltaTime;
-        //    }
 
-        //    //if (Input.GetButtonDown("Horizontal"))
-        //    //{
-        //    //    Vector3 dir = (teleAtk.Closest.transform.position - this.transform.position).normalized;
-        //    //} 
-        //}
+                if (Vector3.Distance(enemyrigid.transform.position, this.transform.position) < 2f)
+                {
+                    enemyrigid.isKinematic = true;
+                    enemyrigid.velocity = Vector3.zero;
+                }
+                else
+                {
+                    enemyrigid.isKinematic = false;
+                    enemyrigid.transform.LookAt(new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z));
+                    enemyrigid.velocity += enemyrigid.transform.forward * 90f * Time.deltaTime;
+                }
+            }
+        }
 
         //Debug.Log(playerVelocity.x);
 
