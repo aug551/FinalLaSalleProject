@@ -40,6 +40,9 @@ public class Enemy : NPC
     [SerializeField] LayerMask playermask;
     public EnemyHealth enemy;
 
+    public float AgentWalkSpeed { get => agentWalkSpeed; set => agentWalkSpeed = value; }
+    public float AgentRunSpeed { get => agentRunSpeed; set => agentRunSpeed = value; }
+
     protected override void Awake()
     {
         base.Awake();

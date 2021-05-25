@@ -238,4 +238,19 @@ public class RootMotionCharacterController : MonoBehaviour
     {
         anim.SetBool("isAttacking", false);
     }
+
+    public void Attacked()
+    {
+        AttackCollider atk = GetComponentInChildren<AttackCollider>();
+
+        if (atk.Enemy.Count > 0)
+        {
+            foreach (EnemyHealth enemy in atk.Enemy)
+            {
+                enemy.TakeDamage(atk.CharacterStats.attack);
+            }
+        }
+
+        atk.Enemy.Clear();
+    }
 }
