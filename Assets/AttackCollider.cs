@@ -5,6 +5,8 @@ using UnityEngine;
 public class AttackCollider : MonoBehaviour
 {
     private RootMotionCharacterController rmcc;
+    private CharacterStats characterStats;
+    private EnemyHealth enemy;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +16,9 @@ public class AttackCollider : MonoBehaviour
 
             if (other.CompareTag("Enemy"))
             {
+                enemy = other.gameObject.GetComponentInParent<EnemyHealth>();
+                Debug.Log(enemy.currentHealth);
+                enemy.TakeDamage(characterStats.attack);
                 Debug.Log("Hit enemy");
             }
         }
@@ -24,6 +29,8 @@ public class AttackCollider : MonoBehaviour
     void Start()
     {
         rmcc = GetComponentInParent<RootMotionCharacterController>();
+        characterStats = GetComponentInParent<CharacterStats>();
+        Debug.Log(characterStats.attack);
     }
 
     // Update is called once per frame

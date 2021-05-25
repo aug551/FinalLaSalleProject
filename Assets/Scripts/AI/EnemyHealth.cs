@@ -8,6 +8,7 @@ public class EnemyHealth : MonoBehaviour
     public float currentHealth;
     public GameObject item;
     public GameObject zombie;
+    private Animator animator;
 
     public float attack = 10;
 
@@ -15,6 +16,7 @@ public class EnemyHealth : MonoBehaviour
     {
         MaxHealth = 100;
         currentHealth = MaxHealth;
+        animator = GetComponent<Animator>();
     }
 
     public void TakeDamage(float damage)
@@ -23,7 +25,15 @@ public class EnemyHealth : MonoBehaviour
         Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
-            Instantiate(item, zombie.transform.position, Quaternion.identity);
+            Destroy(gameObject.GetComponent<Enemy>());
+            animator.Play("Z_FallingBack");
+            Instantiate(item, gameObject.transform.position, Quaternion.identity);
+            Invoke("DestroyEnemy", 1.0f);
         }
+    }
+
+    void DestroyEnemy()
+    {
+        Destroy(gameObject);
     }
 }
