@@ -34,7 +34,6 @@ public class AttackCollider : MonoBehaviour
     {
         rmcc = GetComponentInParent<RootMotionCharacterController>();
         characterStats = GetComponentInParent<CharacterStats>();
-        Debug.Log(characterStats.attack);
     }
 
     // Update is called once per frame

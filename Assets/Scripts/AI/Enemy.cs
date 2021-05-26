@@ -117,11 +117,11 @@ public class Enemy : NPC
                 {
                     if (col.gameObject.TryGetComponent<CharacterHealth>(out CharacterHealth playerhealth))
                     {
+                        Debug.Log("hit");
                         playerhealth.TakeDamage(enemy.attack);
-                        return;
                     }
                 }
-            }     
+            }
         }
     }
 
