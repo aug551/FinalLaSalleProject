@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 2ffee874d360a2b45b74b0b9922e8132
+guid: 32c43de63c3e8bd47b463dc744fcea62
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Jump
+    second: Mid-Air
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,21 +35,21 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Jump
+      name: Mid-Air
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 0
-      lastFrame: 23.2
+      firstFrame: 23.2
+      lastFrame: 25
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 1
-      loopBlendPositionY: 1
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1

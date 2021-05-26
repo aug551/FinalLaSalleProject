@@ -6,7 +6,7 @@ public class RootMotionCharacterController : MonoBehaviour
 {
     private Animator anim;
     private CharacterController controller;
-    private Attack atk;
+    private GameObject grabbedObj;
     private TeleAttackDetect teleAtk;
 
     [SerializeField] private float runningSpeed = 1f;
@@ -49,7 +49,6 @@ public class RootMotionCharacterController : MonoBehaviour
         anim.SetFloat("RunSpeed", runningSpeed);
         controller = GetComponent<CharacterController>();
         
-        atk = GetComponentInChildren<Attack>();
         teleAtk = GetComponentInChildren<TeleAttackDetect>();
 
     }
@@ -65,16 +64,27 @@ public class RootMotionCharacterController : MonoBehaviour
             canJump = true;
             if (playerVelocity.y < 0) playerVelocity.y = 0f;
 
-
-            if (Input.GetButton("Attack 2"))
-            {
-                isGrabbing = true;
-            }
         }
         else
         {
             playerVelocity.y += gravity * Time.deltaTime;
         }
+
+
+        // Grab
+        if (Input.GetButton("Attack 2"))
+        {
+            isGrabbing = true;
+            if (teleAtk.Closest != null && grabbedObj == null)
+                grabbedObj = teleAtk.Closest;
+        }
+
+        if (Input.GetButtonUp("Attack 2"))
+        {
+            isGrabbing = false;
+        }
+
+
 
         // Move Left-Right or Idle
         if (Input.GetButton("Horizontal") ) // && !IsGrabbing
@@ -105,9 +115,12 @@ public class RootMotionCharacterController : MonoBehaviour
             if (canWalljump && isJumping)
             {
                 lastWall = GetComponentInChildren<WallJumpDetection>().Wall;
+                this.transform.eulerAngles = (this.transform.eulerAngles.y == 90) ? new Vector3(0, -90, 0) : new Vector3(0, 90, 0);
+                anim.SetTrigger("WallJump");
             }
 
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+
 
             currNVel = playerVelocity;
             this.isJumping = true;
@@ -125,7 +138,7 @@ public class RootMotionCharacterController : MonoBehaviour
                     if (playerVelocity.x == 0)
                     {
 
-                        playerVelocity.x = -Input.GetAxis("Horizontal") * 6f * runningSpeed;
+                        playerVelocity.x = -Input.GetAxis("Horizontal") * 3f * runningSpeed;
                     }
                     else if (playerVelocity.x / Mathf.Abs(playerVelocity.x) != -Input.GetAxis("Horizontal"))
                     {
@@ -199,7 +212,7 @@ public class RootMotionCharacterController : MonoBehaviour
             isAttacking = false;
             anim.SetInteger("AttackPhase", -1);
 
-            if (Input.GetButtonDown("Attack 1"))
+            if (Input.GetButtonDown("Attack 1") && !IsGrabbing)
             {
                 anim.SetBool("isAttacking", true);
                 anim.SetInteger("AttackPhase", 0);
@@ -221,29 +234,32 @@ public class RootMotionCharacterController : MonoBehaviour
 
         // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
 
-        if (this.isGrabbing)
+        if (grabbedObj && !isGrabbing)
         {
-            if (teleAtk.Closest != null)
+            Rigidbody enemyrigid = grabbedObj.GetComponent<Rigidbody>();
+            grabbedObj.GetComponent<MeshRenderer>().material.color = Color.red;
+        
+            if (Vector3.Distance(enemyrigid.transform.position, this.transform.position) < 2f)
             {
-                Rigidbody enemyrigid = teleAtk.Closest.GetComponent<Rigidbody>();
-                teleAtk.Closest.GetComponent<MeshRenderer>().material.color = Color.red;
+                enemyrigid.isKinematic = true;
+                enemyrigid.velocity = Vector3.zero;
+                IsGrabbing = false;
 
+                grabbedObj.GetComponent<MeshRenderer>().material.color = Color.white;
 
-                if (Vector3.Distance(enemyrigid.transform.position, this.transform.position) < 2f)
-                {
-                    enemyrigid.isKinematic = true;
-                    enemyrigid.velocity = Vector3.zero;
-                }
-                else
-                {
-                    enemyrigid.isKinematic = false;
-                    enemyrigid.transform.LookAt(new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z));
-                    enemyrigid.velocity += enemyrigid.transform.forward * 90f * Time.deltaTime;
-                }
+                grabbedObj = null;
+
+            }
+            else
+            {
+                enemyrigid.isKinematic = false;
+                enemyrigid.transform.LookAt(new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z));
+                enemyrigid.velocity += enemyrigid.transform.forward * 90f * Time.deltaTime;
             }
         }
 
-        //Debug.Log(playerVelocity.x);
+        Debug.Log(IsGrabbing);
+
 
     }
 
