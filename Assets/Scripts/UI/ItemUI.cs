@@ -21,6 +21,7 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
     public ItemDisplay itemDisplay;
     public DisplayPanel displayPanel;
     public CraftingUI craftingUI;
+    public bool hasItem;
     Color startColor;
 
     private void Awake()
@@ -63,6 +64,11 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
     public void UpdateUI(Material _item)
     {
         image.sprite = _item.Icon;
+    }
+    public void ResetItemUI()
+    {
+        image.sprite = null;
+        hasItem = false;
     }
     void Swap(ItemUI _item) 
     {

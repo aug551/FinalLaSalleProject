@@ -12,16 +12,27 @@ public class CraftingUI : MonoBehaviour
     [SerializeField] GameObject craftingrecipeUI;
     [SerializeField] GameObject craftingrecipeUIList;
     [SerializeField] CraftingRecipe currentRecipe;
+    [SerializeField] List<MaterialSlots> materialSlots = new List<MaterialSlots>();
     List<Item> items = new List<Item>();
     public Inventory inventory;
 
     public void Craft()
     {
         if (inventory.IsFull()) return;
-        if (currentRecipe.CanCraft(items))
+        if (currentRecipe)
         {
-            CreateItem();
+            if (currentRecipe.CanCraft(items))
+            {
+                CreateItem();
+                ConsumeMaterials(items);
+            }
         }
+    }
+
+    void ConsumeMaterials(List<Item> items)
+    {
+        inventory.RemoveItem(items);
+        items.Clear();
     }
 
     public void CurrentRecipe(CraftingRecipe recipe)
@@ -36,7 +47,8 @@ public class CraftingUI : MonoBehaviour
     }
     void CreateItem()
     {
-        inventory.AddItem(currentRecipe.result);
+        inventory.AddItem(Instantiate(currentRecipe.result));
+        //I instantiate because in the copyitem function i delete the object and i don't want to delete the object in my recipe
     }
 
     public bool AddToMaterials(Item item)
@@ -47,6 +59,7 @@ public class CraftingUI : MonoBehaviour
             return false;
         }
         items.Add(item);
+        AddToMaterialSlot(item);
         return true;
     }
     public bool RemoveFromMaterials(Item item)
@@ -57,6 +70,32 @@ public class CraftingUI : MonoBehaviour
             return false;
         }
         items.Remove(item);
+        RemoveInMaterialSlot(item);
         return true;
+    }
+
+    void AddToMaterialSlot(Item item)
+    {
+        foreach (MaterialSlots materialSlot in materialSlots)
+        {
+            if (materialSlot.CurrentItem == null)
+            {
+                materialSlot.CurrentItem = item;
+                materialSlot.AddToSlot(item);
+                return;
+            }
+        }
+    }
+
+    void RemoveInMaterialSlot(Item item)
+    {
+        foreach (MaterialSlots materialSlot in materialSlots)
+        {
+            if (materialSlot.CurrentItem == null)
+            {
+                materialSlot.RemoveFromSlot(item);
+                return;
+            }
+        }
     }
 }
