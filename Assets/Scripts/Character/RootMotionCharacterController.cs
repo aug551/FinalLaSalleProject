@@ -169,24 +169,40 @@ public class RootMotionCharacterController : MonoBehaviour
             playerVelocity.x = (isJumping) ? (this.transform.forward.x * dashDistance) / 2 : this.transform.forward.x * dashDistance;
             controller.Move(new Vector3(playerVelocity.x, this.transform.position.y, 0) * Time.deltaTime);
         }
-        
+
 
 
         // Attack
         if (anim.GetCurrentAnimatorClipInfo(1).Length > 0)
         {
+            int atkPhase = -1;
+
             if (Input.GetButtonDown("Attack 1"))
             {
+                if (anim.GetCurrentAnimatorClipInfo(1)[0].clip.name == "First Hit")
+                {
+                    atkPhase = 1;
+                }
+                else if (anim.GetCurrentAnimatorClipInfo(1)[0].clip.name == "Second Hit")
+                {
+                    atkPhase = 2;
+                }
+
                 anim.SetBool("isAttacking", true);
+                anim.SetInteger("AttackPhase", atkPhase);
             }
+
 
         }
         else
         {
             isAttacking = false;
+            anim.SetInteger("AttackPhase", -1);
+
             if (Input.GetButtonDown("Attack 1"))
             {
-                anim.SetTrigger("Attack");
+                anim.SetBool("isAttacking", true);
+                anim.SetInteger("AttackPhase", 0);
                 isAttacking = true;
             }
         }
