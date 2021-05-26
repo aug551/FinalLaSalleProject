@@ -76,7 +76,12 @@ public class RootMotionCharacterController : MonoBehaviour
         {
             isGrabbing = true;
             if (teleAtk.Closest != null && grabbedObj == null)
+            {
                 grabbedObj = teleAtk.Closest;
+
+                grabbedObj.GetComponent<MeshRenderer>().material.color = Color.red;
+            }
+                
         }
 
         if (Input.GetButtonUp("Attack 2"))
@@ -179,7 +184,15 @@ public class RootMotionCharacterController : MonoBehaviour
 
         if (this.isDashing)
         {
-            playerVelocity.x = (isJumping) ? (this.transform.forward.x * dashDistance) / 2 : this.transform.forward.x * dashDistance;
+            if (isGrabbing && grabbedObj)
+            {
+                Vector3 enemyDir = grabbedObj.transform.position - this.transform.position;
+                playerVelocity = enemyDir * 10f;
+            }
+            else
+            {
+                playerVelocity.x = (isJumping) ? (this.transform.forward.x * dashDistance) / 2 : this.transform.forward.x * dashDistance;
+            }
             controller.Move(new Vector3(playerVelocity.x, this.transform.position.y, 0) * Time.deltaTime);
         }
 
@@ -237,7 +250,6 @@ public class RootMotionCharacterController : MonoBehaviour
         if (grabbedObj && !isGrabbing)
         {
             Rigidbody enemyrigid = grabbedObj.GetComponent<Rigidbody>();
-            grabbedObj.GetComponent<MeshRenderer>().material.color = Color.red;
         
             if (Vector3.Distance(enemyrigid.transform.position, this.transform.position) < 2f)
             {
