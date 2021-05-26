@@ -143,7 +143,6 @@ MonoBehaviour:
   MaxHealth: 0
   currentHealth: 0
   item: {fileID: 2053950620749284211, guid: 12cf5922309ea2e4689cb1eac632fb4c, type: 3}
-  zombie: {fileID: 38677733}
   attack: 10
 --- !u!54 &38677739
 Rigidbody:
@@ -904,7 +903,8 @@ MonoBehaviour:
   currentHealth: 0
   regenRateSeconds: 3
   colliderDamage: {fileID: 0}
-  hpSLider: {fileID: 1999682016}
+  hpSlider: {fileID: 0}
+  gameOverPanel: {fileID: 0}
   characterStats: {fileID: 0}
 --- !u!1 &1171573340
 GameObject:
@@ -1330,6 +1330,14 @@ PrefabInstance:
     - target: {fileID: 2419867643954146162, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747092077082050070, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: dashCooldown
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747092077082050071, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: m_Center.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3089126715573236168, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
       propertyPath: m_Name

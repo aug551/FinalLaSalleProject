@@ -116,11 +116,12 @@ public class RootMotionCharacterController : MonoBehaviour
         {
             anim.applyRootMotion = false;
             anim.SetBool("Jumping", true);
+            playerVelocity.y = 0f;
 
             if (canWalljump && isJumping)
             {
                 lastWall = GetComponentInChildren<WallJumpDetection>().Wall;
-                this.transform.eulerAngles = (this.transform.eulerAngles.y == 90) ? new Vector3(0, -90, 0) : new Vector3(0, 90, 0);
+                //this.transform.eulerAngles = (this.transform.eulerAngles.y == 90) ? new Vector3(0, -90, 0) : new Vector3(0, 90, 0);
                 anim.SetTrigger("WallJump");
             }
 
@@ -270,7 +271,7 @@ public class RootMotionCharacterController : MonoBehaviour
             }
         }
 
-        Debug.Log(IsGrabbing);
+
 
 
     }
@@ -324,5 +325,10 @@ public class RootMotionCharacterController : MonoBehaviour
         }
 
         atk.Enemy.Clear();
+    }
+
+    public void Turn()
+    {
+        //this.transform.eulerAngles = (this.transform.eulerAngles.y == 90) ? new Vector3(0, -90, 0) : new Vector3(0, 90, 0);
     }
 }
