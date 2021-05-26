@@ -34,8 +34,10 @@ public class Archer : MonoBehaviour
     {
         GameObject projectile = Instantiate(arrow, transform.position + new Vector3(0.4f,1.5f,0), Quaternion.identity);
         Rigidbody rigid = projectile.GetComponent<Rigidbody>();
-        projectile.transform.LookAt(player.transform);
-        rigid.AddForce(player.transform.position - transform.position, ForceMode.Impulse);
+        projectile.transform.LookAt(new Vector3(player.transform.position.x, player.transform.position.y + 1, player.transform.position.z));
+        //projectile.transform.Rotate(new Vector3(0, 90, 0));
+        //rigid.AddForce((player.transform.position - transform.position) * 0.5f, ForceMode.Impulse);
+        rigid.AddForce(projectile.transform.forward, ForceMode.Impulse);
         alreadyShot = false;
     }
 }

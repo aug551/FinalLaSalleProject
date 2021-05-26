@@ -113,6 +113,7 @@ public class Enemy : NPC
             Collider[] colliders = Physics.OverlapBox(atkCollider.bounds.center, atkCollider.bounds.extents, atkCollider.transform.rotation, playermask);   
             foreach (Collider col in colliders)
             {
+                Debug.Log("hit");
                 if (col.tag == "Player")
                 {
                     if (col.gameObject.TryGetComponent<CharacterHealth>(out CharacterHealth playerhealth))
