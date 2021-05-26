@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArrowHit : MonoBehaviour
 {
-    public float arrowDamage = 5.0f;
+    public float arrowDamage = 1.0f;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
