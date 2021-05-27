@@ -13,6 +13,7 @@ public class CraftingUI : MonoBehaviour
     [SerializeField] GameObject craftingrecipeUIList;
     [SerializeField] CraftingRecipe currentRecipe;
     [SerializeField] List<MaterialSlots> materialSlots = new List<MaterialSlots>();
+    [SerializeField] MaterialSlots resultSlot;
     List<Item> items = new List<Item>();
     public Inventory inventory;
 
@@ -31,13 +32,18 @@ public class CraftingUI : MonoBehaviour
 
     void ConsumeMaterials(List<Item> items)
     {
-        inventory.RemoveItem(items);
-        items.Clear();
+        inventory.RemoveItems(items);
+        foreach (Item item in items)
+        {
+            RemoveInMaterialSlot(item);
+        }
     }
 
     public void CurrentRecipe(CraftingRecipe recipe)
     {
         currentRecipe = recipe;
+        resultSlot.CurrentItem = recipe.result;
+        resultSlot.AddToSlot(recipe.result);
     }
 
     void AddToRecipeList(CraftingRecipe recipe)
@@ -91,10 +97,12 @@ public class CraftingUI : MonoBehaviour
     {
         foreach (MaterialSlots materialSlot in materialSlots)
         {
-            if (materialSlot.CurrentItem == null)
+            if (materialSlot.CurrentItem != null)
             {
-                materialSlot.RemoveFromSlot(item);
-                return;
+                if (materialSlot.CurrentItem == item)
+                {
+                    materialSlot.RemoveFromSlot(item);
+                }
             }
         }
     }

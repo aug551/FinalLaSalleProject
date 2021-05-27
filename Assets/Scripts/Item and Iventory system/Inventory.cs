@@ -36,7 +36,7 @@ public class Inventory : MonoBehaviour
             {               
                 if (items.CanAdd())
                 {                    
-                    if (items.ItemName == item.ItemName)
+                    if (items.Equals(item))
                     {
                         items.Add(1);
                         Destroy(item.gameObject);
@@ -129,7 +129,7 @@ public class Inventory : MonoBehaviour
         }
         return true;
     }
-    public void RemoveItem(List<Item> items)
+    public void RemoveItems(List<Item> items)
     {
         foreach (Item itemToRemove in items)
         {

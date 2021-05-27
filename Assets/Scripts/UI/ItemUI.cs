@@ -90,14 +90,16 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
     {
         if (itemDisplay) itemDisplay.hovered = false;
     }
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData) //https://docs.unity3d.com/2019.1/Documentation/ScriptReference/UI.Button.OnPointerClick.html
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             if (TryGetComponent<Item>(out Item item)) 
             {
-                craftingUI.RemoveFromMaterials(item);
-                image.color = startColor;
+                if (craftingUI.RemoveFromMaterials(item))
+                {
+                    image.color = startColor;
+                }
             }
         }
         else if (eventData.button == PointerEventData.InputButton.Right)
