@@ -9,7 +9,8 @@ public class CharacterHealth : MonoBehaviour
     public float currentHealth;
     public float regenRateSeconds = 3.0f;
     public GameObject colliderDamage;
-    public Slider hpSLider;
+    public Slider hpSlider;
+    public GameObject gameOverPanel;
 
     public CharacterStats characterStats;
 
@@ -39,11 +40,14 @@ public class CharacterHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        Debug.Log(damage);
         currentHealth -= damage * characterStats.defence;
         UpdateHpSlider();
         if (currentHealth<=0)
         {
-            Debug.Log("You suck");
+            hpSlider.gameObject.SetActive(false);
+            gameOverPanel.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 
@@ -59,7 +63,7 @@ public class CharacterHealth : MonoBehaviour
 
     public void UpdateHpSlider()
     {
-        hpSLider.value = currentHealth;
+        hpSlider.value = currentHealth;
     }
 
     public void RegenHealth()

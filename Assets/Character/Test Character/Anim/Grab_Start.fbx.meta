@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 2ffee874d360a2b45b74b0b9922e8132
+guid: 498f858e2ab8c5d4f841b80deef5d14c
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Jump
+    second: Grab_Start
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Jump
+      name: Grab_Start
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 0
-      lastFrame: 23.2
+      firstFrame: 30
+      lastFrame: 83
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -63,7 +63,7 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1

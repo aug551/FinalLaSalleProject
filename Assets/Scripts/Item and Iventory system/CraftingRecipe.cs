@@ -16,7 +16,7 @@ public class CraftingRecipe : ScriptableObject
 
     [SerializeField] public List<Item> materialNeeded;
     [SerializeField] public List<int> amoutneeded; //might not use this afterall
-    [SerializeField] public List<Item> results;
+    [SerializeField] public Item result;
 
 
     public bool CanCraft(List<Item> materials)

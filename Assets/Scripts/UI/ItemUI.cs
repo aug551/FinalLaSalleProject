@@ -21,13 +21,15 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
     public ItemDisplay itemDisplay;
     public DisplayPanel displayPanel;
     public CraftingUI craftingUI;
+    public bool hasItem;
+    Color startColor;
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         image = GetComponent<Image>();
-        Color startColor = image.color;
+        startColor = image.color;
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -63,6 +65,11 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
     {
         image.sprite = _item.Icon;
     }
+    public void ResetItemUI()
+    {
+        image.sprite = null;
+        hasItem = false;
+    }
     void Swap(ItemUI _item) 
     {
         rectTransform.anchoredPosition = _item.rectTransform.anchoredPosition;
@@ -87,12 +94,21 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if (TryGetComponent<Item>(out Item item)) craftingUI.RemoveFromMaterials(item);
+            if (TryGetComponent<Item>(out Item item)) 
+            {
+                craftingUI.RemoveFromMaterials(item);
+                image.color = startColor;
+            }
         }
         else if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (TryGetComponent<Item>(out Item item)) craftingUI.AddToMaterials(item);
+            if (TryGetComponent<Item>(out Item item))
+            {
+                if (craftingUI.AddToMaterials(item))
+                {
+                    image.color = Color.grey;
+                }
+            }
         }
     }
-
 }

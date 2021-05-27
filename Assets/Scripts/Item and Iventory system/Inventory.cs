@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
     
     [SerializeField] List<ItemUI> itemsUIList = new List<ItemUI>();
     //Dictionary<Type, Item> items = new Dictionary<Type, Item>();
-    List<Item> items = new List<Item>();
+    List<Item> itemsIventory = new List<Item>();
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
 
         if (itemType == typeof(Material))
         {
-            foreach (Item items in items)
+            foreach (Item items in itemsIventory)
             {               
                 if (items.CanAdd())
                 {                    
@@ -44,12 +44,12 @@ public class Inventory : MonoBehaviour
                     }
                 }          
             }                 
-            items.Add(AddToUI(item as Material));
+            itemsIventory.Add(AddToUI(item as Material));
             return;
         }
         if (itemType == typeof(Armor))
         {
-            items.Add(AddToUI(item as Armor));
+            itemsIventory.Add(AddToUI(item as Armor));
             return;
         }
     }
@@ -58,10 +58,10 @@ public class Inventory : MonoBehaviour
     {
         foreach (ItemUI itemui in itemsUIList)
         {
-            if (itemui.image.sprite == null)
+            if (!itemui.hasItem)
             {
                 ChangeAlpha(1, itemui);
-                itemsUIList.Remove(itemui);
+                itemui.hasItem = true;
                 itemui.UpdateUI(item);
                 return CopyItem(item, itemui);
             }
@@ -73,10 +73,10 @@ public class Inventory : MonoBehaviour
 
         foreach (ItemUI itemui in itemsUIList)
         {
-            if (itemui.image.sprite == null)
+            if (!itemui.hasItem)
             {
                 ChangeAlpha(1, itemui);
-                itemsUIList.Remove(itemui);
+                itemui.hasItem = true;
                 itemui.UpdateUI(item);
                 return CopyItem(item, itemui);
             }
@@ -122,18 +122,32 @@ public class Inventory : MonoBehaviour
     {
         foreach (Item item1 in item)
         {
-            if (!items.Contains(item1))
+            if (!itemsIventory.Contains(item1))
             {
                 return false;
             }
         }
         return true;
     }
-    bool RemoveItem(Item item)
+    public void RemoveItem(List<Item> items)
     {
-        return false;
+        foreach (Item itemToRemove in items)
+        {
+            foreach (Item item1 in itemsIventory)
+            {
+                if (item1.Equals(itemToRemove))
+                {
+                    if (item1.TryGetComponent<ItemUI>(out ItemUI itemui)) 
+                    {
+                        ChangeAlpha(0, itemui);
+                        itemui.ResetItemUI();
+                        Destroy(item1);
+                    }
+                }
+            }
+        }
     }
-    bool IsFull()
+    public bool IsFull()
     {
         return false;
     }

@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 2ffee874d360a2b45b74b0b9922e8132
+guid: a41ef5370b3a2664cb5fec3de0f0dcd2
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Jump
+    second: Wall Jump
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Jump
+      name: Wall Jump
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 0
-      lastFrame: 23.2
+      firstFrame: 14.2
+      lastFrame: 25.4
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -58,12 +58,19 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.74362814
+        functionName: Turn
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1

@@ -812,7 +812,8 @@ MonoBehaviour:
   inventory: {fileID: 1750428288}
   itemDisplay: {fileID: 1750428291}
   displayPanel: {fileID: 862894721}
-  craftingUI: {fileID: 0}
+  craftingUI: {fileID: 1302195678}
+  hasItem: 0
 --- !u!114 &200616153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,7 +893,7 @@ GameObject:
   - component: {fileID: 229625569}
   m_Layer: 5
   m_Name: MaterialSlot1
-  m_TagString: Untagged
+  m_TagString: ItemSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -942,7 +943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDisplay: {fileID: 1750428291}
   displayPanel: {fileID: 862894721}
-  craftingUI: {fileID: 0}
+  craftingUI: {fileID: 1302195678}
 --- !u!114 &229625570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2601,7 +2602,8 @@ MonoBehaviour:
   inventory: {fileID: 1750428288}
   itemDisplay: {fileID: 1750428291}
   displayPanel: {fileID: 862894721}
-  craftingUI: {fileID: 0}
+  craftingUI: {fileID: 1302195678}
+  hasItem: 0
 --- !u!114 &736743496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3168,7 +3170,8 @@ MonoBehaviour:
   inventory: {fileID: 1750428288}
   itemDisplay: {fileID: 1750428291}
   displayPanel: {fileID: 862894721}
-  craftingUI: {fileID: 0}
+  craftingUI: {fileID: 1302195678}
+  hasItem: 0
 --- !u!114 &841896821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3275,7 +3278,8 @@ MonoBehaviour:
   inventory: {fileID: 1750428288}
   itemDisplay: {fileID: 1750428291}
   displayPanel: {fileID: 862894721}
-  craftingUI: {fileID: 0}
+  craftingUI: {fileID: 1302195678}
+  hasItem: 0
 --- !u!114 &851414169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5008,7 +5012,7 @@ GameObject:
   - component: {fileID: 1266589565}
   m_Layer: 5
   m_Name: MaterialSlot2
-  m_TagString: Untagged
+  m_TagString: ItemSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5058,7 +5062,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDisplay: {fileID: 1750428291}
   displayPanel: {fileID: 862894721}
-  craftingUI: {fileID: 0}
+  craftingUI: {fileID: 1302195678}
 --- !u!114 &1266589566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5165,7 +5169,8 @@ MonoBehaviour:
   inventory: {fileID: 1750428288}
   itemDisplay: {fileID: 1750428291}
   displayPanel: {fileID: 862894721}
-  craftingUI: {fileID: 0}
+  craftingUI: {fileID: 1302195678}
+  hasItem: 0
 --- !u!114 &1292474476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5301,12 +5306,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   craftingrecipeUI: {fileID: 0}
   craftingrecipeUIList: {fileID: 0}
-  materialSlot1: {fileID: 0}
-  materialSlot2: {fileID: 0}
-  ResultSlot: {fileID: 0}
   currentRecipe: {fileID: 0}
-  ItemUIPrefab: {fileID: 1799889177536345716, guid: 5df0334149e39974d9c3acedf3c06df7, type: 3}
-  ItemUIParent: {fileID: 1718135804}
+  materialSlots:
+  - {fileID: 229625569}
+  - {fileID: 1266589565}
+  inventory: {fileID: 1750428288}
 --- !u!1 &1339803047
 GameObject:
   m_ObjectHideFlags: 0
@@ -5696,6 +5700,7 @@ MonoBehaviour:
   playermask:
     serializedVersion: 2
     m_Bits: 0
+  enemy: {fileID: 0}
 --- !u!1 &1495624986
 GameObject:
   m_ObjectHideFlags: 0
@@ -6130,7 +6135,7 @@ GameObject:
   - component: {fileID: 1578600435}
   m_Layer: 5
   m_Name: ResultSlot
-  m_TagString: Untagged
+  m_TagString: ItemSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6179,7 +6184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

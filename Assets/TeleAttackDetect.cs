@@ -57,13 +57,11 @@ public class TeleAttackDetect : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonUp("Attack 2"))
+        if (!rmc.IsGrabbing)
         {
             if (closest)
             {
-                closest.GetComponent<MeshRenderer>().material.color = Color.white;
                 closest = null;
-                rmc.IsGrabbing = false;
             }
         }
     }

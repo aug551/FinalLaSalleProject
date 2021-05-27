@@ -143,7 +143,7 @@ MonoBehaviour:
   MaxHealth: 0
   currentHealth: 0
   item: {fileID: 2053950620749284211, guid: 12cf5922309ea2e4689cb1eac632fb4c, type: 3}
-  zombie: {fileID: 38677733}
+  attack: 10
 --- !u!54 &38677739
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -366,10 +366,10 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!65 &516261676
 BoxCollider:
@@ -770,8 +770,8 @@ GameObject:
   - component: {fileID: 840333248}
   - component: {fileID: 840333247}
   m_Layer: 0
-  m_Name: Cube (4)
-  m_TagString: Enemy
+  m_Name: Wall
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -787,7 +787,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -862,70 +862,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840333246}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.38, y: 5.66, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -14.68, y: 4.97, z: 0}
+  m_LocalScale: {x: 1, y: 9.33, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1016266643
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1016266644}
-  - component: {fileID: 1016266645}
-  - component: {fileID: 1016266646}
-  m_Layer: 0
-  m_Name: TeleAttack
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1016266644
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1016266643}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1777270789}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1016266645
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1016266643}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 9.392822, z: 15.15541}
-  m_Center: {x: 2.232989e-15, y: 1.1836033, z: 7.8428655}
---- !u!114 &1016266646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1016266643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 606d0059070f54f41a904c326da88634, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemiesInRange: []
 --- !u!1 &1026908773 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8182311915427735385, guid: 1a596085fa6aa284f99256e0b9a6e8ac, type: 3}
@@ -961,7 +903,9 @@ MonoBehaviour:
   currentHealth: 0
   regenRateSeconds: 3
   colliderDamage: {fileID: 0}
-  hpSLider: {fileID: 1999682016}
+  hpSlider: {fileID: 0}
+  gameOverPanel: {fileID: 0}
+  characterStats: {fileID: 0}
 --- !u!1 &1171573340
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,10 +937,10 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!65 &1171573342
 BoxCollider:
@@ -1181,7 +1125,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -1387,35 +1331,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2747092077082050070, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: dashCooldown
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747092077082050071, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: m_Center.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3089126715573236168, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
       propertyPath: m_Name
       value: elVampiro
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 660823277, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
---- !u!4 &1777270789 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2419867643954146162, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
-  m_PrefabInstance: {fileID: 1777270788}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1777270790 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4516919697287371830, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
-  m_PrefabInstance: {fileID: 1777270788}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1777270791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1777270790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63bb6ff2074d46a43af6e5fb2969dda5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1844624721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1720,10 +1649,10 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!65 &2021406567
 BoxCollider:

@@ -5,16 +5,22 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
-public class MaterialSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class MaterialSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler/*, IPointerClickHandler*/
 {
     Image image;
     public ItemDisplay itemDisplay;
     public DisplayPanel displayPanel;
     public CraftingUI craftingUI;
+    Item currentItem;
+    CanvasGroup group;
+
+    public Item CurrentItem { get => currentItem; set => currentItem = value; }
 
     private void Awake()
     {
         image = GetComponent<Image>();
+        group = GetComponent<CanvasGroup>();
+        group.alpha = 0;
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -33,20 +39,39 @@ public class MaterialSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (itemDisplay) itemDisplay.hovered = false;
     }
 
-    void RemoveFromSlot()
+    public void AddToSlot(Item item)
     {
-        //image = null;
-        //item = null;
+        Debug.Log("called" + this.currentItem.ItemName);
+        image.sprite = item.Icon;
+        group.alpha = 1;
     }
-    public void OnPointerClick(PointerEventData eventData)
+
+    public void RemoveFromSlot(Item item)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
+        if (CurrentItem == item)
         {
-            
-        }
-        else if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            
+            item = null;
+            image.sprite = null;
+            group.alpha = 0;
         }
     }
+    //public void OnPointerClick(PointerEventData eventData)
+    //{
+    //    if (eventData.button == PointerEventData.InputButton.Left)
+    //    {
+    //        if (CurrentItem)
+    //        {
+    //            craftingUI.RemoveFromMaterials(CurrentItem);
+    //            group.alpha = 0;
+    //        }
+    //    }
+    //    else if (eventData.button == PointerEventData.InputButton.Right)
+    //    {
+    //        if (CurrentItem)
+    //        {
+    //            craftingUI.RemoveFromMaterials(CurrentItem);
+    //            group.alpha = 0;
+    //        }
+    //    }
+    //}
 }
