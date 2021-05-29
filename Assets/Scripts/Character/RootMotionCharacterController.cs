@@ -42,6 +42,7 @@ public class RootMotionCharacterController : MonoBehaviour
     public bool IsGrabbing { get => isGrabbing; set => isGrabbing = value; }
     public bool CanWalljump { get => canWalljump; set => canWalljump = value; }
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +56,7 @@ public class RootMotionCharacterController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        
+    {
         // Apply gravity if not grounded
         if (controller.isGrounded)
         {
@@ -72,29 +73,50 @@ public class RootMotionCharacterController : MonoBehaviour
 
 
         // Grab
-        if (Input.GetButton("Attack 2"))
-        {
-            isGrabbing = true;
-            if (teleAtk.Closest != null && grabbedObj == null)
-            {
-                grabbedObj = teleAtk.Closest;
+        StartSecondaryAttack();
 
-                grabbedObj.GetComponent<MeshRenderer>().material.color = Color.red;
-            }
-                
+
+        // Move
+        Move();
+
+
+        // Jumping ----------------------------------------------------------------
+        if (Input.GetButtonDown("Jump") && (canJump || OnSlope())) StartJumping();
+
+        if (this.isJumping) Jump();
+        else
+        {
+            lastWall = null;
+            anim.applyRootMotion = true;
         }
 
-        if (Input.GetButtonUp("Attack 2"))
-        {
-            isGrabbing = false;
-        }
+
+        // Dashing ---------------------------------------------
+        if (Input.GetButtonDown("Dash") && canDash) StartDash();
+
+        if (this.isDashing) Dash();
 
 
 
+        // Attacks
+        HandlePrimaryAttack();
+
+        HandleSecondaryAttack();
+
+        CorrectPosition();
+
+    }
+
+
+
+
+    // Functions -------------------------------------------------------------------------------
+    
+    private void Move()
+    {
         // Move Left-Right or Idle
-        if (Input.GetButton("Horizontal") ) // && !IsGrabbing
+        if (Input.GetButton("Horizontal")) // && !IsGrabbing
         {
-            //anim.SetFloat("RunSpeed", runningSpeed);
             anim.SetBool("Move", true);
             this.transform.eulerAngles =
                 (Input.GetAxis("Horizontal") > 0) ? new Vector3(0, -90, 0) : new Vector3(0, 90, 0);
@@ -109,96 +131,150 @@ public class RootMotionCharacterController : MonoBehaviour
             if (!isJumping)
                 playerVelocity.x = 0;
         }
+    }
+    
 
-        
-        // Jumping
-        if (Input.GetButtonDown("Jump") && (canJump || OnSlope()))
+    // Jumping
+    private void StartJumping()
+    {
+        anim.applyRootMotion = false;
+        anim.SetBool("Jumping", true);
+        playerVelocity.y = 0f;
+
+        if (canWalljump && isJumping)
         {
-            anim.applyRootMotion = false;
-            anim.SetBool("Jumping", true);
-            playerVelocity.y = 0f;
-
-            if (canWalljump && isJumping)
-            {
-                lastWall = GetComponentInChildren<WallJumpDetection>().Wall;
-                //this.transform.eulerAngles = (this.transform.eulerAngles.y == 90) ? new Vector3(0, -90, 0) : new Vector3(0, 90, 0);
-                anim.SetTrigger("WallJump");
-            }
-
-            playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
-
-
-            currNVel = playerVelocity;
-            this.isJumping = true;
+            lastWall = GetComponentInChildren<WallJumpDetection>().Wall;
+            //this.transform.eulerAngles = (this.transform.eulerAngles.y == 90) ? new Vector3(0, -90, 0) : new Vector3(0, 90, 0);
+            anim.SetTrigger("WallJump");
         }
 
-        // Only use controller for vertical jumping
-        if (this.isJumping)
+        playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+
+
+        currNVel = playerVelocity;
+        this.isJumping = true;
+    }
+    private void Jump()
+    {
+        // For controlling mid-air
+        if (airControl)
         {
-            // For controlling mid-air
-            if (airControl)
+            AirControl();
+        }
+
+        canJump = false;
+
+
+        if (canWalljump && lastWall != GetComponentInChildren<WallJumpDetection>().Wall)
+        {
+            canJump = true;
+        }
+
+        controller.Move(new Vector3(playerVelocity.x, playerVelocity.y, 0) * Time.deltaTime);
+    }
+    private void AirControl()
+    {
+        if (Input.GetButton("Horizontal"))
+        {
+
+            if (playerVelocity.x == 0)
             {
-                if (Input.GetButton("Horizontal"))
-                {
 
-                    if (playerVelocity.x == 0)
-                    {
-
-                        playerVelocity.x = -Input.GetAxis("Horizontal") * 3f * runningSpeed;
-                    }
-                    else if (playerVelocity.x / Mathf.Abs(playerVelocity.x) != -Input.GetAxis("Horizontal"))
-                    {
-                        playerVelocity.x = -currNVel.x * jumpInputInfluence;
-                        currNVel = playerVelocity;
-                    }
-
-                }
+                playerVelocity.x = -Input.GetAxis("Horizontal") * 3f * runningSpeed;
+            }
+            else if (playerVelocity.x / Mathf.Abs(playerVelocity.x) != -Input.GetAxis("Horizontal"))
+            {
+                playerVelocity.x = -currNVel.x * jumpInputInfluence;
+                currNVel = playerVelocity;
             }
 
-            canJump = false;
+        }
+    }
 
 
-            if (canWalljump && lastWall != GetComponentInChildren<WallJumpDetection>().Wall)
-            {
-                canJump = true;
-            }
 
-            controller.Move(new Vector3(playerVelocity.x, playerVelocity.y, 0) * Time.deltaTime);
+
+    // Dashing
+    private void StartDash()
+    {
+        anim.applyRootMotion = false;
+
+        // Called to stop dashing
+        Invoke("FinishedDashing", dashDuration);
+
+        // Called to give cooldowns to the dash
+        Invoke("DashCooldown", dashCooldown);
+
+        this.isDashing = true;
+        this.canDash = false;
+    }
+    private void Dash()
+    {
+        if (isGrabbing && grabbedObj)
+        {
+            Vector3 enemyDir = grabbedObj.transform.position - this.transform.position;
+            playerVelocity = enemyDir * 10f;
         }
         else
         {
-            lastWall = null;
-            anim.applyRootMotion = true;
+            playerVelocity.x = (isJumping) ? (this.transform.forward.x * dashDistance) / 2 : this.transform.forward.x * dashDistance;
         }
+        controller.Move(new Vector3(playerVelocity.x, this.transform.position.y, 0) * Time.deltaTime);
+    }
 
 
-
-        // Dash
-        if (Input.GetButtonDown("Dash") && canDash)
+    // Attacks
+    private void StartSecondaryAttack()
+    {
+        if (Input.GetButton("Attack 2"))
         {
-            anim.applyRootMotion = false;
-            Invoke("FinishedDashing", dashDuration);
-            Invoke("DashCooldown", dashCooldown);
-            this.isDashing = true;
-            this.canDash = false;
-        }
-
-        if (this.isDashing)
-        {
-            if (isGrabbing && grabbedObj)
+            isGrabbing = true;
+            if (teleAtk.Closest != null && grabbedObj == null)
             {
-                Vector3 enemyDir = grabbedObj.transform.position - this.transform.position;
-                playerVelocity = enemyDir * 10f;
+                grabbedObj = teleAtk.Closest;
+
+                grabbedObj.GetComponent<MeshRenderer>().material.color = Color.red;
+            }
+
+        }
+
+        if (Input.GetButtonUp("Attack 2"))
+        {
+            isGrabbing = false;
+        }
+    }
+
+    private void HandleSecondaryAttack()
+    {
+        // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+
+        if (grabbedObj && !isGrabbing)
+        {
+            Rigidbody enemyrigid = grabbedObj.GetComponent<Rigidbody>();
+
+            if (Vector3.Distance(enemyrigid.transform.position, this.transform.position) < 2f)
+            {
+                enemyrigid.isKinematic = true;
+                enemyrigid.velocity = Vector3.zero;
+                IsGrabbing = false;
+
+                grabbedObj.GetComponent<MeshRenderer>().material.color = Color.white;
+
+                grabbedObj = null;
+
             }
             else
             {
-                playerVelocity.x = (isJumping) ? (this.transform.forward.x * dashDistance) / 2 : this.transform.forward.x * dashDistance;
+                enemyrigid.isKinematic = false;
+                enemyrigid.transform.LookAt(new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z));
+                enemyrigid.velocity += enemyrigid.transform.forward * 90f * Time.deltaTime;
             }
-            controller.Move(new Vector3(playerVelocity.x, this.transform.position.y, 0) * Time.deltaTime);
         }
+    }
 
 
-
+    private void HandlePrimaryAttack()
+    {
         // Attack
         if (anim.GetCurrentAnimatorClipInfo(1).Length > 0)
         {
@@ -226,14 +302,18 @@ public class RootMotionCharacterController : MonoBehaviour
             isAttacking = false;
             anim.SetInteger("AttackPhase", -1);
 
-            if (Input.GetButtonDown("Attack 1") && !IsGrabbing)
+            if (Input.GetButtonDown("Attack 1"))
             {
                 anim.SetBool("isAttacking", true);
                 anim.SetInteger("AttackPhase", 0);
                 isAttacking = true;
             }
         }
+    }
 
+
+    private void CorrectPosition()
+    {
         // No jitter/bouncing on slopes
         if (anim.velocity.x != 0 && OnSlope())
         {
@@ -245,36 +325,13 @@ public class RootMotionCharacterController : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
         }
-
-        // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-
-        if (grabbedObj && !isGrabbing)
-        {
-            Rigidbody enemyrigid = grabbedObj.GetComponent<Rigidbody>();
-        
-            if (Vector3.Distance(enemyrigid.transform.position, this.transform.position) < 2f)
-            {
-                enemyrigid.isKinematic = true;
-                enemyrigid.velocity = Vector3.zero;
-                IsGrabbing = false;
-
-                grabbedObj.GetComponent<MeshRenderer>().material.color = Color.white;
-
-                grabbedObj = null;
-
-            }
-            else
-            {
-                enemyrigid.isKinematic = false;
-                enemyrigid.transform.LookAt(new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z));
-                enemyrigid.velocity += enemyrigid.transform.forward * 90f * Time.deltaTime;
-            }
-        }
-
-
-
-
     }
+
+
+
+
+
+
 
     // return true if on slope
     private bool OnSlope()
