@@ -38,4 +38,27 @@ public class DisplayPanel : MonoBehaviour
             textBoxes[4].text = armor.Value.ToString();
         }
     }
+     public void DisplayInfo(Item item)
+    {
+        Type itemType = item.GetType();
+
+        if (itemType == typeof(Material))
+        {
+            Material material = item as Material;
+            image.sprite = material.Icon;
+            textBoxes[1].text = material.ItemName.ToString();
+            textBoxes[2].text = material.Description.ToString();
+            textBoxes[3].text = material.AmountOwned.ToString();
+            textBoxes[4].text = material.Value.ToString();
+        }
+        if (itemType == typeof(Armor))
+        {
+            Armor armor = item as Armor;
+            image.sprite = armor.Icon;
+            textBoxes[1].text = armor.ItemName.ToString();
+            textBoxes[2].text = armor.Description.ToString();
+            textBoxes[3].text = " ";
+            textBoxes[4].text = armor.Value.ToString();
+        }
+    }
 }

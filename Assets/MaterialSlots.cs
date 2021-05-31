@@ -24,12 +24,9 @@ public class MaterialSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (image.sprite != null)
+        if (currentItem != null)
         {
-            if (eventData.pointerEnter.gameObject.TryGetComponent<ItemUI>(out ItemUI itemui))
-            { 
-                displayPanel.DisplayInfo(itemui); 
-            }
+            displayPanel.DisplayInfo(CurrentItem); 
             if (itemDisplay) itemDisplay.hovered = true;
         }
     }
@@ -50,7 +47,8 @@ public class MaterialSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (CurrentItem == item)
         {
-            item = null;
+            Debug.Log("called");
+            currentItem = null;
             image.sprite = null;
             group.alpha = 0;
         }

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class NPC : MonoBehaviour
 {
     //=============================================================================
-    // Author (kinda): Kevin Charron
+    // Author : Kevin Charron
     //=============================================================================
 
     // Patrol points
@@ -27,7 +27,7 @@ public class NPC : MonoBehaviour
         //agent.stoppingDistance = 5f;
     }
 
-    // https://docs.unity3d.com/Manual/nav-AgentPatrol.html i copy pasted a lot from this lul
+    // https://docs.unity3d.com/Manual/nav-AgentPatrol.html 
     protected void Patrol()
     {
         if (points.Length == 0)
@@ -50,6 +50,5 @@ public class NPC : MonoBehaviour
                 Patrol();
         }
     }
-
 }
 
