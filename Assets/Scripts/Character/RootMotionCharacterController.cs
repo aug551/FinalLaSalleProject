@@ -374,10 +374,25 @@ public class RootMotionCharacterController : MonoBehaviour
 
         if (atk.Enemy.Count > 0)
         {
-            foreach (EnemyHealth enemy in atk.Enemy)
+            int crit = Random.Range(0, 100);
+            Debug.Log(crit);
+            if (crit<atk.CharacterStats.critChance)
             {
-                if(enemy)
-                enemy.TakeDamage(atk.CharacterStats.attack);
+                Debug.Log("crit");
+                foreach (EnemyHealth enemy in atk.Enemy)
+                {
+                    if (enemy)
+                        enemy.TakeDamage(atk.CharacterStats.attack*atk.CharacterStats.critDamageMultiplier);
+                }
+            }
+            else
+            {
+                Debug.Log("hit");
+                foreach (EnemyHealth enemy in atk.Enemy)
+                {
+                    if (enemy)
+                        enemy.TakeDamage(atk.CharacterStats.attack);
+                }
             }
         }
 

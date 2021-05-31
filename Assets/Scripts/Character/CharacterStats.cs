@@ -8,8 +8,8 @@ public class CharacterStats : MonoBehaviour
     public float attack;
     public float startingDefence;
     public float defence;
-    //public float critChance;
-    //public float critDamageMultiplier;
+    public float critChance;
+    public float critDamageMultiplier;
 
     void Start()
     {
@@ -17,6 +17,8 @@ public class CharacterStats : MonoBehaviour
         attack = startingAttack;
         startingDefence = 1;
         defence = startingDefence;
+        critChance = 10.0f;
+        critDamageMultiplier = 2.0f;
     }
 
     void Update()
