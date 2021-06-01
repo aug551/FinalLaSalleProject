@@ -26,6 +26,7 @@ public class CraftingUI : MonoBehaviour
             {
                 CreateItem();
                 ConsumeMaterials(items);
+                resultSlot.RemoveFromSlot(currentRecipe.result);
             }
         }
     }

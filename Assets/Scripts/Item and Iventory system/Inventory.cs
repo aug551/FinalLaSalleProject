@@ -113,7 +113,10 @@ public class Inventory : MonoBehaviour
 
     void ChangeAlpha(int alpha, ItemUI item)
     {
-        Color color = item.image.color;
+        Color color;
+        Debug.Log(alpha);
+        color = item.image.color;
+        Debug.Log(color);
         color.a = alpha;
         item.image.color = color;
     }
