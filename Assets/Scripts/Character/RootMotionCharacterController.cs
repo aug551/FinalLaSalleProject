@@ -86,7 +86,6 @@ public class RootMotionCharacterController : MonoBehaviour
         if (this.isJumping) Jump();
         else
         {
-            lastWall = null;
             anim.applyRootMotion = true;
         }
 
@@ -165,7 +164,7 @@ public class RootMotionCharacterController : MonoBehaviour
         canJump = false;
 
 
-        if (canWalljump && lastWall != GetComponentInChildren<WallJumpDetection>().Wall)
+        if (canWalljump )
         {
             canJump = true;
         }

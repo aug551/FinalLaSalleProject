@@ -950,7 +950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2374416310445070055}
   - component: {fileID: 3684475500481681465}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: EnemyDetect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -996,7 +996,7 @@ GameObject:
   - component: {fileID: 4700158829226236246}
   - component: {fileID: 1939634781651453537}
   - component: {fileID: 4140598748917385806}
-  m_Layer: 3
+  m_Layer: 2
   m_Name: TeleAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1407,6 +1407,8 @@ MonoBehaviour:
   attack: 0
   startingDefence: 0
   defence: 0
+  critChance: 0
+  critDamageMultiplier: 0
 --- !u!114 &7556709255601669099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2614,7 +2616,7 @@ GameObject:
   - component: {fileID: 3211413669869593350}
   - component: {fileID: 6284699139437009036}
   - component: {fileID: 3119358193718679779}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: WallDetect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
