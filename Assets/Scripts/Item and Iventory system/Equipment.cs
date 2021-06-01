@@ -9,7 +9,6 @@ public class Equipment : Item
     //=============================================================================
 
     [SerializeField] EquipSlot slot;  // What slot to attach the item to when equipped
-
     public EquipSlot Slot { get => slot; set => slot = value; }
 
     public Equipment(string _itemName, Sprite _icon, string _description, int _value, float _weight, EquipSlot _slot) : base(_itemName, _icon, _description, _value, _weight)

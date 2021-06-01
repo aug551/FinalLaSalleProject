@@ -38,7 +38,6 @@ public class MaterialSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void AddToSlot(Item item)
     {
-        Debug.Log("called" + this.currentItem.ItemName);
         image.sprite = item.Icon;
         group.alpha = 1;
     }
@@ -47,7 +46,6 @@ public class MaterialSlots : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (CurrentItem == item)
         {
-            Debug.Log("called");
             currentItem = null;
             image.sprite = null;
             group.alpha = 0;
