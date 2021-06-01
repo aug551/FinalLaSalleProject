@@ -1331,30 +1331,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2747092077082050070, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
-      propertyPath: gravity
-      value: -12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2747092077082050070, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
-      propertyPath: jumpHeight
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2747092077082050070, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
-      propertyPath: dashCooldown
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2747092077082050070, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
-      propertyPath: jumpInputInfluence
-      value: 0.499
-      objectReference: {fileID: 0}
-    - target: {fileID: 2747092077082050071, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
-      propertyPath: m_Height
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2747092077082050071, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
-      propertyPath: m_Center.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3089126715573236168, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
       propertyPath: m_Name
       value: elVampiro

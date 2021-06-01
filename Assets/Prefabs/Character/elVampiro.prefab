@@ -1367,7 +1367,7 @@ CharacterController:
   m_StepOffset: 0
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0.97, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &2747092077082050070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1381,16 +1381,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runningSpeed: 1
-  gravity: -9.81
-  jumpHeight: 1.5
+  gravity: -12
+  jumpHeight: 2
   airControl: 1
-  jumpInputInfluence: 0.85
+  jumpInputInfluence: 0.499
   slopeForce: 100
   slopeForceRayLength: 1.5
   dashDistance: 50
   dashDuration: 0.15
   dashStopForce: 10
-  dashCooldown: 5
+  dashCooldown: 2
 --- !u!114 &5322910986217002427
 MonoBehaviour:
   m_ObjectHideFlags: 0
