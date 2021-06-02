@@ -7,6 +7,8 @@ public class PlatformTemplate : MonoBehaviour
     public Rigidbody rb;
     bool countDownUp = false;
     public int countDownTime;
+    private Vector3 startingPosition;
+    public int secForReset;
 
     
 
@@ -15,12 +17,16 @@ public class PlatformTemplate : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        startingPosition = this.transform.position;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(countDownTime.ToString());
+
+
     }
 
     //private void OnCollisionEnter(Collider col)
@@ -46,17 +52,45 @@ public class PlatformTemplate : MonoBehaviour
             {
                 rb.isKinematic = false;
                 rb.useGravity = true;
+
+                
+
             }
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            StopCoroutine(PlatformCountDown());
+            countDownTime = 3;
+
+        }if(other.CompareTag("Player")&&countDownUp==true)
+        {
+            ResetTime();
+            
+        }
+    }
+
+
+
     public IEnumerator PlatformCountDown()
     {
         Debug.Log("Countdown started");
-
+        
         yield return new WaitForSeconds(countDownTime);
 
         countDownUp = true;
     }
 
+    public IEnumerator ResetTime()
+    {
+        yield return new WaitForSeconds(secForReset);
+    }
+
+    private void ResetPosition()
+    {
+        // = startingPosition;
+    }
 }
