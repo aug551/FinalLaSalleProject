@@ -8,7 +8,6 @@ public class EnemyHealth : MonoBehaviour
     public float currentHealth;
     public GameObject item;
     private Animator animator;
-    private Enemy enemy;
 
     public float attack = 10;
 
@@ -17,7 +16,6 @@ public class EnemyHealth : MonoBehaviour
         MaxHealth = 100;
         currentHealth = MaxHealth;
         animator = GetComponent<Animator>();
-        enemy = GetComponentInParent<Enemy>();
     }
 
     public void TakeDamage(float damage)

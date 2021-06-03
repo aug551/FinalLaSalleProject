@@ -114,7 +114,7 @@ MonoBehaviour:
   description: Combine with string to make armor
   value: 1
   weight: 0.05
-  type: 2
+  type: 1
   amountOwned: 1
   maxCapacity: 5
 --- !u!54 &5398644737430590943

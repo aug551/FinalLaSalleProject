@@ -23,7 +23,7 @@ public class Material : Item
 
     public enum MaterialType
     {
-        Stone, Metal, Leather, ore
+        String, Leather, IronOre
     }
     public override void Add(int amount)
     {

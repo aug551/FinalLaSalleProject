@@ -114,7 +114,7 @@ MonoBehaviour:
   description: Combine with leather to make armor
   value: 0
   weight: 0
-  type: 1
+  type: 0
   amountOwned: 1
   maxCapacity: 5
 --- !u!54 &3469275180121527991
