@@ -9,12 +9,13 @@ public class FindPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponentInParent<Archer>().Player.transform;    
+        // player = GetComponentInParent<Archer>().Player.transform;    
     }
 
     // Update is called once per frame
     void Update()
     {
+        player = GetComponentInParent<Archer>().Player.transform;
         this.transform.position = player.transform.position;
         this.transform.localPosition = this.transform.localPosition.normalized / 100;
     }
