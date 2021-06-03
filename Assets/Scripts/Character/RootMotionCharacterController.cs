@@ -86,10 +86,8 @@ public class RootMotionCharacterController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && (canJump || OnSlope())) StartJumping();
 
         if (this.isJumping) Jump();
-        else
-        {
-            anim.applyRootMotion = true;
-        }
+        else anim.applyRootMotion = true;
+        
 
 
         // Dashing ---------------------------------------------
