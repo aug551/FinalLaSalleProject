@@ -26,22 +26,22 @@ public class CharacterStats : MonoBehaviour
         
     }
 
-    void AddAttack(float attackMulti)
+    public void AddAttack(float attackMulti)
     {
         attack = startingAttack * attackMulti;
     }
 
-    void RemoveAttackStat(float attackMulti)
+    public void RemoveAttackStat(float attackMulti)
     {
         attack = startingAttack / attackMulti;
     }
 
-    void AddDefence(float defenceMulti)
+    public void AddDefence(float defenceMulti)
     {
         defence = defence - defenceMulti;
     }
 
-    void RemoveDefenceStat (float defenceMulti)
+    public void RemoveDefenceStat (float defenceMulti)
     {
         defence = defence + defenceMulti;
     }

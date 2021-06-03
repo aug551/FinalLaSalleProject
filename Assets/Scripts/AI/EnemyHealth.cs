@@ -26,10 +26,17 @@ public class EnemyHealth : MonoBehaviour
         Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
-            
-            //enemy.AgentRunSpeed = 0; enemy.AgentWalkSpeed = 0;
+            int generateItem = Random.Range(1, 2);
             animator.Play("Z_FallingBack");
-            Instantiate(item, gameObject.transform.position, Quaternion.identity);
+            if (generateItem == 1)
+            {
+                Instantiate(item, gameObject.transform.position, Quaternion.identity);
+
+            }
+            else
+            {
+                Instantiate(item, gameObject.transform.position, Quaternion.identity);
+            }
             Invoke("DestroyEnemy", 1.0f);
         }
     }
