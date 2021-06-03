@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Archer : MonoBehaviour
 {
-    float firingDelay= 2.0f;
     float distance;
     bool alreadyShot = false;
-    bool playerInRange;
+    private Animator anim;
+    private FindPlayer orbit;
+
+    [SerializeField] private float timeToShoot = 1f;
+    [SerializeField] [Range(1f, 30f)] private float projectileSpeed = 10f;
+    [SerializeField] [Range(1f, 10f)] private float firingDelay = 2.0f;
+
     [SerializeField] GameObject arrow;
     [SerializeField] private Transform player;
 
@@ -16,10 +21,18 @@ public class Archer : MonoBehaviour
     private Vector3 projectileDirection = Vector3.zero;
     private Ray projectileRay;
 
+    public Transform Player { get => player;}
 
     void Start()
     {
-        if(!player) player = GameObject.FindGameObjectWithTag("Player").transform;
+        // In the inspector, change this to the "Neck" of the player
+        if(!player) player = GameObject.Find("PlayerNeck").transform;
+
+        orbit = GetComponentInChildren<FindPlayer>();
+
+        anim = GetComponent<Animator>();
+        anim.SetFloat("AnimationSpeed", 1/timeToShoot);
+
         lr = GetComponent<LineRenderer>();
         lr.positionCount = 2;
         lr.SetPosition(0, this.transform.position);
@@ -36,7 +49,8 @@ public class Archer : MonoBehaviour
 
         if(distance<=25f && !alreadyShot)
         {
-            interT += 0.33f * Time.deltaTime;
+            interT += 1/timeToShoot * Time.deltaTime;
+
             Aim(interT);
 
             if (interT >= 1)
@@ -55,6 +69,7 @@ public class Archer : MonoBehaviour
 
     private void ResetAim()
     {
+        anim.SetBool("isAttacking", false);
         interT = 0f;
         lr.startWidth = 0f;
         lr.endWidth = 0f;
@@ -63,16 +78,18 @@ public class Archer : MonoBehaviour
 
     void Aim(float interp)
     {
-        Vector3 direction = (player.position - new Vector3(0.4f, 1.5f, 0)) - this.transform.position;
+        anim.SetBool("isAttacking", true);
+
+        Vector3 direction = (player.position) - orbit.GetLocalPos().position;
 
         RaycastHit hit;
-        projectileRay = new Ray(transform.position + new Vector3(0.4f, 1.5f, 0), Vector3.Normalize(direction) * 10f);
+        projectileRay = new Ray(orbit.GetLocalPos().position, Vector3.Normalize(direction) * 10f);
 
         if (!alreadyShot && Physics.Raycast(projectileRay, out hit, 25f))
         {
-            lr.SetPosition(0, transform.position + new Vector3(0.4f, 1.5f, 0));
+            lr.SetPosition(0, orbit.GetLocalPos().position);
             lr.SetPosition(1, hit.point);
-            projectileDirection = Vector3.Normalize(hit.point - this.transform.position);
+            projectileDirection = Vector3.Normalize(hit.point - orbit.GetLocalPos().position);
         }
 
         lr.startWidth = Mathf.Lerp(0, 0.1f, interp);
@@ -82,14 +99,14 @@ public class Archer : MonoBehaviour
     void Shoot()
     {
         RaycastHit hit;
-        if (Physics.Raycast(this.transform.position, projectileDirection, out hit, 25f))
+        if (Physics.Raycast(orbit.GetLocalPos().position, projectileDirection, out hit, 25f))
         {
-                lr.SetPosition(0, transform.position + new Vector3(0.4f, 1.5f, 0));
+                lr.SetPosition(0, orbit.GetLocalPos().position);
                 lr.SetPosition(1, hit.point);
         }
         else
         {
-            lr.SetPosition(0, transform.position + new Vector3(0.4f, 1.5f, 0));
+            lr.SetPosition(0, orbit.GetLocalPos().position);
             lr.SetPosition(1, projectileDirection * 25f);
         }
 
@@ -103,10 +120,10 @@ public class Archer : MonoBehaviour
         lr.endWidth = 0f;
         interT = 0f;
 
-        GameObject projectile = Instantiate(arrow, transform.position + new Vector3(0.4f, 1.5f, 0), Quaternion.identity);
+        GameObject projectile = Instantiate(arrow, orbit.GetLocalPos().position, Quaternion.identity);
         Rigidbody rigid = projectile.GetComponent<Rigidbody>();
         projectile.transform.LookAt(player.transform.position);
-        rigid.AddForce(projectile.transform.forward * 10, ForceMode.Impulse);
+        rigid.AddForce(projectile.transform.forward * this.projectileSpeed, ForceMode.Impulse);
 
 
     }

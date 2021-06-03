@@ -15,6 +15,8 @@ public class RootMotionCharacterController : MonoBehaviour
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private bool airControl = true;
     [SerializeField] [Range(0,1)] private float jumpInputInfluence = 1.0f;
+    [SerializeField] private int jumpAmount = 2;
+    private int currentJumpAmount = 0;
     private bool isJumping = false;
     private bool canJump = false;
 
@@ -64,7 +66,7 @@ public class RootMotionCharacterController : MonoBehaviour
             isJumping = false;
             canJump = true;
             if (playerVelocity.y < 0) playerVelocity.y = 0f;
-
+            currentJumpAmount = jumpAmount - 1;
         }
         else
         {
@@ -140,15 +142,21 @@ public class RootMotionCharacterController : MonoBehaviour
         anim.SetBool("Jumping", true);
         playerVelocity.y = 0f;
 
-        if (canWalljump && isJumping)
+        if (isJumping)
         {
-            lastWall = GetComponentInChildren<WallJumpDetection>().Wall;
-            //this.transform.eulerAngles = (this.transform.eulerAngles.y == 90) ? new Vector3(0, -90, 0) : new Vector3(0, 90, 0);
-            anim.SetTrigger("WallJump");
+            if (canWalljump)
+            {
+                lastWall = GetComponentInChildren<WallJumpDetection>().Wall;
+                //this.transform.eulerAngles = (this.transform.eulerAngles.y == 90) ? new Vector3(0, -90, 0) : new Vector3(0, 90, 0);
+                anim.SetTrigger("WallJump");
+            }
+            if (currentJumpAmount > 0)
+            {
+                currentJumpAmount -= 1;
+            }
         }
 
         playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
-
 
         currNVel = playerVelocity;
         this.isJumping = true;
@@ -163,11 +171,7 @@ public class RootMotionCharacterController : MonoBehaviour
 
         canJump = false;
 
-
-        if (canWalljump )
-        {
-            canJump = true;
-        }
+        canJump = CanWalljump || currentJumpAmount > 0;
 
         controller.Move(new Vector3(playerVelocity.x, playerVelocity.y, 0) * Time.deltaTime);
     }

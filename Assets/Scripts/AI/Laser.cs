@@ -4,33 +4,54 @@ using UnityEngine;
 
 public class Laser : IState
 {
-    LineRenderer laserLineRenderer;
-    Transform eyepos;
-    public float laserSize = 0.1f;
-    Animator animator;
-    RaycastHit hit;
+    public float laserStartSize = 0.1f;
+    TheBoss theBoss;
+    LaserEyes laserEyes;
+    Animator anim;
+    AudioSource audio;
+    private float interT = 0f;
 
-    public Laser(TheBoss theBoss)
+    public Laser(TheBoss theBoss1)
     {
-       animator = theBoss.animator;
-       Vector3[] initLaserPositions = new Vector3[2] { Vector3.zero, Vector3.zero };
-       laserLineRenderer.SetPositions(initLaserPositions);
-       laserLineRenderer.endWidth = laserSize;
-       laserLineRenderer.startWidth = laserSize;
+       theBoss = theBoss1;
+       anim = theBoss1.animator;
+       audio = theBoss1.audioSource;
+       laserEyes = theBoss1.laserEyes;
+       theBoss.LineRenderer.enabled = false;
+       theBoss.LineRenderer.SetPosition(0,theBoss.laserEyes.transform.position);
+       theBoss.LineRenderer.endWidth = laserStartSize;
+       theBoss.LineRenderer.startWidth = laserStartSize;
     }
 
-    public override IEnumerator Enter()
+    public override IEnumerator Enter(TheBoss theBoss1)
     {
+        int i = 0;
         canTransition = false;
-        laserLineRenderer.enabled = true;
-        animator.SetBool("laser", true);
-        if (Physics.Raycast(eyepos.position, Vector3.forward, out hit))
+        anim.SetBool("Laser", true);
+        yield return new WaitForSeconds(2f);
+        //theBoss.LineRenderer.startWidth = .5f; /*Mathf.Lerp(0, 0.1f, 0.2f + Time.deltaTime);*/
+        //theBoss.LineRenderer.endWidth = .5f; /*Mathf.Lerp(0, 0.1f, 0.2f + Time.deltaTime);*/
+        audio.Play();
+        while ( i < 3.5f / Time.fixedDeltaTime)
         {
-            laserLineRenderer.SetPosition(0, hit.point);
+            interT += 6 * Time.deltaTime;
+            theBoss.LineRenderer.enabled = true;
+            theBoss.LineRenderer.startWidth = Mathf.Lerp(0, 0.3f, interT);
+            theBoss.LineRenderer.endWidth = Mathf.Lerp(0, 0.3f, interT);
+            laserEyes.activateTheLasers(theBoss);
+            i++;
+            yield return new WaitForFixedUpdate();
         }
-        yield return new WaitForSeconds(3f);
+        audio.Stop();
+        anim.SetBool("Laser", false);
+        theBoss.LineRenderer.enabled = false;
+        yield return null;
+    }
+    public void Finishedlaser()
+    {
 
     }
+
     public override IEnumerator Exit()
     {
         canTransition = false;

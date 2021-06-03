@@ -1,42 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TheBoss : MonoBehaviour
 {
     IState currentState;
     List<IState> AllStates = new List<IState>();
+    IState laserState;
+    IState runningAttack;
     public Animator animator;
+    public AudioSource audioSource;
+    public LineRenderer LineRenderer;
+    public Transform eyepos;
+    public LaserEyes laserEyes;
+    public GameObject corner1;
+    public GameObject corner2;
+    public NavMeshAgent agent;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        LineRenderer = GetComponent<LineRenderer>();
+        laserState = new Laser(this);
+        runningAttack = new RunningAttack(this);
+        AllStates.Add(laserState);
+        AllStates.Add(runningAttack);
+    }
+
     void Start()
     {
-        IState laserState = new Laser(this);
-        IState DialogueState = new Laser(this);
-        IState LastState = new Laser(this);
-        animator = GetComponent<Animator>();
-        currentState = DialogueState;
-        StartCoroutine(currentState.Enter());
+        currentState = laserState;
+        StartCoroutine(currentState.Enter(this));
     }
     
-    // Update is called once per frame
     void Update()
     {
-        if (currentState.canTransition)
-        {
-            int i = Random.Range(0, AllStates.Count);
-            currentState = AllStates[i];
-            currentState.Enter();
-        }
+
     }
 
-    void SwitchStates(IState state)
-    {
-        currentState.Exit();
-        if (currentState.canTransition)
-        {
-            currentState = state;
-            currentState.Enter();
-        }
-    }  
+    //public void SwitchStates(IState state)
+    //{
+    //    currentState.Exit();
+    //    if (currentState.canTransition)
+    //    {
+    //        currentState = state;
+    //        currentState.Enter();
+    //    }
+    //}  
 }
