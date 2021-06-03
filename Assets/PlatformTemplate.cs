@@ -64,7 +64,7 @@ public class PlatformTemplate : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             StopCoroutine(PlatformCountDown());
-            countDownTime = 3;
+            countDownTime = 1;
 
         }if(other.CompareTag("Player")&&countDownUp==true)
         {

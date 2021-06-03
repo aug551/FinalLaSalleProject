@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b9cf8ffd96f2194b89a2f4562a9f179, type: 3}
   m_Name: LeatherTorso
   m_EditorClassIdentifier: 
-  materialNeeded: []
+  materialNeeded:
+  - {fileID: 5654311649778276709, guid: a58e645e4cb343b4da8918a6e60b8810, type: 3}
+  - {fileID: 3798407851661007373, guid: fd9d6a298c64caa4e97ca86b0602365e, type: 3}
   amoutneeded: 
-  result: {fileID: 0}
+  result: {fileID: 7677881440317525350, guid: 7b268e0801a57e94588aeb280183d1bf, type: 3}

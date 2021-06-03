@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b9cf8ffd96f2194b89a2f4562a9f179, type: 3}
   m_Name: New Crafting Recipe
   m_EditorClassIdentifier: 
-  materialNeeded: []
+  materialNeeded:
+  - {fileID: 0}
+  - {fileID: 0}
   amoutneeded: 
   result: {fileID: 0}
