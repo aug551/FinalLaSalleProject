@@ -6,27 +6,56 @@ public class PlatformTemplate : MonoBehaviour
 {
     public Rigidbody rb;
     bool countDownUp = false;
-    public int countDownTime;
+    public bool canReset;
+    public float countDownTime;
     private Vector3 startingPosition;
-    public int secForReset;
+    public float secForReset;
+    //private bool resetTimeFinished=false;
 
-    
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        startingPosition = this.transform.position;
+        startingPosition = transform.position;
 
     }
 
     // Update is called once per frame
+
+
     void Update()
     {
-        Debug.Log(countDownTime.ToString());
+
+        if(countDownUp == true && canReset == true)
+        {
+            secForReset= secForReset - Time.deltaTime;
+
+            if(secForReset<=0)
+            {
+                transform.position = startingPosition;
+                rb.isKinematic = true;
+                rb.useGravity = false;
+                secForReset = 0;
+                canReset = false;
+            }
+        }
 
 
+        //Debug.Log(countDownTime.ToString());
+        //if (countDownUp == true)
+        //{
+
+
+        //    ResetTime();
+        //    if (resetTimeFinished == true)
+        //    {
+        //        ResetPosition();
+        //    }
+
+        //}
     }
 
     //private void OnCollisionEnter(Collider col)
@@ -45,13 +74,19 @@ public class PlatformTemplate : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Vampire is alive");
-            StartCoroutine(PlatformCountDown());
-            
-            if( countDownUp==true)
+            Debug.Log("Vampire is on the platform");
+            //StartCoroutine(PlatformCountDown());
+
+            countDownTime -= Time.deltaTime;
+            Debug.Log(countDownTime);
+
+            if (countDownTime <= 0)//( countDownUp==true)
             {
                 rb.isKinematic = false;
                 rb.useGravity = true;
+                countDownUp = true;
+                //StopCoroutine(PlatformCountDown());
+
 
                 
 
@@ -61,36 +96,57 @@ public class PlatformTemplate : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("Player"))
-        {
-            StopCoroutine(PlatformCountDown());
-            countDownTime = 1;
+       
+            if (other.CompareTag("Player")&&countDownUp==true&&canReset==true)
+            {
 
-        }if(other.CompareTag("Player")&&countDownUp==true)
-        {
-            ResetTime();
-            
-        }
-    }
+                //StopCoroutine(PlatformCountDown());
+                countDownTime = 3;
+                //countDownUp = false;
 
-
-
-    public IEnumerator PlatformCountDown()
-    {
-        Debug.Log("Countdown started");
+            }
         
-        yield return new WaitForSeconds(countDownTime);
-
-        countDownUp = true;
+       
     }
 
-    public IEnumerator ResetTime()
-    {
-        yield return new WaitForSeconds(secForReset);
-    }
 
-    private void ResetPosition()
-    {
-        // = startingPosition;
-    }
+
+    //public IEnumerator PlatformCountDown()
+    //{
+    //    Debug.Log(Time.time);
+        
+    //    yield return new WaitForSeconds(countDownTime);
+
+    //    countDownUp = true;
+
+
+    //    //ResetTime();
+    //    //if (resetTimeFinished==true)
+    //    //{
+    //    //    ResetPosition();
+    //    //}
+    //}
+
+    
+
+
+
+//    public IEnumerator ResetTime()
+//    {
+//        print("time reset started");
+
+//        yield return new WaitForSeconds(secForReset);
+
+//       resetTimeFinished = true;
+
+//}
+
+//    private void ResetPosition()
+//    {
+//        Debug.Log("reset position started");
+//        rb.isKinematic = true;
+//        rb.useGravity = false;
+//        transform.position = startingPosition;//
+//        // = startingPosition;
+//    }
 }

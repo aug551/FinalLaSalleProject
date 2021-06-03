@@ -5,7 +5,7 @@ using UnityEngine;
 public class Equipment : Item
 {
     //=============================================================================
-    // Author: Kevin Charron
+    // Author: Kevin Charron 
     //=============================================================================
 
     [SerializeField] EquipSlot slot;  // What slot to attach the item to when equipped
