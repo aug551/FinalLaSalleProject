@@ -7,34 +7,32 @@ public class RunningAttack : IState
     public float laserStartSize = 0.1f;
     TheBoss theBoss;
     LaserEyes laserEyes;
+    Animator anim;
 
     public RunningAttack(TheBoss theBoss1)
     {
         theBoss = theBoss1;
-        laserEyes = theBoss1.laserEyes;
-        theBoss.LineRenderer.enabled = false;
-        theBoss.LineRenderer.SetPosition(0, theBoss.laserEyes.transform.position);
-        theBoss.LineRenderer.endWidth = laserStartSize;
-        theBoss.LineRenderer.startWidth = laserStartSize;
+        anim = theBoss1.animator;
     }
 
-    public override IEnumerator Enter()
-    {
-        int i = 0;
+    public override IEnumerator Enter(TheBoss theBoss1)
+    {       
         canTransition = false;
         theBoss.animator.SetBool("Charge", true);
-        yield return new WaitForSeconds(2f);
-        theBoss.LineRenderer.startWidth = .5f; /*Mathf.Lerp(0, 0.1f, 0.2f + Time.deltaTime);*/
-        theBoss.LineRenderer.endWidth = .5f; /*Mathf.Lerp(0, 0.1f, 0.2f + Time.deltaTime);*/
-        while (i < 1000)
+        theBoss.agent.SetDestination(theBoss.corner1.transform.position);
+        while (theBoss.agent.pathPending && theBoss.agent.remainingDistance > 1.35f)
         {
-            theBoss.LineRenderer.enabled = true;
-            laserEyes.activateTheLasers(theBoss);
-            i++;
+            theBoss.agent.SetDestination(theBoss.corner1.transform.position);
             yield return new WaitForFixedUpdate();
         }
-        theBoss.LineRenderer.enabled = false;
-        yield return new WaitForSeconds(3f);
+        theBoss.animator.SetBool("Charge", false);
+        theBoss.animator.SetBool("Charge", true);
+        theBoss.agent.SetDestination(theBoss.corner2.transform.position);
+        while (theBoss.agent.pathPending && theBoss.agent.remainingDistance > 1.35f)
+        {
+            theBoss.agent.SetDestination(theBoss.corner2.transform.position);
+            yield return new WaitForFixedUpdate();
+        }     
     }
     public void Finishedlaser()
     {
