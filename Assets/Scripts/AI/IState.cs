@@ -5,7 +5,8 @@ using UnityEngine;
 public abstract class IState 
 {
     public bool canTransition;
-    public virtual IEnumerator Enter(TheBoss theBoss)
+    protected TheBoss theBoss;
+    public virtual IEnumerator Enter()
     {
         yield break;
     }
