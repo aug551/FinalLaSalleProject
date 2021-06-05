@@ -24,6 +24,12 @@ public class Laser : IState
         canTransition = false;
         int i = 0;
         float interT = 0f;
+        do
+        {
+            RotateTowardsPlayer();
+            yield return new WaitForFixedUpdate();
+
+        } while (Quaternion.Angle(theBoss.transform.rotation, theBoss.targetRotation.rotation) > 0.01f);
         anim.SetBool("Laser", true);
         yield return new WaitForSeconds(2f);
         Initlaser();

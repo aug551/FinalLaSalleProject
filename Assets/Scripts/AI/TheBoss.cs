@@ -18,6 +18,8 @@ public class TheBoss : MonoBehaviour
     public GameObject corner1;
     public GameObject corner2;
     public NavMeshAgent agent;
+    public GameObject player;
+    public Transform targetRotation;
 
     private void Awake()
     {

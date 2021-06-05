@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 8b40db561a06ae1489d15a20dba4cb83
+guid: a8e2dd19435ab7e4cae76f05ea8f655a
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Zombie Scream
+    second: Getting Up
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -26,14 +26,16 @@ ModelImporter:
       to improve retargeting quality.\n\t'Base HumanRibcage' is inbetween humanoid
       transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: "\nRetargeting quality report for clip 'mixamo.com':\n\tLeftUpperArm
-      average position error 2.5 mm and maximum position error 5.3 mm at time 0:25
-      (29.8%) Frame 25\n\tLeftLowerArm average position error 1.4 mm and maximum
-      position error 4.9 mm at time 0:25 (29.8%) Frame 25\n\tLeftHand average position
-      error 0.8 mm and maximum position error 4.4 mm at time 0:25 (29.8%) Frame 25\n\tRightUpperArm
-      average position error 2.9 mm and maximum position error 6.3 mm at time 1:
-      1 (36.9%) Frame 31\n\tRightLowerArm average position error 1.5 mm and maximum
-      position error 3.5 mm at time 1: 1 (36.9%) Frame 31\n\tRightHand average position
-      error 0.7 mm and maximum position error 2.0 mm at time 0:21 (25.0%) Frame 21\n"
+      average position error 5.8 mm and maximum position error 19.1 mm at time 0:23
+      (28.4%) Frame 23\n\tLeftLowerArm average position error 4.1 mm and maximum
+      position error 18.0 mm at time 0:22 (27.2%) Frame 22\n\tLeftHand average position
+      error 2.3 mm and maximum position error 13.0 mm at time 0:21 (25.9%) Frame
+      21\n\tRightUpperArm average position error 7.0 mm and maximum position error
+      11.8 mm at time 0:27 (33.3%) Frame 27\n\tRightLowerArm average position error
+      4.1 mm and maximum position error 10.3 mm at time 0:20 (24.7%) Frame 20\n\tRightHand
+      average position error 2.5 mm and maximum position error 9.5 mm at time 0:27
+      (33.3%) Frame 27\n\tRightFoot average orientation error 0.9 deg and maximum
+      orientation error 5.5 deg at time 1:14 (54.3%) Frame 44\n"
     animationDoRetargetingWarnings: 1
     importAnimatedCustomProperties: 0
     importConstraints: 0
@@ -46,11 +48,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Zombie Scream
+      name: Getting Up
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 84
+      lastFrame: 81
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

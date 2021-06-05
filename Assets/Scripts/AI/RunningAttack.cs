@@ -5,6 +5,8 @@ using UnityEngine;
 public class RunningAttack : IState
 {
     Animator anim;
+    private Transform lookattransform;
+
     public RunningAttack(TheBoss theBoss1)
     {
         theBoss = theBoss1;
@@ -16,22 +18,17 @@ public class RunningAttack : IState
         Debug.Log("entered run");
         canTransition = false;
         anim.SetBool("Charge", true);
-        yield return new WaitForSeconds(2.4f);
-        theBoss.agent.SetDestination(theBoss.corner1.transform.position);
-        while (!theBoss.agent.pathPending && theBoss.agent.remainingDistance > .55f)
-        {
-            theBoss.agent.SetDestination(theBoss.corner1.transform.position);
-            yield return new WaitForFixedUpdate();
-        }
+        RotateTowardsPlayer();
+        theBoss.transform.rotation = new Quaternion(0, theBoss.transform.rotation.y, 0, theBoss.transform.rotation.w);
+        yield return new WaitForSeconds(4f);
         anim.SetBool("Charge", false);
-        anim.SetBool("Charge", true);
-        theBoss.agent.SetDestination(theBoss.corner2.transform.position);
-        while (!theBoss.agent.pathPending && theBoss.agent.remainingDistance > .55f)
+        yield return new WaitForSeconds(8.65f);
+        do
         {
-            theBoss.agent.SetDestination(theBoss.corner2.transform.position);
+            RotateTowardsPlayer();
             yield return new WaitForFixedUpdate();
-        }
-        anim.SetBool("Charge", false);
+
+        } while (Quaternion.Angle(theBoss.transform.rotation, theBoss.targetRotation.rotation) > 0.01f);
         canTransition = true;
         yield break;
     }
