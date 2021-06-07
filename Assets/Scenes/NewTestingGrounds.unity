@@ -142,7 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 0
   currentHealth: 0
-  item: {fileID: 2053950620749284211, guid: 12cf5922309ea2e4689cb1eac632fb4c, type: 3}
+  itemLeather: {fileID: 0}
+  itemString: {fileID: 0}
   attack: 10
 --- !u!54 &38677739
 Rigidbody:
@@ -461,6 +462,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &770189319 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 253899875081497112, guid: 1a1d6b7d12de9b94bb1058f3cfebc5cc, type: 3}
+  m_PrefabInstance: {fileID: 253899874189120504}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &776780638
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,6 +765,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &992122541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2167380887944925943, guid: 3a4d25afb08ca5440a9a5a11d38c78a8, type: 3}
+  m_PrefabInstance: {fileID: 2167380888305121791}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1171573340
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,6 +999,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2484670197052722568, guid: dfe893387b2d45e46b38dd981d8c4b67, type: 3}
   m_PrefabInstance: {fileID: 3367069301208630726}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &1268805205
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268805204}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &1268805209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,7 +1029,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 0
   currentHealth: 0
-  item: {fileID: 0}
+  itemLeather: {fileID: 2181059020417121920, guid: a58e645e4cb343b4da8918a6e60b8810, type: 3}
+  itemString: {fileID: 7244651551123553768, guid: fd9d6a298c64caa4e97ca86b0602365e, type: 3}
   attack: 10
 --- !u!65 &1268805210
 BoxCollider:
@@ -1027,6 +1061,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1358964377}
+    - target: {fileID: 1632192592, guid: 6dc4cf4496348884d8ee27743ae38562, type: 3}
+      propertyPath: itemString
+      value: 
+      objectReference: {fileID: 7244651551123553768, guid: fd9d6a298c64caa4e97ca86b0602365e, type: 3}
+    - target: {fileID: 1632192592, guid: 6dc4cf4496348884d8ee27743ae38562, type: 3}
+      propertyPath: itemLeather
+      value: 
+      objectReference: {fileID: 2181059020417121920, guid: a58e645e4cb343b4da8918a6e60b8810, type: 3}
     - target: {fileID: 578376449398627443, guid: 6dc4cf4496348884d8ee27743ae38562, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1162,10 +1204,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2747092077082050070, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: jumpInputInfluence
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3089126715573236168, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7556709255601669099, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: hpSlider
+      value: 
+      objectReference: {fileID: 770189319}
+    - target: {fileID: 7556709255601669099, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: gameOverPanel
+      value: 
+      objectReference: {fileID: 992122541}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
 --- !u!224 &1787308809 stripped

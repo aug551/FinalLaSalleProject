@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4430440077718402936}
   - component: {fileID: 1336645286170206767}
   - component: {fileID: 3057916898550778570}
-  - component: {fileID: 7677881440317525350}
+  - component: {fileID: 4671671795627171803}
   m_Layer: 0
   m_Name: A_LeatherTorso
   m_TagString: Untagged
@@ -113,7 +113,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7677881440317525350
+--- !u!114 &4671671795627171803
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7786308652674284725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 880ba1091ea591543b73add514b097cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 27a54005062d4c0499739f6b93bbf1af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Leather Torso
@@ -130,7 +130,9 @@ MonoBehaviour:
   description: Armor for the chest slot
   value: 0
   weight: 0
-  slot: 4
+  slot: 2
   defenceStat: 0.5
   player: {fileID: 0}
   isArmor: 1
+  Stamina: 0
+  armorSprite: {fileID: 21300000, guid: c0dd134581b566245a79f2be3a6d6699, type: 3}

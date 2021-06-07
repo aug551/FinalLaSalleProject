@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8355570030853801549}
   - component: {fileID: 6630513220041823002}
   - component: {fileID: 7270780523603524607}
-  - component: {fileID: 2595682070505143379}
+  - component: {fileID: 3113894884778985599}
   m_Layer: 0
   m_Name: A_LeatherBoots
   m_TagString: Untagged
@@ -113,7 +113,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2595682070505143379
+--- !u!114 &3113894884778985599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2487782625071893888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 880ba1091ea591543b73add514b097cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 27a54005062d4c0499739f6b93bbf1af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Leather Boots
@@ -134,3 +134,5 @@ MonoBehaviour:
   defenceStat: 0.5
   player: {fileID: 0}
   isArmor: 1
+  Stamina: 0
+  armorSprite: {fileID: 21300000, guid: c9656134d1c89a4488f5edf9b1868c3b, type: 3}
