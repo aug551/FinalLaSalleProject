@@ -16,8 +16,4 @@ public abstract class IState
     {
         yield break;
     }
-    public virtual IEnumerator Exit()
-    {
-        yield break;
-    }
 }

@@ -45,7 +45,6 @@ public class Laser : IState
     }
     public void Finishedlaser()
     {
-        Debug.Log("exit");
         theBoss.audioSource.Stop();
         anim.SetBool("Laser", false);
         theBoss.LineRenderer.enabled = false;

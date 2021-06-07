@@ -20,7 +20,10 @@ public class TheBoss : MonoBehaviour
     public NavMeshAgent agent;
     public GameObject player;
     public Transform targetRotation;
+    public bool isOnCorner1;
 
+
+    // state machine idea from https://www.youtube.com/watch?v=G1bd75R10m4&t=949s
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -44,31 +47,22 @@ public class TheBoss : MonoBehaviour
     
     void Update()
     {
-
-        if (currentState.canTransition)
+        //if (currentState.canTransition)
+        //{
+        //    Debug.Log(currentState.canTransition);
+        //    int i = Random.Range(0, allBaseStates.Count);
+        //    currentState = allBaseStates[i];
+        //    StartCoroutine(currentState.Enter());
+        //}
+        if (currentState.canTransition && currentState != runningAttackState)
         {
-            Debug.Log(currentState.canTransition);
-            int i = Random.Range(0, allBaseStates.Count);
-            currentState = allBaseStates[i];
+            currentState = runningAttackState;
             StartCoroutine(currentState.Enter());
         }
-        //if(//boss health lower than 50% && onlyOnce)
-        //{
-        //    if (currentState.canTransition)
-        //    {
-        //        currentState = enrageState;
-        //        StartCoroutine(currentState.Enter(this));
-        //    }
-        //}
+        if (currentState.canTransition && currentState != laserState)
+        {
+            currentState = laserState;
+            StartCoroutine(currentState.Enter());
+        }
     }
-
-    //public void SwitchStates(IState state)
-    //{
-    //    currentState.Exit();
-    //    if (currentState.canTransition)
-    //    {
-    //        currentState = state;
-    //        currentState.Enter();
-    //    }
-    //}  
 }
