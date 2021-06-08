@@ -49,7 +49,7 @@ public class Inventory : MonoBehaviour
             itemsIventory.Add(AddToUI(item as Material));
             return;
         }
-        if (itemType == typeof(Equipment))
+        if (itemType == typeof(Armor))
         {
             Debug.Log("what");
             itemsIventory.Add(AddToUI(item as Armor));
