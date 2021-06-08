@@ -51,7 +51,6 @@ public class Inventory : MonoBehaviour
         }
         if (itemType == typeof(Armor))
         {
-            Debug.Log("what");
             itemsIventory.Add(AddToUI(item as Armor));
             return;
         }
@@ -150,7 +149,10 @@ public class Inventory : MonoBehaviour
                             RemoveFromInventory(item1);
                         }
                     }
-                    RemoveFromInventory(item1);
+                    else
+                    {
+                        RemoveFromInventory(item1);
+                    }
                 }
             }
         }
