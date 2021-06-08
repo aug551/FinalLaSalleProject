@@ -20,10 +20,12 @@ public class Laser : IState
 
     public override IEnumerator Enter()
     {
+        
         Debug.Log("entered laser");
         canTransition = false;
         int i = 0;
         float interT = 0f;
+        SetTargetRotation();
         do
         {
             RotateTowardsPlayer();

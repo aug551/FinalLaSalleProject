@@ -30,6 +30,8 @@ public class Inventory : MonoBehaviour
             return;
         Type itemType = item.GetType();
 
+        //Debug.Log("what");
+        Debug.Log("what");
         if (itemType == typeof(Material))
         {
             foreach (Item items in itemsIventory)
@@ -47,8 +49,9 @@ public class Inventory : MonoBehaviour
             itemsIventory.Add(AddToUI(item as Material));
             return;
         }
-        if (itemType == typeof(Armor))
+        if (itemType == typeof(Equipment))
         {
+            Debug.Log("what");
             itemsIventory.Add(AddToUI(item as Armor));
             return;
         }
@@ -114,9 +117,7 @@ public class Inventory : MonoBehaviour
     void ChangeAlpha(int alpha, ItemUI item)
     {
         Color color;
-        Debug.Log(alpha);
         color = item.image.color;
-        Debug.Log(color);
         color.a = alpha;
         item.image.color = color;
     }
@@ -136,16 +137,20 @@ public class Inventory : MonoBehaviour
     {
         foreach (Item itemToRemove in items)
         {
+            Type itemType = itemToRemove.GetType();
             foreach (Item item1 in itemsIventory)
-            {
+            {             
                 if (item1.Equals(itemToRemove))
                 {
-                    if (item1.TryGetComponent<ItemUI>(out ItemUI itemui)) 
+                    if (itemType == typeof(Material))
                     {
-                        ChangeAlpha(0, itemui);
-                        itemui.ResetItemUI();
-                        Destroy(item1);
+                        Material item = itemToRemove as Material;
+                        if (item1.Use(item.AmountOwned) == 0)
+                        {
+                            RemoveFromInventory(item1);
+                        }
                     }
+                    RemoveFromInventory(item1);
                 }
             }
         }
@@ -153,5 +158,15 @@ public class Inventory : MonoBehaviour
     public bool IsFull()
     {
         return false;
+    }
+
+    void RemoveFromInventory(Item item1)
+    {
+        if (item1.TryGetComponent<ItemUI>(out ItemUI itemui))
+        {
+            ChangeAlpha(0, itemui);
+            itemui.ResetItemUI();
+            Destroy(item1);
+        }
     }
 }

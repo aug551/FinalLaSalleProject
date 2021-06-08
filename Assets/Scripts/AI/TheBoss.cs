@@ -21,6 +21,8 @@ public class TheBoss : MonoBehaviour
     public GameObject player;
     public Transform targetRotation;
     public bool isOnCorner1;
+    bool alreadyattacked;
+    float attackInterval = 0.75f;
 
 
     // state machine idea from https://www.youtube.com/watch?v=G1bd75R10m4&t=949s
@@ -64,5 +66,20 @@ public class TheBoss : MonoBehaviour
             currentState = laserState;
             StartCoroutine(currentState.Enter());
         }
+    }
+
+    public void Attack()
+    {
+        if (!alreadyattacked)
+        {
+            alreadyattacked = true;
+            animator.SetTrigger("Attack");
+            Invoke(nameof(AttackCD), attackInterval);
+            animator.SetBool("Attacking", true);
+        }
+    }
+    void AttackCD()
+    {
+        alreadyattacked = false;
     }
 }

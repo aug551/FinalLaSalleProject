@@ -10,6 +10,10 @@ public class LaserEyes : MonoBehaviour
         if (Physics.Raycast(theBoss.eyepos.position, transform.forward, out hit))
         {
             theBoss.LineRenderer.SetPosition(1, hit.point);
+            if (hit.collider.gameObject.TryGetComponent<CharacterHealth>(out CharacterHealth characterHealth))
+            {
+                characterHealth.TakeDamage(0.1f);
+            }
         }
     }
 }
