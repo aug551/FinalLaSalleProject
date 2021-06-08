@@ -13,5 +13,10 @@ public class ArrowHit : MonoBehaviour
             health.TakeDamage(arrowDamage);
             Destroy(gameObject);
         }
+        if(other.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
+        
     }
 }

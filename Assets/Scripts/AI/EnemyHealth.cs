@@ -36,12 +36,7 @@ public class EnemyHealth : MonoBehaviour
             {
                 Instantiate(itemString, gameObject.transform.position, Quaternion.identity);
             }
-            Invoke("DestroyEnemy", 1.0f);
+            Destroy(gameObject);
         }
-    }
-
-    void DestroyEnemy()
-    {
-        Destroy(gameObject);
     }
 }
