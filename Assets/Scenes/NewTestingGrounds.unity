@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: e636b1720db2b9c4bb84711b5c8fc2b4, type: 2}
---- !u!1 &52662359 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7200045910487832724, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
-  m_PrefabInstance: {fileID: 1143655195}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &302040964
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,6 +306,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3089126715573236168, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
   m_PrefabInstance: {fileID: 1777270788}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &556480908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556480901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23ab5e013e6d9f459dc9885ad1471b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  alreadyTele: 0
+  compare: 
+  actual: 
 --- !u!1 &638134680
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,7 +742,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7200045910487832724, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
       propertyPath: m_Name
-      value: Cylinder
+      value: HomeTeleport
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200045910487832724, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: m_TagString
+      value: Teleport
       objectReference: {fileID: 0}
     - target: {fileID: 7200045910487832728, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
       propertyPath: m_RootOrder
@@ -781,7 +796,12 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 556480901}
-    m_RemovedComponents: []
+    - target: {fileID: 7200045910487832729, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: homeTele
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7200045910487832729, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
 --- !u!1 &1171573340
 GameObject:
@@ -1094,7 +1114,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7200045910487832724, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
       propertyPath: m_Name
-      value: Cylinder (1)
+      value: Teleport1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200045910487832724, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: m_TagString
+      value: Teleport
       objectReference: {fileID: 0}
     - target: {fileID: 7200045910487832728, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
       propertyPath: m_RootOrder
@@ -1147,8 +1171,9 @@ PrefabInstance:
     - target: {fileID: 7200045910487832729, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
       propertyPath: homeTele
       value: 
-      objectReference: {fileID: 52662359}
-    m_RemovedComponents: []
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7200045910487832729, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
 --- !u!1 &1456555644
 GameObject:
@@ -1351,7 +1376,7 @@ GameObject:
   - component: {fileID: 1935826450}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Teleport
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

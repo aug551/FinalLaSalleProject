@@ -13,6 +13,7 @@ TagManager:
   - ElectricityPlacer
   - Wall
   - MechanicalBall
+  - Teleport
   layers:
   - Default
   - TransparentFX
