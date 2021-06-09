@@ -40,7 +40,6 @@ public class CharacterHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Debug.Log(damage);
         currentHealth -= damage * characterStats.defence;
         UpdateHpSlider();
         if (currentHealth<=0)

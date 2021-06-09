@@ -5,36 +5,41 @@ using UnityEngine;
 public class Teleport : MonoBehaviour
 {
     public GameObject player;
-    public GameObject homeTele;
-    public Transform lastTele;
-    public bool alreadyTeleported;
+    Teleport homeTele;
+    Vector3 lastTele = new Vector3();
 
     void Start()
     {
+        homeTele = GameObject.Find("HomeTeleport").GetComponent<Teleport>();
         player = GameObject.Find("Player");
+        lastTele = Vector3.zero;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-           if(this.gameObject.transform.position==homeTele.transform.position && lastTele == null)
-            {
+           if(this.gameObject == homeTele.gameObject && lastTele == Vector3.zero)
+           {
                 Debug.Log("cant tele from home");
-            }
+           }
            else
-            {
-                if (homeTele.transform.position==this.gameObject.transform.position)
+           {
+                if (this.gameObject == homeTele.gameObject)
                 {
-                    //lastTele.position = this.gameObject.transform.position;
-                    player.transform.localPosition = lastTele.position;
+                    player.gameObject.transform.position = lastTele;
+                    Debug.Log("lastTele");
                 }
                 else
                 {
-                    lastTele.position = player.transform.position;
-                    player.transform.position = homeTele.transform.position;
+                    homeTele.lastTele = player.transform.position;
+                    Debug.Log(player.transform.position);
+                    Debug.Log(homeTele.transform.position);
+                    player.gameObject.transform.position = homeTele.transform.position;
+                    Debug.Log(player.transform.position);
+                    Debug.Log(homeTele.transform.position);
                 }
-            }
+           }
         }
     }         
 }
