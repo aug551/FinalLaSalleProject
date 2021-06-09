@@ -56,7 +56,6 @@ public class Archer : MonoBehaviour
             if (interT >= 1)
             {
                 Shoot();
-                Debug.Log("Shoot");
                 alreadyShot = true;
             }
 

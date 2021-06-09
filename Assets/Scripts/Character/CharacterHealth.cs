@@ -21,7 +21,6 @@ public class CharacterHealth : MonoBehaviour
         maxHealth = 100;
         currentHealth = maxHealth;
         //InvokeRepeating("RegenHealth", 0.0f, regenRateSeconds); //soruce:https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
-        Debug.Log(currentHealth);
     }
 
     void Update()

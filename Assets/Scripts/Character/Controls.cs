@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class Controls : MonoBehaviour
 {
-    public GameObject InventoryPanel;
+    public GameObject inventoryPanel;
+    public GameObject crafitngPanel;
     public bool isActive = false;
   void Inventory()
     {
         if(isActive)
         {
-            InventoryPanel.GetComponent<Canvas>().enabled = false;
+            inventoryPanel.GetComponent<Canvas>().enabled = false;
             isActive = false;
         }
         else
         {
-            InventoryPanel.GetComponent<Canvas>().enabled = true;
+            inventoryPanel.GetComponent<Canvas>().enabled = true;
             isActive = true;
         }
     }
     private void Start()
     {
-        InventoryPanel.GetComponent<Canvas>().enabled = false;
+        inventoryPanel.GetComponent<Canvas>().enabled = false;
     }
 
     private void Update()
