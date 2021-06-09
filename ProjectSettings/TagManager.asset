@@ -12,6 +12,7 @@ TagManager:
   - WholePlacer
   - ElectricityPlacer
   - Wall
+  - MechanicalBall
   layers:
   - Default
   - TransparentFX
