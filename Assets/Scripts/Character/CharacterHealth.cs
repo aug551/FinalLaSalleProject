@@ -19,7 +19,8 @@ public class CharacterHealth : MonoBehaviour
     {
         characterStats = GetComponent<CharacterStats>();
         maxHealth = 100;
-        currentHealth = maxHealth;
+        currentHealth = 50;
+        UpdateHpSlider();
         //InvokeRepeating("RegenHealth", 0.0f, regenRateSeconds); //soruce:https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
     }
 
@@ -50,7 +51,7 @@ public class CharacterHealth : MonoBehaviour
         }
     }
 
-    public void Heal(int amount)
+    public void Heal(float amount)
     {
         currentHealth += amount;
         if(currentHealth>maxHealth)

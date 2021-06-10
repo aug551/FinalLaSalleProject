@@ -30,8 +30,6 @@ public class Inventory : MonoBehaviour
             return;
         Type itemType = item.GetType();
 
-        //Debug.Log("what");
-        Debug.Log("what");
         if (itemType == typeof(Material))
         {
             foreach (Item items in itemsIventory)
