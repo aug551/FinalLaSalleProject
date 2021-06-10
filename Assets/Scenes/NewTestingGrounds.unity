@@ -322,6 +322,76 @@ MonoBehaviour:
   alreadyTele: 0
   compare: 
   actual: 
+--- !u!1001 &621388615
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7200045910487832724, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: m_Name
+      value: Teleport1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200045910487832724, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: m_TagString
+      value: Teleport
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200045910487832728, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200045910487832728, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200045910487832728, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.54564
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200045910487832728, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.012993813
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200045910487832728, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200045910487832728, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200045910487832728, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200045910487832728, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200045910487832728, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200045910487832728, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200045910487832728, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200045910487832729, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 556480901}
+    - target: {fileID: 7200045910487832729, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+      propertyPath: homeTele
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7200045910487832729, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
 --- !u!1 &638134680
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,10 +814,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HomeTeleport
       objectReference: {fileID: 0}
-    - target: {fileID: 7200045910487832724, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
-      propertyPath: m_TagString
-      value: Teleport
-      objectReference: {fileID: 0}
     - target: {fileID: 7200045910487832728, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -792,16 +858,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7200045910487832729, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 556480901}
-    - target: {fileID: 7200045910487832729, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
-      propertyPath: homeTele
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7200045910487832729, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
 --- !u!1 &1171573340
 GameObject:

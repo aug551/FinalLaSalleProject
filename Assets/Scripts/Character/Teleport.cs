@@ -14,7 +14,7 @@ public class Teleport : MonoBehaviour
     void Start()
     {
         homeTele = GameObject.Find("HomeTeleport").gameObject;
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Player").gameObject;
         lastTele = Vector3.zero;
     }
 
@@ -34,18 +34,13 @@ public class Teleport : MonoBehaviour
                     if (other.gameObject == homeTele.gameObject)
                     {
                         player.gameObject.transform.position = lastTele;
-                        Debug.Log("lastTele");
                         alreadyTele = true;
                         actual = other.name;
                     }
                     else
                     {
                         lastTele = player.transform.position;
-                        Debug.Log(player.transform.position);
-                        Debug.Log(homeTele.transform.position);
                         player.gameObject.transform.position = homeTele.transform.position;
-                        Debug.Log(player.transform.position);
-                        Debug.Log(homeTele.transform.position);
                         alreadyTele = true;
                         actual = other.name;
                     }
