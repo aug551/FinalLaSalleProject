@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyBall : MonoBehaviour
 {
     [SerializeField] int speed; //{ get; set; }
-    private Vector3 direction,leftS,rightS;
+    private Vector3 direction;
     private Rigidbody rigidBody;
     public enum DirectionSelection { left, right };
     public DirectionSelection directionSelection;
@@ -36,6 +36,17 @@ public class EnemyBall : MonoBehaviour
         
     }
 
+  
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<CharacterHealth>().TakeDamage(20);
+
+            Destroy(gameObject);
+        }
+    }
     //enum directionEnum
     //{
     //    left,
