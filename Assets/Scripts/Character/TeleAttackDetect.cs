@@ -64,5 +64,42 @@ public class TeleAttackDetect : MonoBehaviour
                 closest = null;
             }
         }
+
+        HandleSecondaryAttack();
+    }
+
+    private void HandleSecondaryAttack()
+    {
+        // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+
+        if (rmc.GrabbedObj && !rmc.IsGrabbing)
+        {
+            Rigidbody enemyrigid = rmc.GrabbedObj.GetComponent<Rigidbody>();
+
+            if (Vector3.Distance(enemyrigid.transform.position, this.transform.position) < 1.5f)
+            {
+                enemyrigid.isKinematic = true;
+                enemyrigid.velocity = Vector3.zero;
+                rmc.IsGrabbing = false;
+
+                rmc.GrabbedObj.GetComponent<MeshRenderer>().material.color = Color.white;
+
+                rmc.GrabbedObj = null;
+
+            }
+            else
+            {
+                enemyrigid.isKinematic = false;
+                enemyrigid.transform.LookAt(new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z));
+                if (enemyrigid.transform.position.z >= 0)
+                {
+                    enemyrigid.velocity += new Vector3(enemyrigid.transform.forward.x, enemyrigid.transform.forward.y, -enemyrigid.velocity.z) * 90f * Time.deltaTime;
+                }
+                else
+                {
+                    enemyrigid.velocity += enemyrigid.transform.forward * 90f * Time.deltaTime;
+                }
+            }
+        }
     }
 }

@@ -47,6 +47,7 @@ public class RootMotionCharacterController : MonoBehaviour
     public bool IsGrabbing { get => isGrabbing; set => isGrabbing = value; }
     public bool CanWalljump { get => canWalljump; set => canWalljump = value; }
     public bool IsControlled { get => isControlled; set => isControlled = value; }
+    public GameObject GrabbedObj { get => grabbedObj; set => grabbedObj = value; }
 
 
 
@@ -112,7 +113,6 @@ public class RootMotionCharacterController : MonoBehaviour
             // Attacks
             HandlePrimaryAttack();
 
-            HandleSecondaryAttack();
 
             CorrectPosition();
         }
@@ -269,35 +269,6 @@ public class RootMotionCharacterController : MonoBehaviour
             isGrabbing = false;
         }
     }
-
-    private void HandleSecondaryAttack()
-    {
-        // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-
-        if (grabbedObj && !isGrabbing)
-        {
-            Rigidbody enemyrigid = grabbedObj.GetComponent<Rigidbody>();
-
-            if (Vector3.Distance(enemyrigid.transform.position, this.transform.position) < 2f)
-            {
-                enemyrigid.isKinematic = true;
-                enemyrigid.velocity = Vector3.zero;
-                IsGrabbing = false;
-
-                grabbedObj.GetComponent<MeshRenderer>().material.color = Color.white;
-
-                grabbedObj = null;
-
-            }
-            else
-            {
-                enemyrigid.isKinematic = false;
-                enemyrigid.transform.LookAt(new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z));
-                enemyrigid.velocity += enemyrigid.transform.forward * 90f * Time.deltaTime;
-            }
-        }
-    }
-
 
     private void HandlePrimaryAttack()
     {

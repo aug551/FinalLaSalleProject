@@ -1136,7 +1136,6 @@ GameObject:
   - component: {fileID: 1195270914}
   - component: {fileID: 1195270913}
   - component: {fileID: 1195270917}
-  - component: {fileID: 1195270918}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Enemy
@@ -1214,7 +1213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195270912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.68, y: 2.23, z: 0}
+  m_LocalPosition: {x: -2.84, y: 2.23, z: -8.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1236,18 +1235,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1195270918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1195270912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cb062f149a068c46ab4ac7a0cd518c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1549218436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1405,6 +1392,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1939634781651453537, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: m_Size.x
+      value: 15.788649
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939634781651453537, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: m_Size.y
+      value: 7.9213567
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939634781651453537, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: m_Size.z
+      value: 14.237112
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939634781651453537, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: m_Center.x
+      value: -0.13368893
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939634781651453537, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: m_Center.y
+      value: 1.6222951
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939634781651453537, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: m_Center.z
+      value: 6.618557
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939634781651453537, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2287266844751084619, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
       propertyPath: m_TagString
       value: Player
