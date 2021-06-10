@@ -727,7 +727,7 @@ Transform:
   m_GameObject: {fileID: 776780638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 95.004, y: 1, z: 3.5976}
+  m_LocalScale: {x: 95.004, y: 1, z: 9.555944}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -978,7 +978,7 @@ GameObject:
   - component: {fileID: 1093115040}
   - component: {fileID: 1093115041}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: atkCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1117,7 +1117,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171573340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.530001, y: 6.34, z: 0}
+  m_LocalPosition: {x: 21.72, y: 6.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1136,6 +1136,7 @@ GameObject:
   - component: {fileID: 1195270914}
   - component: {fileID: 1195270913}
   - component: {fileID: 1195270917}
+  - component: {fileID: 1195270918}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Enemy
@@ -1235,6 +1236,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1195270918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195270912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cb062f149a068c46ab4ac7a0cd518c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1549218436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,6 +1452,10 @@ PrefabInstance:
     - target: {fileID: 3089126715573236168, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3684475500481681465, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: m_Height
+      value: 2.43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
@@ -2270,8 +2287,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149280688272}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -28.21, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -28.21, y: 0.71642, z: 0.00011265}
+  m_LocalScale: {x: 0.78, y: 0.78, z: 0.78}
   m_Children:
   - {fileID: 572617754320590115}
   - {fileID: 6394150233456232057}
@@ -2418,6 +2435,7 @@ GameObject:
   - component: {fileID: 919132149280688273}
   - component: {fileID: 919132149280688274}
   - component: {fileID: 919132149280688275}
+  - component: {fileID: 919132149280688276}
   m_Layer: 0
   m_Name: Hulk_Enemy
   m_TagString: Untagged
@@ -2440,11 +2458,11 @@ MonoBehaviour:
   points:
   - {fileID: 700262652}
   - {fileID: 173076094}
-  aggroRadius: 5
+  aggroRadius: 15
   attackdamage: 0
   attackRadius: 0
   attackInterval: 0
-  atkCollider: {fileID: 0}
+  atkCollider: {fileID: 1093115041}
   agentWalkSpeed: 1
   agentRunSpeed: 1
   eyeTransfrom: {fileID: 2885267213288755647}
@@ -2482,7 +2500,7 @@ NavMeshAgent:
   m_Speed: 4.01
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 1000
+  m_AngularSpeed: 2000
   m_StoppingDistance: 1.35
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
@@ -2491,6 +2509,18 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &919132149280688276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149280688272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93efbb6a074140c4cac3a604f0227f64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &936440893446594222
 Transform:
   m_ObjectHideFlags: 0

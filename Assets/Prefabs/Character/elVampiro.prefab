@@ -1013,7 +1013,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 3.0988271
+  m_Height: 2.43
   m_Direction: 1
   m_Center: {x: 0, y: 1.0494136, z: 0}
 --- !u!1 &2465835411945386889
@@ -1416,6 +1416,7 @@ MonoBehaviour:
   jumpHeight: 2
   airControl: 1
   jumpInputInfluence: 0.499
+  jumpAmount: 2
   slopeForce: 100
   slopeForceRayLength: 1.5
   dashDistance: 50

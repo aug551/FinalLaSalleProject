@@ -34,15 +34,20 @@ public class RootMotionCharacterController : MonoBehaviour
     [SerializeField] private float dashStopForce = 3f;
     [SerializeField] private float dashCooldown = 5f;
 
+    private Vector3 controlVelocity = Vector3.zero;
+
     private GameObject lastWall = null;
 
     private bool isAttacking = false;
     private bool isGrabbing = false;
     private bool canWalljump = false;
+    private bool isControlled = false;
 
     public bool IsAttacking { get => isAttacking; }
     public bool IsGrabbing { get => isGrabbing; set => isGrabbing = value; }
     public bool CanWalljump { get => canWalljump; set => canWalljump = value; }
+    public bool IsControlled { get => isControlled; set => isControlled = value; }
+
 
 
     // Start is called before the first frame update
@@ -59,50 +64,60 @@ public class RootMotionCharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Apply gravity if not grounded
-        if (controller.isGrounded)
+        Debug.Log(IsControlled);
+        if (isControlled)
         {
-            anim.SetBool("Jumping", false);
-            isJumping = false;
-            canJump = true;
-            if (playerVelocity.y < 0) playerVelocity.y = 0f;
-            currentJumpAmount = jumpAmount - 1;
+            controller.Move(controlVelocity * Time.deltaTime);
+            
         }
         else
         {
-            playerVelocity.y += gravity * Time.deltaTime;
+            Debug.Log("isjumping " + isJumping);
+            // Apply gravity if not grounded
+            if (controller.isGrounded)
+            {
+                anim.SetBool("Jumping", false);
+                isJumping = false;
+                canJump = true;
+                if (playerVelocity.y < 0) playerVelocity.y = 0f;
+                currentJumpAmount = jumpAmount - 1;
+            }
+            else
+            {
+                playerVelocity.y += gravity * Time.deltaTime;
+            }
+
+
+            // Grab
+            StartSecondaryAttack();
+
+
+            // Move
+            Move();
+
+
+            // Jumping ----------------------------------------------------------------
+            if (Input.GetButtonDown("Jump") && (canJump || OnSlope())) StartJumping();
+
+            if (this.isJumping) Jump();
+            else anim.applyRootMotion = true;
+
+
+
+            // Dashing ---------------------------------------------
+            if (Input.GetButtonDown("Dash") && canDash) StartDash();
+
+            if (this.isDashing) Dash();
+
+
+
+            // Attacks
+            HandlePrimaryAttack();
+
+            HandleSecondaryAttack();
+
+            CorrectPosition();
         }
-
-
-        // Grab
-        StartSecondaryAttack();
-
-
-        // Move
-        Move();
-
-
-        // Jumping ----------------------------------------------------------------
-        if (Input.GetButtonDown("Jump") && (canJump || OnSlope())) StartJumping();
-
-        if (this.isJumping) Jump();
-        else anim.applyRootMotion = true;
-        
-
-
-        // Dashing ---------------------------------------------
-        if (Input.GetButtonDown("Dash") && canDash) StartDash();
-
-        if (this.isDashing) Dash();
-
-
-
-        // Attacks
-        HandlePrimaryAttack();
-
-        HandleSecondaryAttack();
-
-        CorrectPosition();
 
     }
 
@@ -110,6 +125,18 @@ public class RootMotionCharacterController : MonoBehaviour
 
 
     // Functions -------------------------------------------------------------------------------
+    public void ControlCharacter(Vector3 velocity, float duration)
+    {
+        anim.applyRootMotion = false;
+        this.controlVelocity = velocity;
+        IsControlled = true;
+        Invoke("FinishedControl", duration); 
+    }
+    private void FinishedControl()
+    {
+        isControlled = false;
+        Debug.Log(IsControlled);
+    }
     
     private void Move()
     {
