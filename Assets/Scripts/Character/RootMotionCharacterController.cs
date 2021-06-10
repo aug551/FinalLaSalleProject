@@ -64,7 +64,6 @@ public class RootMotionCharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(IsControlled);
         if (isControlled)
         {
             controller.Move(controlVelocity * Time.deltaTime);
@@ -72,7 +71,6 @@ public class RootMotionCharacterController : MonoBehaviour
         }
         else
         {
-            Debug.Log("isjumping " + isJumping);
             // Apply gravity if not grounded
             if (controller.isGrounded)
             {

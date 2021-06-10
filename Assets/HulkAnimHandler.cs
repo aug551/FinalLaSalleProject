@@ -5,7 +5,17 @@ using UnityEngine;
 
 public class HulkAnimHandler : EnemyAnimHandler
 {
+    [SerializeField] private Vector3 pushForce = new Vector3(30f, 10f, 0);
+    [SerializeField] private float pushDuration = 0.45f;
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            collision.collider.GetComponentInParent<RootMotionCharacterController>().ControlCharacter(
+                new Vector3(this.transform.forward.x * pushForce.x, pushForce.y, 0), pushDuration);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()

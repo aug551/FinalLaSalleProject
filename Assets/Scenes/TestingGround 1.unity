@@ -472,7 +472,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516261674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.28, y: 2.95, z: 0}
+  m_LocalPosition: {x: 24.94, y: 2.95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -992,7 +992,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1093115039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.45, z: 0}
+  m_LocalPosition: {x: 0, y: 1.502, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 543450653472854570}
@@ -1009,8 +1009,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.0257626, z: 1.0958369}
-  m_Center: {x: 2.0721623e-16, y: -0.51288146, z: 0.04791844}
+  m_Size: {x: 1, y: 2.1550465, z: 1.2956371}
+  m_Center: {x: -6.232338e-16, y: -0.44823924, z: 0.053795043}
 --- !u!1 &1171573340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1405,6 +1405,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2287266844751084619, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2419867643954146162, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1452,10 +1456,6 @@ PrefabInstance:
     - target: {fileID: 3089126715573236168, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3684475500481681465, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
-      propertyPath: m_Height
-      value: 2.43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
@@ -2521,6 +2521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93efbb6a074140c4cac3a604f0227f64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pushForce: {x: 20, y: 10, z: 0}
+  pushDuration: 0.15
 --- !u!4 &936440893446594222
 Transform:
   m_ObjectHideFlags: 0
