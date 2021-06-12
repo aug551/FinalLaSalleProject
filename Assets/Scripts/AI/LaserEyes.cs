@@ -12,7 +12,8 @@ public class LaserEyes : MonoBehaviour
             theBoss.LineRenderer.SetPosition(1, hit.point);
             if (hit.collider.gameObject.TryGetComponent<CharacterHealth>(out CharacterHealth characterHealth))
             {
-                characterHealth.TakeDamage(0.1f);
+                Debug.Log("hit");
+                characterHealth.TakeDamage(0f);
             }
         }
     }

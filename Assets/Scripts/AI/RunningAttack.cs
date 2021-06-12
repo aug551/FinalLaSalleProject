@@ -18,8 +18,6 @@ public class RunningAttack : IState
     {
         Debug.Log("entered run");
         canTransition = false;
-        anim.SetBool("Charge", true);
-        yield return new WaitForSeconds(2.8f); // taken from scream animation time
         SetTargetRotation();
         do
         {
@@ -27,6 +25,8 @@ public class RunningAttack : IState
             yield return new WaitForFixedUpdate();
 
         } while (Quaternion.Angle(theBoss.transform.rotation, theBoss.targetRotation.rotation) > 0.01f);
+        anim.SetBool("Charge", true);
+        yield return new WaitForSeconds(2.9f); // taken from scream animation time
         if (!theBoss.isOnCorner1)
         {
             theBoss.isOnCorner1 = true;

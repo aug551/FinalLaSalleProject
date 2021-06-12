@@ -20,7 +20,6 @@ public class Laser : IState
 
     public override IEnumerator Enter()
     {
-        
         Debug.Log("entered laser");
         canTransition = false;
         int i = 0;
@@ -31,26 +30,48 @@ public class Laser : IState
             RotateTowardsPlayer();
             yield return new WaitForFixedUpdate();
 
-        } while (Quaternion.Angle(theBoss.transform.rotation, theBoss.targetRotation.rotation) > 0.01f);
+        } while (Quaternion.Angle(theBoss.transform.rotation, theBoss.targetRotation.rotation) > 0.1f);
         anim.SetBool("Laser", true);
+        yield return new WaitForSeconds(1.633f);//taken from jump anim
+        theBoss.player.GetComponent<RootMotionCharacterController>().ControlCharacter(new Vector3(theBoss.transform.forward.x, theBoss.transform.forward.y, 0) * 40, 1f);
+        yield return new WaitForSeconds(0.8f);
         yield return new WaitForSeconds(2f);
+        theBoss.targetRotation.LookAt(theBoss.player.transform.position);
         Initlaser();
-        while ( i < 3.3f / Time.fixedDeltaTime)
+        while ( i < 1.65f / Time.fixedDeltaTime) //3,3f
         {
+            RotateTowardsPlayer();
             interT += 6 * Time.deltaTime;
             ActivateTheLasers(interT);
             i++;
             yield return new WaitForFixedUpdate();
         }
         Finishedlaser();
+        yield return new WaitForSeconds(3f);
+        anim.SetBool("Laser", false);
+        anim.SetBool("LaserDown", true);
+        Initlaser();
+        while (i < 3.3f / Time.fixedDeltaTime) //3,3f
+        {
+            RotateTowardsPlayer();
+            interT += 6 * Time.deltaTime;
+            ActivateTheLasers(interT);
+            i++;
+            yield return new WaitForFixedUpdate();
+        }
+        Finishedlaser();
+        yield return new WaitForSeconds(2f);
+        canTransition = true;
+        anim.applyRootMotion = true;
         yield break;
     }
+
     public void Finishedlaser()
     {
         theBoss.audioSource.Stop();
         anim.SetBool("Laser", false);
+        anim.SetBool("LaserDown", false);
         theBoss.LineRenderer.enabled = false;
-        canTransition = true;
     }
 
     public void Initlaser()

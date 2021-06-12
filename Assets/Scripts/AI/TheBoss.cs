@@ -43,7 +43,7 @@ public class TheBoss : MonoBehaviour
 
     void Start()
     {
-        currentState = runningAttackState;
+        currentState = laserState;
         StartCoroutine(currentState.Enter());
     }
     
@@ -56,14 +56,14 @@ public class TheBoss : MonoBehaviour
         //    currentState = allBaseStates[i];
         //    StartCoroutine(currentState.Enter());
         //}
-        if (currentState.canTransition && currentState != runningAttackState)
-        {
-            currentState = runningAttackState;
-            StartCoroutine(currentState.Enter());
-        }
         if (currentState.canTransition && currentState != laserState)
         {
             currentState = laserState;
+            StartCoroutine(currentState.Enter());
+        }
+        if (currentState.canTransition && currentState != runningAttackState)
+        {
+            currentState = runningAttackState;
             StartCoroutine(currentState.Enter());
         }
     }
@@ -73,13 +73,25 @@ public class TheBoss : MonoBehaviour
         if (!alreadyattacked)
         {
             alreadyattacked = true;
-            animator.SetTrigger("Attack");
+            animator = GetComponent<Animator>();
+            animator.SetTrigger("Attacking");
             Invoke(nameof(AttackCD), attackInterval);
-            animator.SetBool("Attacking", true);
         }
     }
+
     void AttackCD()
     {
         alreadyattacked = false;
+    }
+    public float DistanceFromPlayer()
+    {
+       return Vector3.Distance(player.transform.position, transform.position);
+    }
+    void ResetPosition()
+    {
+        Debug.Log("test");
+        animator = GetComponent<Animator>();
+        animator.applyRootMotion = false;
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 }
