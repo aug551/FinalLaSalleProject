@@ -49,6 +49,7 @@ public class RunningAttack : IState
         }
         anim.SetBool("Charge", false);
         anim.SetBool("Attacking", false);
+        theBoss.cinemachineShake.ShakeCamera(5f, 1f);
         anim.SetTrigger("HitWall"); //arrived at wall
         yield return new WaitForSeconds(2.5f);// taken from fall animation time
         yield return new WaitForSeconds(4.967f);// taken from fall animation time

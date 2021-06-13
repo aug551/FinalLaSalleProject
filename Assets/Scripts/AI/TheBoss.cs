@@ -23,6 +23,7 @@ public class TheBoss : MonoBehaviour
     public bool isOnCorner1;
     bool alreadyattacked;
     float attackInterval = 0.75f;
+    public CinemachineShake cinemachineShake;
 
 
     // state machine idea from https://www.youtube.com/watch?v=G1bd75R10m4&t=949s
@@ -83,14 +84,13 @@ public class TheBoss : MonoBehaviour
     {
         alreadyattacked = false;
     }
-    public float DistanceFromPlayer()
-    {
-       return Vector3.Distance(player.transform.position, transform.position);
-    }
+    //public float DistanceFromPlayer()
+    //{
+    //   return Vector3.Distance(player.transform.position, transform.position);
+    //}
     void ResetPosition()
     {
-        Debug.Log("test");
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>(); //because of weird bug
         animator.applyRootMotion = false;
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
