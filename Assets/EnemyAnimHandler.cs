@@ -19,4 +19,6 @@ public class EnemyAnimHandler : MonoBehaviour
         isChasing = enemy.IsChasing;
     }
 
+
+
 }
