@@ -26,8 +26,8 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Item item) 
     {
-        if (itemsUIList.Count == 0)
-            return;
+        if (IsFull()) return;
+
         Type itemType = item.GetType();
 
         if (itemType == typeof(Material))
@@ -130,7 +130,7 @@ public class Inventory : MonoBehaviour
         }
         return true;
     }
-    public void RemoveItems(List<Item> items)
+    public void RemoveItems(List<Item> items, CraftingUI ui)
     {
         foreach (Item itemToRemove in items)
         {
@@ -152,11 +152,17 @@ public class Inventory : MonoBehaviour
                         RemoveFromInventory(item1);
                     }
                 }
+                ui.RemoveFromMaterials(item1);
+                item1.GetComponent<ItemUI>().ResetColor();
             }
         }
     }
     public bool IsFull()
     {
+        if (itemsIventory.Count >= 12)
+        {
+            return true;
+        }
         return false;
     }
 

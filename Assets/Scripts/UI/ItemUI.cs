@@ -98,19 +98,26 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
             {
                 if (craftingUI.RemoveFromMaterials(item))
                 {
-                    image.color = startColor;
+                    ResetColor();
                 }
             }
         }
         else if (eventData.button == PointerEventData.InputButton.Right)
         {
+            Debug.Log("added");
             if (TryGetComponent<Item>(out Item item))
             {
+                Debug.Log("added1");
                 if (craftingUI.AddToMaterials(item))
                 {
+                    Debug.Log("added2");
                     image.color = Color.grey;
                 }
             }
         }
+    }
+    public void ResetColor()
+    {
+        image.color = startColor;
     }
 }

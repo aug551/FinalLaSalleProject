@@ -33,7 +33,7 @@ public class CraftingUI : MonoBehaviour
 
     void ConsumeMaterials(List<Item> items)
     {
-        inventory.RemoveItems(currentRecipe.materialNeeded);
+        inventory.RemoveItems(currentRecipe.materialNeeded, this);
         foreach (Item item in items)
         {
             RemoveInMaterialSlot(item);

@@ -38,7 +38,7 @@ public class Laser : IState
         yield return new WaitForSeconds(2f);
         theBoss.targetRotation.LookAt(theBoss.player.transform.position);
         Initlaser();
-        theBoss.cinemachineShake.ShakeCamera(1f, 1.65f);
+        theBoss.cinemachineShake.ShakeCamera(0.6f, 1.65f);
         while ( i < 1.65f / Time.fixedDeltaTime) //3,3f
         {
             RotateTowardsPlayer();
@@ -52,7 +52,7 @@ public class Laser : IState
         anim.SetBool("Laser", false);
         anim.SetBool("LaserDown", true);
         Initlaser();
-        theBoss.cinemachineShake.ShakeCamera(1f, 1.8f);
+        theBoss.cinemachineShake.ShakeCamera(0.6f, 1.8f);
         while (i < 3.3f / Time.fixedDeltaTime) //3,3f
         {
             RotateTowardsPlayer();

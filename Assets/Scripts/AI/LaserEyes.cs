@@ -13,7 +13,7 @@ public class LaserEyes : MonoBehaviour
             if (hit.collider.gameObject.TryGetComponent<CharacterHealth>(out CharacterHealth characterHealth))
             {
                 Debug.Log("hit");
-                characterHealth.TakeDamage(0f);
+                characterHealth.TakeDamage(8f);
             }
         }
     }
