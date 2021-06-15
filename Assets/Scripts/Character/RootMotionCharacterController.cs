@@ -252,21 +252,22 @@ public class RootMotionCharacterController : MonoBehaviour
     // Attacks
     private void StartSecondaryAttack()
     {
-        if (Input.GetButton("Attack 2"))
+        
+        if (Input.GetButtonDown("Attack 2"))
         {
+            teleAtk.stopPull = false;
             isGrabbing = true;
+            teleAtk.SetClosestObject();
             if (teleAtk.Closest != null && grabbedObj == null)
             {
                 grabbedObj = teleAtk.Closest;
-
-                grabbedObj.GetComponent<MeshRenderer>().material.color = Color.red;
             }
 
         }
 
         if (Input.GetButtonUp("Attack 2"))
         {
-            isGrabbing = false;
+            teleAtk.stopPull = true;
         }
     }
 

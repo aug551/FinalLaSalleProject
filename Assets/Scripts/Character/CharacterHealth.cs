@@ -63,7 +63,7 @@ public class CharacterHealth : MonoBehaviour
 
     public void UpdateHpSlider()
     {
-        hpSlider.value = currentHealth;
+        //hpSlider.value = currentHealth;
     }
 
     public void RegenHealth()
