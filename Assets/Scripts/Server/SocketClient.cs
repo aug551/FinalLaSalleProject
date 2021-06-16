@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SocketClient : MonoBehaviour
 {
@@ -14,16 +15,31 @@ public class SocketClient : MonoBehaviour
     NetworkStream stream;
     StreamWriter writer;
     StreamReader reader;
-    string host = "Airipie.local";
+    string host = "psg551.com";
     Int32 port = 60000;
 
+    string username;
+    string playerData;
+    Player player;
 
     // Start is called before the first frame update
     void Start()
     {
-        SetupSocket();
+    }
 
-        Debug.Log(ReadSocket());
+    public void SetUsername(string user)
+    {
+        username = user;
+    }
+
+    public void GetData()
+    {
+        SetupSocket();
+        WriteSocket(username);
+        playerData = ReadSocket();
+        player = Player.CreateFromJSON(playerData);
+        Debug.Log(player.name);
+        CloseSocket();
     }
 
     public void SetupSocket()
@@ -54,11 +70,13 @@ public class SocketClient : MonoBehaviour
 
     public string ReadSocket()
     {
+        string recd;
         if (!socketReady)
             return "";
         try
         {
-            return reader.ReadLine();
+            recd = reader.ReadLine();
+            return recd;
         }
         catch (Exception e)
         {
