@@ -1,15 +1,12 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SocketClient : MonoBehaviour
 {
+    private GameManager instance = GameManager.instance;
+
     internal Boolean socketReady = false;
     TcpClient mySocket;
     NetworkStream stream;
@@ -20,7 +17,6 @@ public class SocketClient : MonoBehaviour
 
     string username;
     string playerData;
-    Player player;
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +33,18 @@ public class SocketClient : MonoBehaviour
         SetupSocket();
         WriteSocket(username);
         playerData = ReadSocket();
-        player = Player.CreateFromJSON(playerData);
-        Debug.Log(player.name);
+        
+        if (!String.IsNullOrEmpty(playerData))
+        {
+            instance.Player = Player.CreateFromJSON(playerData);
+            Debug.Log(instance.Player.name);
+            instance.LoadScene("MainMenu");
+        }
+        else
+        {
+            Debug.Log("Player does not exist.");
+        }
+
         CloseSocket();
     }
 
