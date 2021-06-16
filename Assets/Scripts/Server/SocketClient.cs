@@ -16,6 +16,8 @@ public class SocketClient : MonoBehaviour
     Int32 port = 60000;
 
     string username;
+    string name;
+
     string playerData;
 
     // Start is called before the first frame update
@@ -28,26 +30,45 @@ public class SocketClient : MonoBehaviour
         username = user;
     }
 
+    public void SetName(string name)
+    {
+        this.name = name;
+    }
+
+    // Create new player data and save to server
+    public void CreateNew()
+    {
+        SetupSocket();
+        instance.player = new Player(username, name);
+        playerData = JsonUtility.ToJson(instance.player);
+        WriteSocket("Create" + playerData);
+        Debug.Log(ReadSocket());
+        CloseSocket();
+    }
+
+    // Get existing player data from server
     public void GetData()
     {
         SetupSocket();
         WriteSocket(username);
         playerData = ReadSocket();
-        
-        if (!String.IsNullOrEmpty(playerData))
+
+        try
         {
             instance.Player = Player.CreateFromJSON(playerData);
             Debug.Log(instance.Player.name);
             instance.LoadScene("MainMenu");
         }
-        else
+        catch(Exception e)
         {
-            Debug.Log("Player does not exist.");
+            Debug.Log("Player does not exist: " + e.ToString());
         }
 
         CloseSocket();
     }
 
+
+    // All Socket Operations
     public void SetupSocket()
     {
         try
