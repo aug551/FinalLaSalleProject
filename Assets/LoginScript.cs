@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LoginScript : MonoBehaviour
 {
+    GameManager gameManager = GameManager.instance;
     [SerializeField] private GameObject loginPanel;
     [SerializeField] private GameObject createPanel;
 
