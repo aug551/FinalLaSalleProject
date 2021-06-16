@@ -22,7 +22,7 @@ public class CharacterSleep : MonoBehaviour
                 if (canSleep)
                 {
                     isAsleep = true;
-                    MovePlayer();
+                    //MovePlayer();
                 }
             }
             else
@@ -43,6 +43,7 @@ public class CharacterSleep : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         canSleep = false;
+        isAsleep = false;
     }
 
     void MovePlayer()
