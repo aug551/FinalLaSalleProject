@@ -19,11 +19,10 @@ public class CubeCooldown : MonoBehaviour
 
  
     void Update()
-    {
-        Debug.Log(onCooldown);
+    { 
         if(onCooldown)
         {
-            if(timeElapsed <= lerpDuration)
+            if(timeElapsed <= lerpDuration - 2)
             {
                 cube.material.color = Color.Lerp(Color.red, Color.white, timeElapsed/lerpDuration);
                 timeElapsed += Time.deltaTime;

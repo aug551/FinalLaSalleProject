@@ -47,17 +47,24 @@ public class TeleAttackDetect : MonoBehaviour
             {
                 foreach (GameObject obj in enemiesInRange)
                 {
-                    if (closest == null)
+                    if (!obj.GetComponent<CubeCooldown>().onCooldown)
                     {
-                        closest = obj;
-                    }
-                    else
-                    {
-                        distance = Vector3.Distance(this.transform.parent.position, obj.transform.position);
-                        if (distance < Vector3.Distance(this.transform.parent.position, closest.transform.position))
+                        if (closest == null)
                         {
                             closest = obj;
                         }
+                        else
+                        {
+                            distance = Vector3.Distance(this.transform.parent.position, obj.transform.position);
+                            if (distance < Vector3.Distance(this.transform.parent.position, closest.transform.position))
+                            {
+                                closest = obj;
+                            }
+                        }
+                    }
+                    else
+                    {
+
                     }
                 }
             }

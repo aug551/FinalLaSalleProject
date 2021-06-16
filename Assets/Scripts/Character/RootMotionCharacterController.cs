@@ -373,7 +373,6 @@ public class RootMotionCharacterController : MonoBehaviour
         if (atk.Enemy.Count > 0)
         {
             int crit = Random.Range(0, 100);
-            Debug.Log(crit);
             if (crit<atk.CharacterStats.critChance)
             {
                 Debug.Log("crit");
@@ -385,7 +384,6 @@ public class RootMotionCharacterController : MonoBehaviour
             }
             else
             {
-                Debug.Log("hit");
                 foreach (EnemyHealth enemy in atk.Enemy)
                 {
                     if (enemy)
