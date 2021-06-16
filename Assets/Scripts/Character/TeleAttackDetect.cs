@@ -5,11 +5,13 @@ using UnityEngine;
 public class TeleAttackDetect : MonoBehaviour
 {
     private RootMotionCharacterController rmc;
+    [SerializeField] GameObject blockHolder;
 
     public List<GameObject> enemiesInRange = new List<GameObject>();
     public GameObject closest = null;
     private float distance = 0f;
     public bool stopPull = false;
+    public bool holdingBlock = false;
 
     public GameObject Closest { get => closest;  }
 
@@ -19,6 +21,7 @@ public class TeleAttackDetect : MonoBehaviour
         {
             enemiesInRange.Add(other.gameObject);
         }
+        
     }
 
     private void OnTriggerExit(Collider other)
@@ -47,7 +50,25 @@ public class TeleAttackDetect : MonoBehaviour
             {
                 foreach (GameObject obj in enemiesInRange)
                 {
-                    if (!obj.GetComponent<CubeCooldown>().onCooldown)
+                    if(obj.TryGetComponent<CubeCooldown>(out CubeCooldown cube))
+                    {
+                        if (!obj.GetComponent<CubeCooldown>().onCooldown)
+                        {
+                            if (closest == null)
+                            {
+                                closest = obj;
+                            }
+                            else
+                            {
+                                distance = Vector3.Distance(this.transform.parent.position, obj.transform.position);
+                                if (distance < Vector3.Distance(this.transform.parent.position, closest.transform.position))
+                                {
+                                    closest = obj;
+                                }
+                            }
+                        }
+                    }
+                    else
                     {
                         if (closest == null)
                         {
@@ -61,10 +82,6 @@ public class TeleAttackDetect : MonoBehaviour
                                 closest = obj;
                             }
                         }
-                    }
-                    else
-                    {
-
                     }
                 }
             }
@@ -86,31 +103,49 @@ public class TeleAttackDetect : MonoBehaviour
         if (rmc.GrabbedObj && rmc.IsGrabbing)
         {
             Rigidbody enemyrigid = rmc.GrabbedObj.GetComponent<Rigidbody>();
-            if(!closest.GetComponent<CubeCooldown>().onCooldown)
+            if(closest.TryGetComponent<CubeCooldown>(out CubeCooldown cube))
             {
-                if (Vector3.Distance(enemyrigid.transform.position, new Vector3(rmc.transform.position.x, rmc.transform.position.y + 1.0f, rmc.transform.position.z)) < 1.5f || stopPull)
+                if (!closest.GetComponent<CubeCooldown>().onCooldown)
                 {
-                    closest.GetComponent<CubeCooldown>().onCooldown = true;
-                    enemyrigid.isKinematic = true;
-                    enemyrigid.velocity = Vector3.zero;
-                    rmc.IsGrabbing = false;
-                    rmc.GrabbedObj = null;
-                    closest = null;
-                }
-                else
-                {
-                    closest.GetComponent<Renderer>().material.color = Color.red;
-                    enemyrigid.isKinematic = false;
-                    enemyrigid.transform.LookAt(new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z));
-                    if (enemyrigid.transform.position.z > 0.2f || enemyrigid.transform.position.z < 0.2f)
+                    if (Vector3.Distance(enemyrigid.transform.position, new Vector3(rmc.transform.position.x, rmc.transform.position.y + 1.0f, rmc.transform.position.z)) < 1.5f || stopPull)
                     {
-                        enemyrigid.velocity += enemyrigid.transform.forward * 90f * Time.deltaTime;
+                        closest.GetComponent<CubeCooldown>().onCooldown = true;
+                        enemyrigid.isKinematic = true;
+                        enemyrigid.velocity = Vector3.zero;
+                        rmc.IsGrabbing = false;
+                        rmc.GrabbedObj = null;
+                        closest = null;
                     }
                     else
                     {
-                        enemyrigid.velocity += new Vector3(enemyrigid.transform.forward.x, enemyrigid.transform.forward.y, -enemyrigid.velocity.z) * 90f * Time.deltaTime;
+                        closest.GetComponent<Renderer>().material.color = Color.red;
+                        enemyrigid.isKinematic = false;
+                        enemyrigid.transform.LookAt(new Vector3(this.transform.position.x, this.transform.position.y + 1.5f, this.transform.position.z));
+                        if (enemyrigid.transform.position.z > 0.2f || enemyrigid.transform.position.z < 0.2f)
+                        {
+                            enemyrigid.velocity += enemyrigid.transform.forward * 90f * Time.deltaTime;
+                        }
+                        else
+                        {
+                            enemyrigid.velocity += new Vector3(enemyrigid.transform.forward.x, enemyrigid.transform.forward.y, -enemyrigid.velocity.z) * 90f * Time.deltaTime;
+                        }
                     }
                 }
+            }
+            else
+            {
+                if(!holdingBlock)
+                {
+                    enemyrigid.isKinematic = false;
+                    enemyrigid.transform.LookAt(blockHolder.transform.position);
+                    enemyrigid.velocity += new Vector3(enemyrigid.transform.forward.x, enemyrigid.transform.forward.y, -enemyrigid.velocity.z) * 90f * Time.deltaTime;
+                    if(Vector3.Distance(enemyrigid.transform.position, blockHolder.transform.position) < 1.5f)
+                    {
+                        enemyrigid.isKinematic = false;
+                        enemyrigid.velocity = Vector3.zero;
+                    }
+                }
+            
             }
         }
     }
