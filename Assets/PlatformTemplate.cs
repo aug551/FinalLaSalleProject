@@ -74,11 +74,9 @@ public class PlatformTemplate : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Vampire is on the platform");
             //StartCoroutine(PlatformCountDown());
 
             countDownTime -= Time.deltaTime;
-            Debug.Log(countDownTime);
 
             if (countDownTime <= 0)//( countDownUp==true)
             {

@@ -19,7 +19,7 @@ public class CharacterHealth : MonoBehaviour
     {
         characterStats = GetComponent<CharacterStats>();
         maxHealth = 100;
-        currentHealth = 50;
+        currentHealth = maxHealth;
         UpdateHpSlider();
         //InvokeRepeating("RegenHealth", 0.0f, regenRateSeconds); //soruce:https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
     }
@@ -63,7 +63,7 @@ public class CharacterHealth : MonoBehaviour
 
     public void UpdateHpSlider()
     {
-        //hpSlider.value = currentHealth;
+        hpSlider.value = currentHealth;
     }
 
     public void RegenHealth()

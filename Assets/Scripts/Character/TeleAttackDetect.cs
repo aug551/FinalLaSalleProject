@@ -19,7 +19,7 @@ public class TeleAttackDetect : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Cube"))
         {
             enemiesInRange.Add(other.gameObject);
         }
@@ -28,7 +28,7 @@ public class TeleAttackDetect : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Cube"))
         {
             enemiesInRange.Remove(other.gameObject);
         }
