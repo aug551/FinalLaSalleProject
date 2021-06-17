@@ -255,14 +255,20 @@ public class RootMotionCharacterController : MonoBehaviour
         
         if (Input.GetButtonDown("Attack 2"))
         {
-            teleAtk.stopPull = false;
-            isGrabbing = true;
-            teleAtk.SetClosestObject();
-            if (teleAtk.Closest != null && grabbedObj == null)
+            if(!teleAtk.holdingBlock)
             {
-                grabbedObj = teleAtk.Closest;
+                teleAtk.stopPull = false;
+                isGrabbing = true;
+                teleAtk.SetClosestObject();
+                if (teleAtk.Closest != null && grabbedObj == null)
+                {
+                    grabbedObj = teleAtk.Closest;
+                }
             }
-
+            else
+            {
+                teleAtk.ThrowBlock(teleAtk.closest.GetComponent<Rigidbody>());
+            }
         }
 
         if (Input.GetButtonUp("Attack 2"))

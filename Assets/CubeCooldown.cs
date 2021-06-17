@@ -22,7 +22,7 @@ public class CubeCooldown : MonoBehaviour
     { 
         if(onCooldown)
         {
-            if(timeElapsed <= lerpDuration - 2)
+            if(timeElapsed <= lerpDuration - 1)
             {
                 cube.material.color = Color.Lerp(Color.red, Color.white, timeElapsed/lerpDuration);
                 timeElapsed += Time.deltaTime;
@@ -30,6 +30,7 @@ public class CubeCooldown : MonoBehaviour
             else
             {
                 timeElapsed = 0;
+                cube.material.color = Color.white;
                 onCooldown = false;
             }
         }
