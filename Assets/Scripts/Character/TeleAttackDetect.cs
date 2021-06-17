@@ -13,7 +13,6 @@ public class TeleAttackDetect : MonoBehaviour
     private float distance = 0f;
     public bool stopPull = false;
     public bool holdingBlock = false;
-    public bool stopFollow = false;
     public Vector3 mousePos;
 
     public GameObject Closest { get => closest; }
@@ -137,16 +136,13 @@ public class TeleAttackDetect : MonoBehaviour
             }
             else
             {
-                if (!stopFollow)
+                enemyrigid.isKinematic = false;
+                enemyrigid.transform.LookAt(blockHolder.transform.position);
+                enemyrigid.velocity += new Vector3(enemyrigid.transform.forward.x, enemyrigid.transform.forward.y, -enemyrigid.velocity.z) * 90f * Time.deltaTime;
+                if (Vector3.Distance(enemyrigid.transform.position, blockHolder.transform.position) < 1.5f)
                 {
-                    enemyrigid.isKinematic = false;
-                    enemyrigid.transform.LookAt(blockHolder.transform.position);
-                    enemyrigid.velocity += new Vector3(enemyrigid.transform.forward.x, enemyrigid.transform.forward.y, -enemyrigid.velocity.z) * 90f * Time.deltaTime;
-                    if (Vector3.Distance(enemyrigid.transform.position, blockHolder.transform.position) < 1.5f)
-                    {
-                        enemyrigid.velocity = Vector3.zero;
-                        holdingBlock = true;
-                    }
+                    enemyrigid.velocity = Vector3.zero;
+                    holdingBlock = true;
                 }
             }
         }
@@ -156,11 +152,14 @@ public class TeleAttackDetect : MonoBehaviour
     {
         mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Mathf.Abs(Camera.main.transform.position.z)));
-        stopFollow = true;
         cube.useGravity = false;
         cube.isKinematic = false;
         cube.transform.LookAt(mousePos);
-        cube.velocity += cube.transform.forward * 5000f * Time.deltaTime;
+        cube.GetComponent<ThrowableBlock>().fired = true;
+        cube.velocity = cube.transform.forward * 5000f * Time.deltaTime;
         holdingBlock = false;
+        closest = null;
+        rmc.GrabbedObj = null;
+
     }
 }

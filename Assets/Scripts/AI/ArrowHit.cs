@@ -7,16 +7,19 @@ public class ArrowHit : MonoBehaviour
     public float arrowDamage = 1.0f;
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.CompareTag("Player"))
         {
             CharacterHealth health = other.gameObject.GetComponentInParent<CharacterHealth>();
             health.TakeDamage(arrowDamage);
             Destroy(gameObject);
         }
-        if(other.CompareTag("Wall"))
+        if (other.CompareTag("Wall"))
         {
             Destroy(gameObject);
         }
-        
+
     }
+
+
 }
