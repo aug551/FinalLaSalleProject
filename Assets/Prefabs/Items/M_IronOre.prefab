@@ -56,6 +56,10 @@ PrefabInstance:
       value: M_IronOre
       objectReference: {fileID: 0}
     - target: {fileID: 5654311649778276709, guid: a58e645e4cb343b4da8918a6e60b8810, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 6817021561935448156, guid: b8c0a1ff551cd7a499ed7c2ffaa8bb70, type: 3}
+    - target: {fileID: 5654311649778276709, guid: a58e645e4cb343b4da8918a6e60b8810, type: 3}
       propertyPath: type
       value: 2
       objectReference: {fileID: 0}
