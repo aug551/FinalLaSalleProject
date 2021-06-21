@@ -236,15 +236,7 @@ public class RootMotionCharacterController : MonoBehaviour
     }
     private void Dash()
     {
-        if (isGrabbing && grabbedObj)
-        {
-            Vector3 enemyDir = grabbedObj.transform.position - this.transform.position;
-            playerVelocity = enemyDir * 10f;
-        }
-        else
-        {
-            playerVelocity.x = (isJumping) ? (this.transform.forward.x * dashDistance) / 2 : this.transform.forward.x * dashDistance;
-        }
+        playerVelocity.x = (isJumping) ? (this.transform.forward.x * dashDistance) / 2 : this.transform.forward.x * dashDistance;
         controller.Move(new Vector3(playerVelocity.x, this.transform.position.y, 0) * Time.deltaTime);
     }
 
