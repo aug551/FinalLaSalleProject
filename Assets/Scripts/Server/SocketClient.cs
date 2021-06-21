@@ -29,6 +29,7 @@ public class SocketClient : MonoBehaviour
     {
         invalidAccount.SetActive(false);
         existAccount.SetActive(false);
+        CloseSocket();
     }
 
     // Setting variables from input fields
@@ -65,9 +66,14 @@ public class SocketClient : MonoBehaviour
         SetupSocket();
         WriteSocket(username);
         playerData = ReadSocket();
+        Debug.Log(PlayerData);
 
         try
         {
+            if (!instance)
+            {
+                instance = GameManager.instance;
+            }
             instance.Player = Player.CreateFromJSON(playerData);
             Debug.Log(instance.Player.name);
             instance.LoadScene("MainMenu");
@@ -85,6 +91,8 @@ public class SocketClient : MonoBehaviour
     // All Socket Operations
     public void SetupSocket()
     {
+        // Debug.Log("Connect Status: " + mySocket.Connected);
+
         try
         {
             mySocket = new TcpClient("psg551.com", 60000);
@@ -92,7 +100,6 @@ public class SocketClient : MonoBehaviour
             writer = new StreamWriter(stream);
             reader = new StreamReader(stream);
             socketReady = true;
-            Debug.Log("Connect Status: " + mySocket.Connected);
         }
         catch (Exception e)
         {
