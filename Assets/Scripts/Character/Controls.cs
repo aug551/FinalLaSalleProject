@@ -7,13 +7,13 @@ public class Controls : MonoBehaviour
 {
     public GameObject inventoryPanel;
     public GameObject crafitngPanel;
-    
-    
+    CanvasGroup group;
+
     public bool isActive = false;
-  
-    private void Start()
+
+    private void Awake()
     {
-        inventoryPanel.GetComponent<Canvas>().enabled = false;
+        group = inventoryPanel.GetComponent<CanvasGroup>();
     }
 
     private void Update()
@@ -22,19 +22,33 @@ public class Controls : MonoBehaviour
         {
             Inventory();
         }
+        if (Input.GetButtonDown("Equipment"))
+        {
+            Equipment();
+        }
     }
 
     void Inventory()
     {
-        if (isActive)
+        Toggle(group);
+    }
+    void Equipment()
+    {
+        Toggle(EquipmentManager.Instance.Group);
+    }
+    public void Toggle(CanvasGroup group)
+    {
+        if (group.alpha == 0)
         {
-            inventoryPanel.GetComponent<Canvas>().enabled = false;
-            isActive = false;
+            group.alpha = 1;
+            group.blocksRaycasts = true;
+            group.interactable = true;
         }
         else
         {
-            inventoryPanel.GetComponent<Canvas>().enabled = true;
-            isActive = true;
+            group.alpha = 0;
+            group.blocksRaycasts = false;
+            group.interactable = false;
         }
     }
 }

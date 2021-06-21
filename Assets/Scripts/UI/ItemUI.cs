@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -96,7 +97,14 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
         {
             if (TryGetComponent<Item>(out Item item)) 
             {
-                if (craftingUI.RemoveFromMaterials(item))
+                Type itemType = item.GetType();
+                if (itemType == typeof(Armor))
+                {
+                    Armor armor = item as Armor;
+                    armor.UnEquip();
+                    EquipmentManager.Instance.UnEquip(armor, armor.Slot);
+                }
+                else if (craftingUI.RemoveFromMaterials(item))
                 {
                     ResetColor();
                 }
@@ -104,13 +112,17 @@ public class ItemUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
         }
         else if (eventData.button == PointerEventData.InputButton.Right)
         {
-            Debug.Log("added");
             if (TryGetComponent<Item>(out Item item))
             {
-                Debug.Log("added1");
-                if (craftingUI.AddToMaterials(item))
+                Type itemType = item.GetType();
+                if (itemType == typeof(Armor))
                 {
-                    Debug.Log("added2");
+                    Armor armor = item as Armor;
+                    armor.Equip();
+                    EquipmentManager.Instance.Equip(armor, armor.Slot);
+                }
+                else if (craftingUI.AddToMaterials(item))
+                {
                     image.color = Color.grey;
                 }
             }
