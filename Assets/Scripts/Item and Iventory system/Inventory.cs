@@ -13,6 +13,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] List<ItemUI> itemsUIList = new List<ItemUI>();
     //Dictionary<Type, Item> items = new Dictionary<Type, Item>();
     List<Item> itemsIventory = new List<Item>();
+    [SerializeField] CraftingUI ui;
 
     private void Awake()
     {
@@ -45,6 +46,7 @@ public class Inventory : MonoBehaviour
                 }          
             }                 
             itemsIventory.Add(AddToUI(item as Material));
+            Debug.Log("added material");
             return;
         }
         if (itemType == typeof(Armor))
@@ -119,18 +121,29 @@ public class Inventory : MonoBehaviour
         item.image.color = color;
     }
 
-    public bool ContainsItems(List<Item> item)
+    //public bool ContainsItems(List<Item> item)
+    //{
+    //    foreach (Item item1 in item)
+    //    {
+    //        if (!itemsIventory.Contains(item1))
+    //        {
+    //            return false;
+    //        }
+    //    }
+    //    return true;
+    //}
+    public bool ContainsItem(Item item)
     {
-        foreach (Item item1 in item)
+        foreach (Item items in itemsIventory)
         {
-            if (!itemsIventory.Contains(item1))
+            if (items.Equals(item))
             {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
-    public void RemoveItems(List<Item> items, CraftingUI ui)
+    public void RemoveItems(List<Item> items)
     {
         foreach (Item itemToRemove in items)
         {
@@ -156,6 +169,24 @@ public class Inventory : MonoBehaviour
                 item1.GetComponent<ItemUI>().ResetColor();
             }
         }
+    }
+    public void RemoveItem(Item item)
+    {
+        Type itemType = item.GetType();
+        if (itemsIventory.Contains(item))
+        {
+            if (itemType == typeof(Material))
+            {
+                Material itemMaterial = item as Material;
+                if (item.Use(itemMaterial.AmountOwned) == 0)
+                {
+                    RemoveFromInventory(item);
+                }
+            }
+        }
+        else { RemoveFromInventory(item); }
+        ui.RemoveFromMaterials(item);
+        item.GetComponent<ItemUI>().ResetColor();
     }
     public bool IsFull()
     {

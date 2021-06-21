@@ -33,7 +33,7 @@ public class CraftingUI : MonoBehaviour
 
     void ConsumeMaterials(List<Item> items)
     {
-        inventory.RemoveItems(currentRecipe.materialNeeded, this);
+        inventory.RemoveItems(currentRecipe.materialNeeded);
         foreach (Item item in items)
         {
             RemoveInMaterialSlot(item);
@@ -54,6 +54,7 @@ public class CraftingUI : MonoBehaviour
     }
     void CreateItem()
     {
+        Debug.Log("created");
         inventory.AddItem(Instantiate(currentRecipe.result));
         //I instantiate because in the copyitem function i delete the object and i don't want to delete the object in my recipe
     }
