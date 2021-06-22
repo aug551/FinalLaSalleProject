@@ -36,19 +36,12 @@ public class SocketClient : MonoBehaviour
         existAccount.SetActive(false);
 
         // Try grabbing the public key as bytes
-
-        StreamReader sReader = new StreamReader("keys/public_key.pem");
-        string s_publicKey = sReader.ReadToEnd();
-        Debug.Log(s_publicKey);
-        PemReader pr = new PemReader(new StringReader(s_publicKey));
-        AsymmetricKeyParameter publicKey = (AsymmetricKeyParameter)pr.ReadObject();
-        RSAParameters rsaParams = DotNetUtilities.ToRSAParameters((RsaKeyParameters)publicKey);
-        
-
-        csp = new RSACryptoServiceProvider();
-        csp.ImportParameters(rsaParams);
-
-        Debug.Log(csp.SignatureAlgorithm);
+        Connect(host, port, instance);
+        Write("GetKey");
+        byte[] bytes = new byte[1024];
+        int i = s.Receive(bytes);
+        Debug.Log(Encoding.ASCII.GetString(bytes));
+        Disconnect();
     }
 
     // Socket Operations
@@ -106,32 +99,19 @@ public class SocketClient : MonoBehaviour
         Write(_msg);
 
         // Player Info
-        //string reply = Read();
-        //Debug.Log("Player info: " + reply);
-        byte[] player_bytes = new byte[1024];
-        int i = s.Receive(player_bytes);
+        string reply = Read();
+        Debug.Log("Player info: " + reply);
 
 
-        // Signature
-        Write("await_sig");
-        byte[] sig_bytes = new byte[1024];
-        i = s.Receive(sig_bytes);
-
-        Debug.Log(sig_bytes);
-        bool good = csp.VerifyData(player_bytes, "SHA256", sig_bytes);
-        Debug.Log(good);
-
-        //if (!reply.StartsWith("not_found"))
-        //{
-        //    instance.Player = Player.CreateFromJSON(reply);
-        //    instance.LoadScene("MainMenu");
-        //}
-        //else
-        //{
-        //    invalidAccount.SetActive(true);
-        //}
-
-
+        if (!reply.StartsWith("not_found"))
+        {
+            instance.Player = Player.CreateFromJSON(reply);
+            instance.LoadScene("MainMenu");
+        }
+        else
+        {
+            invalidAccount.SetActive(true);
+        }
 
 
         Disconnect();
