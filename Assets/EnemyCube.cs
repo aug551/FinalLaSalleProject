@@ -95,7 +95,8 @@ public class EnemyCube : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             Debug.Log("Vampire Spotted!");
-            transform.Translate(Vector3.down * Time.deltaTime);
+            //transform.Translate(other.transform.position);
+            other.gameObject.GetComponent<CharacterHealth>().TakeDamage(5);
         }
     }
 
