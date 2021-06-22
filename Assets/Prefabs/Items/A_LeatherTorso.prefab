@@ -130,7 +130,7 @@ MonoBehaviour:
   description: Armor for the chest slot
   value: 0
   weight: 0
-  slot: 2
+  slot: 4
   defenceStat: 0.5
   player: {fileID: 0}
   isArmor: 1

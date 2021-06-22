@@ -72,16 +72,19 @@ public class TeleAttackDetect : MonoBehaviour
                     }
                     else
                     {
-                        if (closest == null)
+                        if(!obj.GetComponent<ThrowableBlock>().fired)
                         {
-                            closest = obj;
-                        }
-                        else
-                        {
-                            distance = Vector3.Distance(this.transform.parent.position, obj.transform.position);
-                            if (distance < Vector3.Distance(this.transform.parent.position, closest.transform.position))
+                            if (closest == null)
                             {
                                 closest = obj;
+                            }
+                            else
+                            {
+                                distance = Vector3.Distance(this.transform.parent.position, obj.transform.position);
+                                if (distance < Vector3.Distance(this.transform.parent.position, closest.transform.position))
+                                {
+                                    closest = obj;
+                                }
                             }
                         }
                     }
@@ -129,7 +132,7 @@ public class TeleAttackDetect : MonoBehaviour
                         }
                         else
                         {
-                            enemyrigid.velocity += new Vector3(enemyrigid.transform.forward.x, enemyrigid.transform.forward.y, -enemyrigid.velocity.z) * 90f * Time.deltaTime;
+                            enemyrigid.velocity += new Vector3(enemyrigid.transform.forward.x, enemyrigid.transform.forward.y, -enemyrigid.transform.forward.z) * 90f * Time.deltaTime;
                         }
                     }
                 }
@@ -138,7 +141,7 @@ public class TeleAttackDetect : MonoBehaviour
             {
                 enemyrigid.isKinematic = false;
                 enemyrigid.transform.LookAt(blockHolder.transform.position);
-                enemyrigid.velocity += new Vector3(enemyrigid.transform.forward.x, enemyrigid.transform.forward.y, -enemyrigid.velocity.z) * 90f * Time.deltaTime;
+                enemyrigid.velocity += new Vector3(enemyrigid.transform.forward.x, enemyrigid.transform.forward.y, enemyrigid.transform.forward.z) * 90f * Time.deltaTime;
                 if (Vector3.Distance(enemyrigid.transform.position, blockHolder.transform.position) < 1.5f)
                 {
                     enemyrigid.velocity = Vector3.zero;

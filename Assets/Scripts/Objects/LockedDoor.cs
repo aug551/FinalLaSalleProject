@@ -8,6 +8,7 @@ public class LockedDoor : MonoBehaviour
     [SerializeField] Item key;
     Inventory inventory;
     Animator anim;
+    bool haskey;
     [SerializeField] Text text;
 
     private void Awake()
@@ -16,24 +17,29 @@ public class LockedDoor : MonoBehaviour
         anim = GetComponent<Animator>();
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
     }
-    private void OnTriggerStay(Collider other)
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && haskey)
+        {
+            //inventory.RemoveItem(key);
+            OpenDoors();
+        }
+    }
+    private void OnTriggerEnter(Collider other)
     {
         text.enabled = true;
         text.text = "Need Key to enter";
         if (inventory.ContainsItem(key))
         {
             text.text = "Press E to Open";
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                Debug.Log("open");
-                //inventory.RemoveItem(key);
-                OpenDoors();
-            }
+            haskey = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         text.enabled = false;
+        haskey = false;
     }
     void OpenDoors()
     {
