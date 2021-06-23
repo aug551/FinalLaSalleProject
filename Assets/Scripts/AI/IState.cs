@@ -35,4 +35,9 @@ public abstract class IState
     {
         yield break;
     }
+
+    public virtual IEnumerator Enter(List<StationaryLaser> stationaryLasers)
+    {
+        yield break;
+    }
 }
