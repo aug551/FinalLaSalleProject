@@ -7,6 +7,7 @@ public class ThrowableBlock : MonoBehaviour
     public TeleAttackDetect teleAtk;
     public CubeExplode explode;
     public bool fired = false;
+    public Vector3 currentForce;
 
     private void OnTriggerEnter(Collider other)
     {

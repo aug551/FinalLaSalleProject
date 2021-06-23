@@ -10,7 +10,7 @@ public class CubeExplode : MonoBehaviour
     float cubePivotDistance;
     Vector3 cubesPivot;
     float explosionRadius = 5;
-    float explosionForce = 100;
+    float explosionForce = 300;
 
     void Start()
     {
@@ -45,8 +45,11 @@ public class CubeExplode : MonoBehaviour
             if (rb != null)
             {
                 rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, 5);
+                //rb.transform.LookAt(force);
+                //rb.velocity = force*500*Time.deltaTime;
             }
         }
+
     }
 
     void CreatePiece(int x, int y, int z)

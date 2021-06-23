@@ -6,6 +6,7 @@ public class TeleAttackDetect : MonoBehaviour
 {
     private RootMotionCharacterController rmc;
     [SerializeField] GameObject blockHolder;
+    public GameObject cubePrefab;
 
 
     public List<GameObject> enemiesInRange = new List<GameObject>();
@@ -46,6 +47,8 @@ public class TeleAttackDetect : MonoBehaviour
 
     public void SetClosestObject()
     {
+        Debug.Log(enemiesInRange.Count);
+        Debug.Log(holdingBlock);
         if (rmc.IsGrabbing)
         {
             if (enemiesInRange.Count > 0)
@@ -89,6 +92,10 @@ public class TeleAttackDetect : MonoBehaviour
                         }
                     }
                 }
+            }
+            else
+            {
+                closest = Instantiate(cubePrefab, this.transform.position + new Vector3(0,5,0), Quaternion.identity);
             }
         }
 
