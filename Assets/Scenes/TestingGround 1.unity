@@ -769,7 +769,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 147507719937881678, guid: f2d0f742161a0a4469902cd5707458f1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.43
+      value: 4.87
       objectReference: {fileID: 0}
     - target: {fileID: 147507719937881678, guid: f2d0f742161a0a4469902cd5707458f1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1620,6 +1620,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4140598748917385806, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+      propertyPath: cubePrefab
+      value: 
+      objectReference: {fileID: 147507719937881672, guid: f2d0f742161a0a4469902cd5707458f1, type: 3}
     - target: {fileID: 4140598748917385806, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
       propertyPath: blockHolder
       value: 
