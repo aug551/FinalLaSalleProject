@@ -27,6 +27,7 @@ public class SocketClient : MonoBehaviour
     string playerName;
 
     RSACryptoServiceProvider csp;
+    string publicKeystr;
 
 
     private void Start()
@@ -35,13 +36,57 @@ public class SocketClient : MonoBehaviour
         invalidAccount.SetActive(false);
         existAccount.SetActive(false);
 
-        // Try grabbing the public key as bytes
+        UpdatePublicKey();
+    }
+
+    private void UpdatePublicKey()
+    {
+        // If public key doesn't exist, get it
+        // If it does exist, verify it
+        string path_to_key = @"keys\public_key.pem";
         Connect(host, port, instance);
-        Write("GetKey");
-        byte[] bytes = new byte[1024];
-        int i = s.Receive(bytes);
-        Debug.Log(Encoding.ASCII.GetString(bytes));
+        s.Send(Encoding.ASCII.GetBytes("GetKey"));
+
+        string serverKey = Read();
+        Debug.Log(serverKey);
+
+        if (File.Exists(path_to_key))
+        {
+            StreamReader sReader = new StreamReader(path_to_key);
+            publicKeystr = sReader.ReadToEnd();
+            Debug.Log(publicKeystr == serverKey);
+            if (publicKeystr != serverKey)
+            {
+                File.WriteAllText(path_to_key, serverKey);
+                publicKeystr = serverKey;
+            }
+            sReader.Close();
+        }
+        else
+        {
+            File.WriteAllText(path_to_key, serverKey);
+            publicKeystr = serverKey;
+        }
+
+        TextReader textReader = new StringReader(publicKeystr);
+        PemReader pemReader = new PemReader(textReader);
+        RsaKeyParameters pemObject = (RsaKeyParameters)pemReader.ReadObject();
+        RSAParameters rSAParameters = DotNetUtilities.ToRSAParameters(pemObject);
+
+        csp = new RSACryptoServiceProvider();
+        csp.ImportParameters(rSAParameters);
+
+        string plaintext = "Public key updated";
+        byte[] cipher = csp.Encrypt(Encoding.ASCII.GetBytes(plaintext), true);
+        s.Send(cipher);
+
+        textReader.Close();
         Disconnect();
+    }
+
+    private byte[] EncryptMessage(string msg)
+    {
+        return csp.Encrypt(Encoding.ASCII.GetBytes(msg), true);
     }
 
     // Socket Operations
@@ -60,11 +105,12 @@ public class SocketClient : MonoBehaviour
 
     private void Write(string msg)
     {
-        byte[] _msg = Encoding.ASCII.GetBytes(msg);
+        //byte[] _msg = Encoding.ASCII.GetBytes(msg);
+        byte[] encrypted = EncryptMessage(msg);
 
         try
         {
-            int i = s.Send(_msg);
+            int i = s.Send(encrypted);
             Debug.Log("Sent " + i + " bytes.");
         }
         catch (SocketException e)
@@ -144,4 +190,20 @@ public class SocketClient : MonoBehaviour
         playerName = name;
     }
 
+
+}
+
+class PasswordFinder : IPasswordFinder
+{
+    private string password;
+
+    public PasswordFinder(string password)
+    {
+        this.password = password;
+    }
+
+    public char[] GetPassword()
+    {
+        return password.ToCharArray();
+    }
 }

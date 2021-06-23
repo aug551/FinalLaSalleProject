@@ -5,16 +5,6 @@ from mycrypt.crypt import Crypto
 
 crypto = Crypto()
 
-# message = b"Hey Man!!"
-# encrypted = crypto.EncryptMessage(message)
-# signed = crypto.SignMessage(message)
-# print(signed)
-
-# crypto.Verify(message, signed)
-
-# decrypted = crypto.DecryptMessage(signed)
-# print(decrypted.decode())
-
 class Socket:
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -56,21 +46,33 @@ class Socket:
 
     def ClientThread(self, connection, lock):
         while True:
-            ff = connection.recv(1024)
-            ffstr = ff.decode('ascii')
+            _ff = connection.recv(1024)
 
-            if ffstr.startswith("Open"):
-                ffstr = ffstr[4:]
-                toSend = self.Login(ffstr).encode('ascii')
-                connection.sendall(toSend)
-                sig_req = connection.recv(1024)
-                connection.sendall(crypto.SignMessage(toSend))
+            try:
+                firstmsg = _ff.decode('ascii')
+                if firstmsg.startswith("GetKey"):
+                    connection.sendall(self.GetPublicKey())
+                    testenc = connection.recv(1024)
+                    print(crypto.DecryptMessage(testenc))
+            except UnicodeDecodeError:
+                ff = crypto.DecryptMessage(_ff)
+                ffstr = ff.decode('ascii')
+
+                if ffstr.startswith("Open"):
+                    ffstr = ffstr[4:]
+                    toSend = self.Login(ffstr).encode('ascii')
+                    connection.sendall(toSend)
+                    sig_req = connection.recv(1024)
+                    connection.sendall(crypto.SignMessage(toSend))
 
 
-            if ffstr.startswith("Create"):
-                ffstr = ffstr[6:]
-                connection.sendall(self.CreateAccount(ffstr).encode('ascii'))
+                if ffstr.startswith("Create"):
+                    ffstr = ffstr[6:]
+                    connection.sendall(self.CreateAccount(ffstr).encode('ascii'))
 
             connection.close()
             lock.release()
             break
+
+    def GetPublicKey(self):
+        return crypto.GetPublicKey()

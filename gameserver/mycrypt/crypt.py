@@ -13,7 +13,7 @@ class Crypto:
         try:
             file = open(f"keys/private_key.pem", 'rb')
             pemlines = file.read()
-            self.private_key = serialization.load_pem_private_key(pemlines, b'platformgame', default_backend())
+            self.private_key = serialization.load_pem_private_key(pemlines, None, default_backend())
             file.close()
         except IOError:
             self.GeneratePrivateKey()
@@ -35,7 +35,7 @@ class Crypto:
             try:
                 file1 = open('keys/private_key.pem', 'rb')
                 pemlines = file1.read()
-                private_key = serialization.load_pem_private_key(pemlines, b'platformgame', default_backend())
+                private_key = serialization.load_pem_private_key(pemlines, None, default_backend())
                 file1.close()
                 
                 public_key = private_key.public_key()
@@ -72,7 +72,7 @@ class Crypto:
             pem = private_key.private_bytes(
                 encoding=serialization.Encoding.PEM,
                 format=serialization.PrivateFormat.PKCS8,
-                encryption_algorithm=serialization.BestAvailableEncryption(b'platformgame')
+                encryption_algorithm=serialization.NoEncryption()
             )
             
             file = open(f"keys/private_key.pem", "wb")
@@ -81,7 +81,7 @@ class Crypto:
             
             file = open(f"keys/private_key.pem", "rb")
             pemlines = file.read()
-            self.private_key = serialization.load_pem_private_key(pemlines, b'platformgame', default_backend())
+            self.private_key = serialization.load_pem_private_key(pemlines, None, default_backend())
             file.close()
         
     def EncryptMessage(self, msg):
@@ -94,7 +94,6 @@ class Crypto:
             )
         )
         return encrypted
-
 
     def SignMessage(self, msg):
         signed = self.private_key.sign(
@@ -111,13 +110,12 @@ class Crypto:
         plaintext = self.private_key.decrypt(
             msg,
             padding.OAEP(
-                mgf=padding.MGF1(algorithm=hashes.SHA256()),
-                algorithm=hashes.SHA256(),
+                mgf=padding.MGF1(algorithm=hashes.SHA1()),
+                algorithm=hashes.SHA1(),
                 label=None
             )
         )
         return plaintext
-
 
     def Verify(self, msg, signature):
         try:
@@ -133,3 +131,11 @@ class Crypto:
             print('signatures match')
         except InvalidSignature:
             print('signatures do not match!')
+
+    def GetPublicKey(self):
+        try:
+            file = open('keys/public_key.pem', 'rb')
+            pem = file.read()
+            return pem
+        except IOError:
+            print('Can\'t open file')

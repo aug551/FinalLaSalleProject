@@ -4,6 +4,7 @@ import threading
 
 server = Socket(60000)
 
+
 lock = threading.Lock()
 
 while True:
