@@ -47,8 +47,6 @@ public class TeleAttackDetect : MonoBehaviour
 
     public void SetClosestObject()
     {
-        Debug.Log(enemiesInRange.Count);
-        Debug.Log(holdingBlock);
         if (rmc.IsGrabbing)
         {
             if (enemiesInRange.Count > 0)
@@ -95,7 +93,17 @@ public class TeleAttackDetect : MonoBehaviour
             }
             else
             {
-                closest = Instantiate(cubePrefab, this.transform.position + new Vector3(0,5,0), Quaternion.identity);
+                Debug.Log(this.transform.rotation.y);
+                if(this.transform.rotation.y > 0)
+                {
+                    closest = Instantiate(cubePrefab, this.transform.position + new Vector3(10, 5, 0), Quaternion.identity);
+                    Debug.Log("1");
+                }
+                else
+                {
+                    closest = Instantiate(cubePrefab, this.transform.position + new Vector3(-10, 5, 0), Quaternion.identity);
+                    Debug.Log("2");
+                }
             }
         }
 

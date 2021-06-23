@@ -10,7 +10,7 @@ public class CubeExplode : MonoBehaviour
     float cubePivotDistance;
     Vector3 cubesPivot;
     float explosionRadius = 5;
-    float explosionForce = 300;
+    float explosionForce = 150;
 
     void Start()
     {
