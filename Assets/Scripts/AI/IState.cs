@@ -7,6 +7,7 @@ public abstract class IState
 {
     public bool canTransition;
     protected TheBoss theBoss;
+    protected LaserRoom laserRoom;
 
     protected void RotateTowardsPlayer()
     {
@@ -32,11 +33,6 @@ public abstract class IState
         }
     }
     public virtual IEnumerator Enter()
-    {
-        yield break;
-    }
-
-    public virtual IEnumerator Enter(List<StationaryLaser> stationaryLasers)
     {
         yield break;
     }

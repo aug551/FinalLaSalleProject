@@ -10,6 +10,8 @@ public class TheBoss : MonoBehaviour
     IState laserState;
     IState runningAttackState;
     IState enrageState;
+    IState verticalLaserState;
+    IState horizontalLaserState;
     public Animator animator;
     public AudioSource audioSource;
     public LineRenderer LineRenderer;
@@ -20,6 +22,7 @@ public class TheBoss : MonoBehaviour
     public NavMeshAgent agent;
     public GameObject player;
     public Transform targetRotation;
+    public LaserRoom room;
     public bool isOnCorner1;
     bool alreadyattacked;
     float attackInterval = 0.75f;
@@ -38,14 +41,17 @@ public class TheBoss : MonoBehaviour
         runningAttackState = new RunningAttack(this);
         Debug.Log(animator);
         enrageState = new Enrage(this);
+        verticalLaserState = new VerticalLaserState(room);
+        horizontalLaserState = new HorizontalLaserState();
+        allBaseStates.Add(verticalLaserState);
+        allBaseStates.Add(horizontalLaserState);
         allBaseStates.Add(laserState);
         allBaseStates.Add(runningAttackState);
     }
 
     void Start()
     {
-        currentState = laserState;
-        StartCoroutine(currentState.Enter());
+        StartCoroutine(verticalLaserState.Enter());
     }
     
     void Update()
@@ -57,16 +63,18 @@ public class TheBoss : MonoBehaviour
         //    currentState = allBaseStates[i];
         //    StartCoroutine(currentState.Enter());
         //}
-        if (currentState.canTransition && currentState != laserState)
-        {
-            currentState = laserState;
-            StartCoroutine(currentState.Enter());
-        }
-        if (currentState.canTransition && currentState != runningAttackState)
-        {
-            currentState = runningAttackState;
-            StartCoroutine(currentState.Enter());
-        }
+        //if (currentState.canTransition && currentState != laserState)
+        //{
+        //    currentState = laserState;
+        //    StartCoroutine(currentState.Enter());
+        //}
+        //if (currentState.canTransition && currentState != runningAttackState)
+        //{
+        //    currentState = runningAttackState;
+        //    StartCoroutine(currentState.Enter());
+        //}
+
+        
     }
 
     public void Attack()

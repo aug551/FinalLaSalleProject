@@ -5,24 +5,38 @@ using UnityEngine;
 public class VerticalLaserState : IState
 {
     public float laserStartSize = 0.1f;
-    [SerializeField] float maxWidth1;
-    [SerializeField] float maxWidth2;
+    [SerializeField] float maxWidth1 = 0.1f;
+    [SerializeField] float maxWidth2 = 2f;
+    List<StationaryLaser> lasers = new List<StationaryLaser>();
 
-    public VerticalLaserState() //constructor
+    public VerticalLaserState(LaserRoom room) //constructor
     {
+        laserRoom = room;
         canTransition = false;
     }
 
-    public override IEnumerator Enter(List<StationaryLaser> stationaryLasers)
+    public override IEnumerator Enter()
     {
         canTransition = false;
-        Initlaser(stationaryLasers);
-        ActivateTheLasers(maxWidth1, stationaryLasers);
+        lasers = laserRoom.GetLaserTurrets(new int[] { 3, 8 });
+        Initlaser(lasers);
+        ActivateTheLasers(maxWidth1, lasers);
         yield return new WaitForSeconds(3f);
-        theBoss.cinemachineShake.ShakeCamera(0.6f, 1.8f);
-        ActivateTheLasers(maxWidth2, stationaryLasers);
+        ActivateTheLasers(maxWidth2, lasers);
         yield return new WaitForSeconds(3f);
-        Finishedlaser(stationaryLasers);
+        lasers = laserRoom.GetLaserTurrets(new int[] { 1, 4 });
+        Initlaser(lasers);
+        ActivateTheLasers(maxWidth1, lasers);
+        yield return new WaitForSeconds(3f);
+        ActivateTheLasers(maxWidth2, lasers);
+        yield return new WaitForSeconds(3f);
+        lasers = laserRoom.GetLaserTurrets(new int[] { 1, 4 });
+        Initlaser(lasers);
+        ActivateTheLasers(maxWidth1, lasers);
+        yield return new WaitForSeconds(3f);
+        ActivateTheLasers(maxWidth2, lasers);
+        yield return new WaitForSeconds(3f);
+        Finishedlaser(lasers);
         canTransition = true;
         yield break;
     }
@@ -40,7 +54,7 @@ public class VerticalLaserState : IState
     {
         foreach (StationaryLaser stationaryLaser in stationaryLasers)
         {
-            theBoss.LineRenderer.enabled = true; 
+            stationaryLaser.Line.enabled = true; 
         }
     }
 

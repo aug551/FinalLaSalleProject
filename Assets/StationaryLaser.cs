@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class StationaryLaser : MonoBehaviour
 {
-    RaycastHit hit;
     LineRenderer line;
     public float laserStartSize = 0.1f;
+
+    public LineRenderer Line { get => line; set => line = value; }
+
     private void Awake()
     {
         line = GetComponent<LineRenderer>();
@@ -14,13 +16,11 @@ public class StationaryLaser : MonoBehaviour
     }
     void PositionLaser()
     {
+        line.enabled = false;
         line.endWidth = laserStartSize;
         line.startWidth = laserStartSize;
         line.SetPosition(0, transform.position);
-        if (Physics.Raycast(transform.position, transform.forward, out hit))
-        {
-            line.SetPosition(1, hit.point);
-        }
+        line.SetPosition(1, new Vector3(transform.position.x, transform.position.y - 20f, transform.position.z));
     }
     public void IncreaseLaserSize(float maxsize)
     {
@@ -31,11 +31,15 @@ public class StationaryLaser : MonoBehaviour
     {
         float interT = 0;
         int i = 0;
-        while (line.startWidth >= maxsize)
+        float startWidth = line.startWidth;
+        float endWidth = line.endWidth;
+
+        while (line.startWidth <= maxsize)
         {
+            Debug.Log("yo");
             interT += 6 * Time.deltaTime;
-            line.startWidth = Mathf.Lerp(0, 0.3f, interT);
-            line.endWidth = Mathf.Lerp(0, 0.3f, interT);
+            line.startWidth = Mathf.Lerp(startWidth, maxsize, interT);
+            line.endWidth = Mathf.Lerp(endWidth, maxsize, interT);
             i++;
             yield return new WaitForFixedUpdate();
         }
