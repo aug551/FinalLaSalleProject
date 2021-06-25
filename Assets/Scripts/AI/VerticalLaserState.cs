@@ -17,27 +17,37 @@ public class VerticalLaserState : IState
 
     public override IEnumerator Enter()
     {
+        //17 lasers total
         canTransition = false;
-        lasers = laserRoom.GetLaserTurrets(new int[] { 3, 8 });
+
+        lasers = laserRoom.GetLaserTurrets(new int[] { 7 , 8 }, new int[] { 1,2 });
         Initlaser(lasers);
         ActivateTheLasers(maxWidth1, lasers);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         ActivateTheLasers(maxWidth2, lasers);
-        yield return new WaitForSeconds(3f);
-        lasers = laserRoom.GetLaserTurrets(new int[] { 1, 4 });
-        Initlaser(lasers);
-        ActivateTheLasers(maxWidth1, lasers);
-        yield return new WaitForSeconds(3f);
-        ActivateTheLasers(maxWidth2, lasers);
-        yield return new WaitForSeconds(3f);
-        lasers = laserRoom.GetLaserTurrets(new int[] { 1, 4 });
-        Initlaser(lasers);
-        ActivateTheLasers(maxWidth1, lasers);
-        yield return new WaitForSeconds(3f);
-        ActivateTheLasers(maxWidth2, lasers);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
+        DeActivateTheLasers(lasers);
         Finishedlaser(lasers);
-        canTransition = true;
+
+        lasers = laserRoom.GetLaserTurrets(new int[] { 0 , 16 });
+        Initlaser(lasers);
+        ActivateTheLasers(maxWidth1, lasers);
+        yield return new WaitForSeconds(2f);
+        ActivateTheLasers(maxWidth2, lasers);
+        yield return new WaitForSeconds(2f);
+        DeActivateTheLasers(lasers);
+        Finishedlaser(lasers);
+
+        lasers = laserRoom.GetLaserTurrets(new int[] { 6, 12 });
+        Initlaser(lasers);
+        ActivateTheLasers(maxWidth1, lasers);
+        yield return new WaitForSeconds(2f);
+        ActivateTheLasers(maxWidth2, lasers);
+        yield return new WaitForSeconds(2f);
+        DeActivateTheLasers(lasers);
+        Finishedlaser(lasers);
+
+
         yield break;
     }
 
@@ -45,7 +55,7 @@ public class VerticalLaserState : IState
     {
         foreach (StationaryLaser stationaryLaser in stationaryLasers)
         {
-            theBoss.LineRenderer.enabled = true;
+            stationaryLaser.Line.enabled = false;
         }
 
     }
@@ -63,6 +73,13 @@ public class VerticalLaserState : IState
         foreach(StationaryLaser stationaryLaser in stationaryLasers)
         {
             stationaryLaser.IncreaseLaserSize(maxsize);
+        }
+    }
+    public void DeActivateTheLasers(List<StationaryLaser> stationaryLasers)
+    {
+        foreach (StationaryLaser stationaryLaser in stationaryLasers)
+        {
+            stationaryLaser.DecreaseLaserSize();
         }
     }
 }

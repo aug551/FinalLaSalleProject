@@ -42,7 +42,7 @@ public class TheBoss : MonoBehaviour
         Debug.Log(animator);
         enrageState = new Enrage(this);
         verticalLaserState = new VerticalLaserState(room);
-        horizontalLaserState = new HorizontalLaserState();
+        horizontalLaserState = new HorizontalLaserState(room);
         allBaseStates.Add(verticalLaserState);
         allBaseStates.Add(horizontalLaserState);
         allBaseStates.Add(laserState);
