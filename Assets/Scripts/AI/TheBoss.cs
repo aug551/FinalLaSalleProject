@@ -9,9 +9,9 @@ public class TheBoss : MonoBehaviour
     List<IState> allBaseStates = new List<IState>();
     IState laserState;
     IState runningAttackState;
-    IState enrageState;
+    IState groundBreak;
     IState verticalLaserState;
-    IState horizontalLaserState;
+
     public Animator animator;
     public AudioSource audioSource;
     public LineRenderer LineRenderer;
@@ -24,57 +24,63 @@ public class TheBoss : MonoBehaviour
     public Transform targetRotation;
     public LaserRoom room;
     public bool isOnCorner1;
-    bool alreadyattacked;
-    float attackInterval = 0.75f;
+    public GameObject ground1;
+    public GameObject ground2;
     public CinemachineShake cinemachineShake;
+    bool alreadyattacked;
+    EnemyHealth health;
+
+    float attackInterval = 0.75f;
+    
 
 
     // state machine idea from https://www.youtube.com/watch?v=G1bd75R10m4&t=949s
     private void Awake()
     {
+        health = GetComponent<EnemyHealth>();
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         LineRenderer = GetComponent<LineRenderer>();
         laserState = new Laser(this);
-        Debug.Log(animator);
         runningAttackState = new RunningAttack(this);
-        Debug.Log(animator);
-        enrageState = new Enrage(this);
+        groundBreak = new GroundBreak(this);
         verticalLaserState = new VerticalLaserState(room);
-        horizontalLaserState = new HorizontalLaserState(room);
         allBaseStates.Add(verticalLaserState);
-        allBaseStates.Add(horizontalLaserState);
+        allBaseStates.Add(groundBreak);
         allBaseStates.Add(laserState);
         allBaseStates.Add(runningAttackState);
     }
 
     void Start()
     {
-        StartCoroutine(verticalLaserState.Enter());
+        currentState = groundBreak;
+        StartCoroutine(currentState.Enter());
     }
     
     void Update()
     {
-        //if (currentState.canTransition)
-        //{
-        //    Debug.Log(currentState.canTransition);
-        //    int i = Random.Range(0, allBaseStates.Count);
-        //    currentState = allBaseStates[i];
-        //    StartCoroutine(currentState.Enter());
-        //}
-        //if (currentState.canTransition && currentState != laserState)
-        //{
-        //    currentState = laserState;
-        //    StartCoroutine(currentState.Enter());
-        //}
-        //if (currentState.canTransition && currentState != runningAttackState)
-        //{
-        //    currentState = runningAttackState;
-        //    StartCoroutine(currentState.Enter());
-        //}
-
-        
+        if (health.currentHealth <= health.MaxHealth / 2)
+        {
+            if (currentState.canTransition && currentState != laserState)
+            {
+                currentState = laserState;
+                StartCoroutine(currentState.Enter());
+            }
+            if (currentState.canTransition && currentState != runningAttackState)
+            {
+                currentState = runningAttackState;
+                StartCoroutine(currentState.Enter());
+            }
+        }
+        else
+        {
+            if (currentState.canTransition)
+            {
+                currentState = verticalLaserState;
+                StartCoroutine(currentState.Enter());
+            }
+        }
     }
 
     public void Attack()

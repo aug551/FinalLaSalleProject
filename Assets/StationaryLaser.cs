@@ -7,12 +7,15 @@ public class StationaryLaser : MonoBehaviour
     [SerializeField] bool isHorizontal;
     LineRenderer line;
     public float laserStartSize = 0.1f;
+    BoxCollider box;
 
     public LineRenderer Line { get => line; set => line = value; }
     public bool IsHorizontal { get => isHorizontal; set => isHorizontal = value; }
+    public BoxCollider Box { get => box; set => box = value; }
 
     private void Awake()
     {
+        box = GetComponent<BoxCollider>();
         line = GetComponent<LineRenderer>();
         PositionLaser();
     }
@@ -20,14 +23,16 @@ public class StationaryLaser : MonoBehaviour
     {
         if (isHorizontal)
         {
+            box.enabled = false;
             line.enabled = false;
             line.endWidth = laserStartSize *5;
             line.startWidth = laserStartSize *5;
             line.SetPosition(0, transform.position);
-            line.SetPosition(1, new Vector3(transform.position.x - 20f, transform.position.y, transform.position.z));
+            line.SetPosition(1, new Vector3(transform.position.x - 40f, transform.position.y, transform.position.z));
         }
         else
         {
+            box.enabled = false;
             line.enabled = false;
             line.endWidth = laserStartSize;
             line.startWidth = laserStartSize;
@@ -79,5 +84,17 @@ public class StationaryLaser : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         yield break;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponent<CharacterHealth>().TakeDamage(0.01f);
+        }
+        if (other.gameObject.tag == "Box")
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

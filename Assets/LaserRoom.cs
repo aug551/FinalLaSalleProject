@@ -46,6 +46,15 @@ public class LaserRoom : MonoBehaviour
                 stationaryLasersToActivate.Add(stationaryLasersVertical[i]);
             }
         }
+        lasersToIgnore.Clear();
+        lasersToIgnore.AddRange(ints2);
+        for (int i = 0; i < stationaryLasersHorizontal.Count; i++) // x random turrets get taken out of the ToBeActivated list
+        {
+            if (!lasersToIgnore.Contains(i))
+            {
+                stationaryLasersToActivate.Add(stationaryLasersHorizontal[i]);
+            }
+        }
         return stationaryLasersToActivate;
     }
 }
