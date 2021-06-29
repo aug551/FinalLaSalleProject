@@ -6,11 +6,12 @@ using UnityEngine.AI;
 public class TheBoss : MonoBehaviour
 {
     IState currentState;
-    List<IState> allBaseStates = new List<IState>();
     IState laserState;
     IState runningAttackState;
     IState groundBreak;
     IState verticalLaserState;
+    IState horizontalLaserState;
+    IState playerUpState;
 
     public Animator animator;
     public AudioSource audioSource;
@@ -19,6 +20,7 @@ public class TheBoss : MonoBehaviour
     public LaserEyes laserEyes;
     public GameObject corner1;
     public GameObject corner2;
+    public GameObject slamPosition;
     public NavMeshAgent agent;
     public GameObject player;
     public Transform targetRotation;
@@ -26,8 +28,12 @@ public class TheBoss : MonoBehaviour
     public bool isOnCorner1;
     public GameObject ground1;
     public GameObject ground2;
+    public GameObject PlayerUpCollision;
     public CinemachineShake cinemachineShake;
+    public bool IsPlayerUp;
     bool alreadyattacked;
+    bool onlyOnce;
+    bool laserRoomFinished;
     EnemyHealth health;
 
     float attackInterval = 0.75f;
@@ -46,10 +52,9 @@ public class TheBoss : MonoBehaviour
         runningAttackState = new RunningAttack(this);
         groundBreak = new GroundBreak(this);
         verticalLaserState = new VerticalLaserState(room);
-        allBaseStates.Add(verticalLaserState);
-        allBaseStates.Add(groundBreak);
-        allBaseStates.Add(laserState);
-        allBaseStates.Add(runningAttackState);
+        horizontalLaserState = new HorizontalLaserState(room);
+        playerUpState = new GoBackUp(this);
+        PlayerUpCollision.SetActive(false);
     }
 
     void Start()
@@ -60,7 +65,7 @@ public class TheBoss : MonoBehaviour
     
     void Update()
     {
-        if (health.currentHealth <= health.MaxHealth / 2)
+        if (health.currentHealth >= health.MaxHealth / 2)
         {
             if (currentState.canTransition && currentState != laserState)
             {
@@ -75,9 +80,30 @@ public class TheBoss : MonoBehaviour
         }
         else
         {
-            if (currentState.canTransition)
+            if (!laserRoomFinished)
             {
-                currentState = verticalLaserState;
+                if (currentState.canTransition && onlyOnce)
+                {
+                    onlyOnce = false;
+                    currentState = groundBreak;
+                    StartCoroutine(currentState.Enter());
+                }
+                if (currentState.canTransition && currentState != verticalLaserState)
+                {
+                    currentState = verticalLaserState;
+                    StartCoroutine(currentState.Enter());
+                }
+                if (currentState.canTransition)
+                {
+                    currentState = horizontalLaserState;
+                    StartCoroutine(currentState.Enter());
+                    laserRoomFinished = true;
+                }
+            }
+            else
+            {
+                PlayerUpCollision.SetActive(true);
+                currentState = playerUpState;
                 StartCoroutine(currentState.Enter());
             }
         }
