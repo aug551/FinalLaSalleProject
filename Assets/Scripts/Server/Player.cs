@@ -7,11 +7,13 @@ public class Player
 {
     public string username;
     public string name;
+    public string password;
 
-    public Player(string username, string name)
+    public Player(string username, string name, string password)
     {
         this.username = username;
         this.name = name;
+        this.password = password;
     }
 
     public static Player CreateFromJSON(string json)

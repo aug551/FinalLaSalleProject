@@ -28,6 +28,7 @@ public class SocketClient : MonoBehaviour
 
     string username;
     string playerName;
+    string password;
 
     RSACryptoServiceProvider csp;
     string publicKeystr;
@@ -159,7 +160,9 @@ public class SocketClient : MonoBehaviour
     // Login/Create Account
     private void GetData()
     {
-        string _msg = "Open" + username;
+        string _msg = "Open";
+        instance.player = new Player(username, null, password);
+        _msg += JsonUtility.ToJson(instance.player);
 
         // Standard socket operations
         Connect(host, port, instance);
@@ -167,17 +170,20 @@ public class SocketClient : MonoBehaviour
 
         // Player Info
         string reply = Read();
-        Debug.Log("Player info: " + reply);
 
 
-        if (!reply.StartsWith("not_found"))
+        if (reply.StartsWith("not_found"))
         {
-            instance.Player = Player.CreateFromJSON(reply);
-            instance.LoadScene("MainMenu");
+            invalidAccount.SetActive(true);
+        }
+        else if (reply.StartsWith("wrong_password"))
+        {
+            invalidAccount.SetActive(true);
         }
         else
         {
-            invalidAccount.SetActive(true);
+            instance.Player = Player.CreateFromJSON(reply);
+            instance.LoadScene("MainMenu");
         }
 
 
@@ -187,9 +193,9 @@ public class SocketClient : MonoBehaviour
     private void CreateNew()
     {
         string _msg = "Create";
-        instance.player = new Player(username, playerName);
+        instance.player = new Player(username, playerName, password);
         _msg += JsonUtility.ToJson(instance.player);
-
+        Debug.Log(_msg);
         Connect(host, port, instance);
         Write(_msg);
         string reply = Read();
@@ -211,6 +217,10 @@ public class SocketClient : MonoBehaviour
         playerName = name;
     }
 
+    public void SetPassword(string password)
+    {
+        this.password = password;
+    }
 
 }
 
