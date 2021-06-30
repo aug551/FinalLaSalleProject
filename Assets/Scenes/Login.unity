@@ -5089,8 +5089,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb956a46cc29a3f4e828ac75775a5d46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: []
-  HUD: {fileID: 0}
 --- !u!95 &1404389509
 Animator:
   serializedVersion: 3
@@ -7456,7 +7454,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2137985242
 MonoBehaviour:
   m_ObjectHideFlags: 0

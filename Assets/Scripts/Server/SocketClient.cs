@@ -5,7 +5,10 @@ using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Digests;
+using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Crypto.Signers;
 using Org.BouncyCastle.OpenSsl;
 using Org.BouncyCastle.Security;
 using UnityEngine;
@@ -47,7 +50,11 @@ public class SocketClient : MonoBehaviour
         Connect(host, port, instance);
         s.Send(Encoding.ASCII.GetBytes("GetKey"));
 
-        string serverKey = Read();
+        byte[] sbytes = new byte[1024];
+        s.Receive(sbytes);
+        string serverKey = Encoding.ASCII.GetString(sbytes);
+
+        //string serverKey = Read();
         Debug.Log(serverKey);
 
         if (File.Exists(path_to_key))
@@ -69,7 +76,7 @@ public class SocketClient : MonoBehaviour
         }
 
         TextReader textReader = new StringReader(publicKeystr);
-        PemReader pemReader = new PemReader(textReader);
+        PemReader pemReader = new PemReader(textReader, new PasswordFinder("platformgame"));
         RsaKeyParameters pemObject = (RsaKeyParameters)pemReader.ReadObject();
         RSAParameters rSAParameters = DotNetUtilities.ToRSAParameters(pemObject);
 
@@ -80,13 +87,17 @@ public class SocketClient : MonoBehaviour
         byte[] cipher = csp.Encrypt(Encoding.ASCII.GetBytes(plaintext), true);
         s.Send(cipher);
 
+        //byte[] bytes = new byte[1024];
+        //int i = s.Receive(bytes);
+        //Debug.Log(CheckSignature(sbytes, bytes, pemObject));
+
         textReader.Close();
         Disconnect();
     }
 
     private byte[] EncryptMessage(string msg)
     {
-        return csp.Encrypt(Encoding.ASCII.GetBytes(msg), true);
+        return csp.Encrypt(Encoding.ASCII.GetBytes(msg), RSAEncryptionPadding.OaepSHA1);
     }
 
     // Socket Operations
@@ -133,6 +144,16 @@ public class SocketClient : MonoBehaviour
             return "";
         }
     }
+
+    // TODO VERIFY SIG
+    //private bool CheckSignature(byte[] msg, byte[] sig, RsaKeyParameters key)
+    //{
+    //    PssSigner pss = new PssSigner(new RsaEngine(), new Sha1Digest(), 20);
+    //    pss.Init(false, key);
+    //    pss.BlockUpdate(msg, 0, msg.Length);
+    //    Debug.Log(pss.VerifySignature(sig));
+    //    return csp.VerifyData(msg, CryptoConfig.MapNameToOID("SHA1"), sig);
+    //}
 
 
     // Login/Create Account
