@@ -4,24 +4,27 @@ using UnityEngine;
 
 public class GroundBreak : IState
 {
+    Animator anim;
     public GroundBreak(TheBoss Boss) //constructor
     {
         theBoss = Boss;
         canTransition = false;
+        anim = theBoss.animator;
     }
 
     public override IEnumerator Enter()
     {
         //17 lasers total
+        Debug.Log("entered break");
         canTransition = false;
-        theBoss.animator.SetBool("Run", true);
+        anim.SetBool("Run", true);
         do
         {
             theBoss.transform.position = Vector3.MoveTowards(theBoss.transform.position, theBoss.slamPosition.transform.position, Time.fixedDeltaTime * 15);
             yield return new WaitForFixedUpdate();
         } while (Vector3.Distance(theBoss.transform.position, theBoss.slamPosition.transform.position) > 1f);
-        theBoss.animator.SetBool("Run", false);
-        theBoss.animator.SetTrigger("Slam");
+        anim.SetBool("Run", false);
+        anim.SetTrigger("Slam");
         yield return new WaitForSeconds(1.6f);
         theBoss.cinemachineShake.ShakeCamera(5f, 0.75f);
         theBoss.ground1.SetActive(false);

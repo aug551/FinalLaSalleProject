@@ -12,6 +12,7 @@ public class TheBoss : MonoBehaviour
     IState verticalLaserState;
     IState horizontalLaserState;
     IState playerUpState;
+    IState PlayerUpToLaser;
 
     public Animator animator;
     public AudioSource audioSource;
@@ -33,11 +34,13 @@ public class TheBoss : MonoBehaviour
     public bool IsPlayerUp;
     bool alreadyattacked;
     bool onlyOnce;
-    bool laserRoomFinished;
+    bool onlyOnce2;
+    public bool laserRoomFinished;
+    public bool playerUpFinished;
     EnemyHealth health;
 
     float attackInterval = 0.75f;
-    
+
 
 
     // state machine idea from https://www.youtube.com/watch?v=G1bd75R10m4&t=949s
@@ -51,21 +54,25 @@ public class TheBoss : MonoBehaviour
         laserState = new Laser(this);
         runningAttackState = new RunningAttack(this);
         groundBreak = new GroundBreak(this);
-        verticalLaserState = new VerticalLaserState(room);
+        verticalLaserState = new VerticalLaserState(room, this);
         horizontalLaserState = new HorizontalLaserState(room);
         playerUpState = new GoBackUp(this);
+        PlayerUpToLaser = new PlayerUpToLaser(this);
         PlayerUpCollision.SetActive(false);
     }
 
     void Start()
     {
-        currentState = groundBreak;
+        currentState = laserState;
         StartCoroutine(currentState.Enter());
     }
-    
+
     void Update()
     {
-        if (health.currentHealth >= health.MaxHealth / 2)
+        //mini state machine
+
+        //Default loop (laser and run)
+        if (currentState.canTransition && health.currentHealth >= (health.MaxHealth / 2) && playerUpFinished)
         {
             if (currentState.canTransition && currentState != laserState)
             {
@@ -77,33 +84,35 @@ public class TheBoss : MonoBehaviour
                 currentState = runningAttackState;
                 StartCoroutine(currentState.Enter());
             }
+            return;
         }
-        else
+        //Laser room loop (After boss falls below 50% hp)
+        if (currentState.canTransition && !laserRoomFinished && !playerUpFinished)
         {
-            if (!laserRoomFinished)
+            if (currentState.canTransition && !onlyOnce)
             {
-                if (currentState.canTransition && onlyOnce)
-                {
-                    onlyOnce = false;
-                    currentState = groundBreak;
-                    StartCoroutine(currentState.Enter());
-                }
-                if (currentState.canTransition && currentState != verticalLaserState)
-                {
-                    currentState = verticalLaserState;
-                    StartCoroutine(currentState.Enter());
-                }
-                if (currentState.canTransition)
-                {
-                    currentState = horizontalLaserState;
-                    StartCoroutine(currentState.Enter());
-                    laserRoomFinished = true;
-                }
+                onlyOnce = true;
+                currentState = groundBreak;
+                StartCoroutine(currentState.Enter());
             }
-            else
+            if (currentState.canTransition)
             {
-                PlayerUpCollision.SetActive(true);
+                currentState = verticalLaserState;
+                StartCoroutine(currentState.Enter());
+            }
+        }
+        //PlayerUp loop (After boss falls below 50% hp and player is finished laser room)
+        if (currentState.canTransition && laserRoomFinished && !playerUpFinished)
+        {
+            if (currentState.canTransition && !onlyOnce2)
+            {
+                onlyOnce2 = true;
                 currentState = playerUpState;
+                StartCoroutine(currentState.Enter());
+            }
+            if (currentState.canTransition)
+            {
+                currentState = PlayerUpToLaser;
                 StartCoroutine(currentState.Enter());
             }
         }

@@ -13,10 +13,14 @@ public class GoBackUp : IState
     public override IEnumerator Enter()
     {
         canTransition = false;
+        yield return new WaitForSeconds(4f);
+        theBoss.PlayerUpCollision.SetActive(true);
         while (!theBoss.IsPlayerUp)
         {
             yield return new WaitForFixedUpdate();
         }
+        yield return new WaitForSeconds(0.25f);
+        theBoss.cinemachineShake.MoveCamera(false);
         theBoss.ground1.SetActive(true);
         theBoss.ground2.SetActive(true);
         canTransition = true;

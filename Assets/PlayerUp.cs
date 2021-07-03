@@ -7,6 +7,10 @@ public class PlayerUp : MonoBehaviour
     [SerializeField] TheBoss boss;
     private void OnTriggerEnter(Collider other)
     {
-        boss.IsPlayerUp = true;
+        if (other.gameObject.tag == "Player")
+        {
+            boss.IsPlayerUp = true;
+            Debug.Log("up");
+        }
     }
 }
