@@ -5,15 +5,27 @@ using UnityEngine.UI;
 
 public class Controls : MonoBehaviour
 {
+    GameManager instance;
     public GameObject inventoryPanel;
     public GameObject crafitngPanel;
     CanvasGroup group;
+    [SerializeField] GameObject pausePanel;
+
+    private bool isPaused = false;
 
     public bool isActive = false;
 
     private void Awake()
     {
         group = inventoryPanel.GetComponent<CanvasGroup>();
+    }
+
+    private void Start()
+    {
+        if(instance == null)
+        {
+            instance = GameManager.instance;
+        }
     }
 
     private void Update()
@@ -25,6 +37,22 @@ public class Controls : MonoBehaviour
         if (Input.GetButtonDown("Equipment"))
         {
             Equipment();
+        }
+
+        if (Input.GetButtonDown("Pause"))
+        {
+            if (isPaused)
+            {
+                Time.timeScale = 1f;
+                pausePanel.SetActive(false);
+                isPaused = false;
+            }
+            else
+            {
+                Time.timeScale = 0f;
+                pausePanel.SetActive(true);
+                isPaused = true;
+            }
         }
     }
 
@@ -51,4 +79,5 @@ public class Controls : MonoBehaviour
             group.interactable = false;
         }
     }
+
 }
