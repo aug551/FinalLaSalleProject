@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Refference : https://www.youtube.com/watch?v=s_v9JnTDCCY
 public class CubeExplode : MonoBehaviour
 {
     float cubeSize = 0.2f;
@@ -45,8 +46,6 @@ public class CubeExplode : MonoBehaviour
             if (rb != null)
             {
                 rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, 5);
-                //rb.transform.LookAt(force);
-                //rb.velocity = force*500*Time.deltaTime;
             }
         }
 

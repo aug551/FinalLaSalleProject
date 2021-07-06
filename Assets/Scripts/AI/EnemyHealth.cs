@@ -14,8 +14,8 @@ public class EnemyHealth : MonoBehaviour
 
     void Start()
     {
-        //MaxHealth = 100;
-        //currentHealth = MaxHealth;
+        MaxHealth = 100;
+        currentHealth = MaxHealth;
         //animator = GetComponent<Animator>();
     }
 

@@ -8,13 +8,15 @@ public class TeleAttackDetect : MonoBehaviour
     [SerializeField] GameObject blockHolder;
     public GameObject cubePrefab;
 
-
     public List<GameObject> enemiesInRange = new List<GameObject>();
     public GameObject closest = null;
     private float distance = 0f;
     public bool stopPull = false;
     public bool holdingBlock = false;
     public Vector3 mousePos;
+    public bool canGetBlock = true;
+    public float timer = 3.0f;
+    public float timeElasped = 0f;
 
     public GameObject Closest { get => closest; }
 
@@ -35,6 +37,11 @@ public class TeleAttackDetect : MonoBehaviour
         }
     }
 
+    public void RemoveEnemyFromList(GameObject obj)
+    {
+        enemiesInRange.Remove(obj);
+    }
+
     private void Start()
     {
         rmc = GetComponentInParent<RootMotionCharacterController>();
@@ -43,6 +50,18 @@ public class TeleAttackDetect : MonoBehaviour
     void Update()
     {
         HandleSecondaryAttack();
+        if(!canGetBlock)
+        {
+            if(timeElasped<=timer)
+            {
+                timeElasped += Time.deltaTime;
+            }
+            else
+            {
+                canGetBlock = true;
+                timeElasped = 0;
+            }
+        }
     }
 
     public void SetClosestObject()
@@ -93,16 +112,16 @@ public class TeleAttackDetect : MonoBehaviour
             }
             else
             {
-                Debug.Log(this.transform.rotation.y);
-                if(this.transform.rotation.y > 0)
+                if(canGetBlock)
                 {
-                    closest = Instantiate(cubePrefab, this.transform.position + new Vector3(10, 5, 0), Quaternion.identity);
-                    Debug.Log("1");
-                }
-                else
-                {
-                    closest = Instantiate(cubePrefab, this.transform.position + new Vector3(-10, 5, 0), Quaternion.identity);
-                    Debug.Log("2");
+                    if (this.transform.rotation.y > 0)
+                    {
+                        closest = Instantiate(cubePrefab, this.transform.position + new Vector3(10, 5, 0), Quaternion.identity);
+                    }
+                    else
+                    {
+                        closest = Instantiate(cubePrefab, this.transform.position + new Vector3(-10, 5, 0), Quaternion.identity);
+                    }
                 }
             }
         }
@@ -119,7 +138,7 @@ public class TeleAttackDetect : MonoBehaviour
     private void HandleSecondaryAttack()
     {
         // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-
+        Debug.Log(enemiesInRange.Count);
         if (rmc.GrabbedObj && rmc.IsGrabbing)
         {
             Rigidbody enemyrigid = rmc.GrabbedObj.GetComponent<Rigidbody>();
@@ -156,7 +175,7 @@ public class TeleAttackDetect : MonoBehaviour
             {
                 enemyrigid.isKinematic = false;
                 enemyrigid.transform.LookAt(blockHolder.transform.position);
-                enemyrigid.velocity += new Vector3(enemyrigid.transform.forward.x, enemyrigid.transform.forward.y, enemyrigid.transform.forward.z) * 90f * Time.deltaTime;
+                enemyrigid.velocity = new Vector3(enemyrigid.transform.forward.x, enemyrigid.transform.forward.y, enemyrigid.transform.forward.z) * 8000f * Time.deltaTime;
                 if (Vector3.Distance(enemyrigid.transform.position, blockHolder.transform.position) < 1.5f)
                 {
                     enemyrigid.velocity = Vector3.zero;
@@ -168,6 +187,9 @@ public class TeleAttackDetect : MonoBehaviour
 
     public void ThrowBlock(Rigidbody cube)
     {
+        canGetBlock = false;
+        enemiesInRange.Remove(closest);
+        closest.tag = "Untagged";
         mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Mathf.Abs(Camera.main.transform.position.z)));
         cube.useGravity = false;
@@ -178,6 +200,7 @@ public class TeleAttackDetect : MonoBehaviour
         holdingBlock = false;
         closest = null;
         rmc.GrabbedObj = null;
-
     }
+
+    
 }

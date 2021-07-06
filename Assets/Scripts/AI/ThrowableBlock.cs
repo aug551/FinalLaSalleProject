@@ -17,6 +17,7 @@ public class ThrowableBlock : MonoBehaviour
             {
                 other.GetComponent<EnemyHealth>().TakeDamage(60);
                 explode.Explode();
+                teleAtk.RemoveEnemyFromList(this.gameObject);
             }
             if (other.CompareTag("Player"))
             {
@@ -25,6 +26,7 @@ public class ThrowableBlock : MonoBehaviour
             if (other.CompareTag("Wall"))
             {
                 explode.Explode();
+                teleAtk.RemoveEnemyFromList(this.gameObject);
             }
         }
     }
