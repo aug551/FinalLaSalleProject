@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public Player player;
+    private List<GameObject> listOfEnemies = new List<GameObject>();
 
     public Player Player { get => player; set => player = value; }
 
@@ -35,5 +36,20 @@ public class GameManager : MonoBehaviour
     public void LoadScene(int index)
     {
         SceneManager.LoadScene(index);
+    }
+
+    public void GetEnemies()
+    {
+        Debug.Log(SceneManager.GetActiveScene().name);
+        if (SceneManager.GetActiveScene().name.StartsWith("Level"))
+        {
+            Debug.Log("islevel");
+            listOfEnemies.Clear();
+            foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                listOfEnemies.Add(enemy);
+            }
+        }
+        Debug.Log("Not a level.");
     }
 }

@@ -9,10 +9,19 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject mainMenuPanel;
     public GameObject optionsPanel;
+    private GameManager instance;
+
+    private void Start()
+    {
+        if(instance == null)
+        {
+            instance = GameManager.instance;
+        }
+    }
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        instance.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void ExitGame()

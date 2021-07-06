@@ -146,15 +146,6 @@ public class SocketClient : MonoBehaviour
         }
     }
 
-    // TODO VERIFY SIG
-    //private bool CheckSignature(byte[] msg, byte[] sig, RsaKeyParameters key)
-    //{
-    //    PssSigner pss = new PssSigner(new RsaEngine(), new Sha1Digest(), 20);
-    //    pss.Init(false, key);
-    //    pss.BlockUpdate(msg, 0, msg.Length);
-    //    Debug.Log(pss.VerifySignature(sig));
-    //    return csp.VerifyData(msg, CryptoConfig.MapNameToOID("SHA1"), sig);
-    //}
 
 
     // Login/Create Account
