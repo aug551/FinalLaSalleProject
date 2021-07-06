@@ -11,6 +11,7 @@ public class EnemyHealth : MonoBehaviour
     private Animator animator;
 
     public float attack = 10;
+    public bool item = false;
 
     void Start()
     {
@@ -25,8 +26,8 @@ public class EnemyHealth : MonoBehaviour
         Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
-            int generateItem = Random.Range(1, 2);
-            //animator.Play("Z_FallingBack");
+            int generateItem = Random.Range(1, 3);
+            Debug.Log(generateItem);
             if (generateItem == 1)
             {
                 Instantiate(itemLeather, gameObject.transform.position, Quaternion.identity);

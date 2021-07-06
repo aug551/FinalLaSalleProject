@@ -138,7 +138,6 @@ public class TeleAttackDetect : MonoBehaviour
     private void HandleSecondaryAttack()
     {
         // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-        Debug.Log(enemiesInRange.Count);
         if (rmc.GrabbedObj && rmc.IsGrabbing)
         {
             Rigidbody enemyrigid = rmc.GrabbedObj.GetComponent<Rigidbody>();

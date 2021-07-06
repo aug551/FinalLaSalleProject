@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ThrowableBlock : MonoBehaviour
 {
-    public TeleAttackDetect teleAtk;
     public CubeExplode explode;
     public bool fired = false;
     public Vector3 currentForce;
@@ -17,7 +16,6 @@ public class ThrowableBlock : MonoBehaviour
             {
                 other.GetComponent<EnemyHealth>().TakeDamage(60);
                 explode.Explode();
-                teleAtk.RemoveEnemyFromList(this.gameObject);
             }
             if (other.CompareTag("Player"))
             {
@@ -26,14 +24,12 @@ public class ThrowableBlock : MonoBehaviour
             if (other.CompareTag("Wall"))
             {
                 explode.Explode();
-                teleAtk.RemoveEnemyFromList(this.gameObject);
             }
         }
     }
 
     private void Start()
     {
-        teleAtk = GameObject.FindGameObjectWithTag("Player").GetComponent<TeleAttackDetect>();
         explode = GetComponent<CubeExplode>();
     }
 }
