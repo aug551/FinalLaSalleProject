@@ -8,6 +8,8 @@ public class Player
     public string username;
     public string name;
     public string password;
+    public int level;
+    public float hp;
 
     public Player(string username, string name, string password)
     {

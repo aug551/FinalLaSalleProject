@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,20 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(this);
     }
+
+    internal void SaveGame()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        this.player.hp = player.GetComponent<CharacterHealth>().currentHealth;
+
+        GetComponentInChildren<SocketClient>().SaveGame();
+    }
+
+    //internal void LoadGame()
+    //{
+    //    GameObject player = GameObject.FindGameObjectWithTag("Player");
+    //    player.GetComponent<CharacterHealth>().currentHealth = this.player.hp;
+    //}
 
     // Update is called once per frame
     void Update()

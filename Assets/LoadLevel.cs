@@ -22,4 +22,9 @@ public class LoadLevel : MonoBehaviour
     {
         
     }
+
+    public void SaveGame()
+    {
+        instance.SaveGame();
+    }
 }

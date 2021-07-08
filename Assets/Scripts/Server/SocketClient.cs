@@ -148,7 +148,7 @@ public class SocketClient : MonoBehaviour
 
 
 
-    // Login/Create Account
+    // Server Methods
     private void GetData()
     {
         string _msg = "Open";
@@ -185,6 +185,8 @@ public class SocketClient : MonoBehaviour
     {
         string _msg = "Create";
         instance.player = new Player(username, playerName, password);
+        instance.player.hp = 100f;
+        instance.player.level = 1;
         _msg += JsonUtility.ToJson(instance.player);
         Debug.Log(_msg);
         Connect(host, port, instance);
@@ -193,9 +195,21 @@ public class SocketClient : MonoBehaviour
 
         existAccount.SetActive(reply.StartsWith("already_exists"));
 
+        if (reply.StartsWith("player_created")) instance.LoadScene("MainMenu");
+
         Disconnect();
     }
 
+    public void SaveGame()
+    {
+        string _msg = "Save";
+        _msg += JsonUtility.ToJson(instance.player);
+        Connect(host, port, instance);
+        Write(_msg);
+        string reply = Read();
+        Debug.Log(reply);
+        Disconnect();
+    }
 
     // Setting variables from input fields
     public void SetUsername(string user)

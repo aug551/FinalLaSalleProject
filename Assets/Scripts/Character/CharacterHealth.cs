@@ -13,6 +13,7 @@ public class CharacterHealth : MonoBehaviour
     public GameObject gameOverPanel;
 
     public CharacterStats characterStats;
+    private GameManager instance;
 
 
     void Start()
@@ -21,7 +22,11 @@ public class CharacterHealth : MonoBehaviour
         maxHealth = 100;
         currentHealth = maxHealth;
         UpdateHpSlider();
+        if (!instance) instance = GameManager.instance;
+        this.currentHealth = instance.player.hp;
+        UpdateHpSlider();
         //InvokeRepeating("RegenHealth", 0.0f, regenRateSeconds); //soruce:https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
+
     }
 
     void Update()
