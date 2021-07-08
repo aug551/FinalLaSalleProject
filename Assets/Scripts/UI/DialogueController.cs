@@ -3,21 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
+//References https://www.youtube.com/watch?v=_nRzoTzeyxU
+
+
 public class DialogueController : MonoBehaviour
 {
     public Text nameText;
     public Text dialogueText;
     private Queue<string> sentences;
-
+    public Animator animator;
 
     void Start()
     {
         sentences = new Queue<string>();
     }
 
+    private void Update()
+    {
+        if ((Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.I)))
+        {
+            
+            Debug.Log("next line");
+            DisplayNextSentence();
+
+
+
+        }
+    }
+
     public void StartDialogue(Dialogue dialogue)
     {
-        Debug.Log("Starting conversation with " + dialogue.name);
+        animator.SetBool("isOpen", true);
 
         nameText.text = dialogue.name;
 
@@ -40,15 +58,30 @@ public class DialogueController : MonoBehaviour
         }
 
         string sentence = sentences.Dequeue();
-        
-        Debug.Log(sentence);
-        dialogueText.text = sentence;
 
+        //Debug.Log(sentence);
+        //dialogueText.text = sentence;
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(sentence));
 
     }
+
+   
 
     void EndDialogue()
     {
-        Debug.Log("End of conversation");
+        animator.SetBool("isOpen", false);
     }
+
+    IEnumerator TypeSentence (string sentence)
+    {
+        dialogueText.text = "";
+        foreach (char letter in sentence.ToCharArray())
+        {
+            dialogueText.text += letter;
+
+            yield return null;
+        }
+    }
+
 }

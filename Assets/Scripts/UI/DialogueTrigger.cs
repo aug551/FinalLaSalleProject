@@ -30,7 +30,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Hit i to interact");
+            //Debug.Log("Hit i to interact");
 
             text.SetActive(true);
 
@@ -39,7 +39,12 @@ public class DialogueTrigger : MonoBehaviour
             {
                 Debug.Log("Convo started");
                 TriggerDialogue();
+
+                
             }
+            ////
+
+
 
         }
         
