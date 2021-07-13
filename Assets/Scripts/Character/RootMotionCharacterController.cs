@@ -237,7 +237,7 @@ public class RootMotionCharacterController : MonoBehaviour
     private void Dash()
     {
         playerVelocity.x = (isJumping) ? (this.transform.forward.x * dashDistance) / 2 : this.transform.forward.x * dashDistance;
-        controller.Move(new Vector3(playerVelocity.x, this.transform.position.y, 0) * Time.deltaTime);
+        controller.Move(new Vector3(playerVelocity.x, 0, 0) * Time.deltaTime);
     }
 
 
