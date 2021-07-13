@@ -27,7 +27,6 @@ public class EnemyHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             int generateItem = Random.Range(1, 3);
-            Debug.Log(generateItem);
             if (generateItem == 1)
             {
                 Instantiate(itemLeather, gameObject.transform.position, Quaternion.identity);
@@ -40,4 +39,18 @@ public class EnemyHealth : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log("1");
+    //    if(other.CompareTag("Player"))
+    //    {
+    //        Debug.Log("2");
+    //        if (other.GetComponent<RootMotionCharacterController>().IsDashing)
+    //        {
+    //            TakeDamage(30);
+    //            Debug.Log(currentHealth);
+    //        }
+    //    }
+    //}
 }

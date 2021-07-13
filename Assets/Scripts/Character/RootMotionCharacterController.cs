@@ -30,7 +30,7 @@ public class RootMotionCharacterController : MonoBehaviour
     private bool isDashing = false;
     private bool canDash = true;
     [SerializeField] private float dashDistance = 5f;
-    [SerializeField] private float dashDuration = 0.20f;
+    [SerializeField] private float dashDuration = 0.40f;
     [SerializeField] private float dashStopForce = 3f;
     [SerializeField] private float dashCooldown = 5f;
 
@@ -48,6 +48,7 @@ public class RootMotionCharacterController : MonoBehaviour
     public bool CanWalljump { get => canWalljump; set => canWalljump = value; }
     public bool IsControlled { get => isControlled; set => isControlled = value; }
     public GameObject GrabbedObj { get => grabbedObj; set => grabbedObj = value; }
+    public bool IsDashing { get => isDashing; set => isDashing = value; }
 
 
 
@@ -57,7 +58,6 @@ public class RootMotionCharacterController : MonoBehaviour
         anim = GetComponent<Animator>();
         anim.SetFloat("RunSpeed", runningSpeed);
         controller = GetComponent<CharacterController>();
-        
         teleAtk = GetComponentInChildren<TeleAttackDetect>();
 
     }
@@ -224,7 +224,8 @@ public class RootMotionCharacterController : MonoBehaviour
     private void StartDash()
     {
         anim.applyRootMotion = false;
-
+        Physics.IgnoreLayerCollision(3, 6, true);
+        DashDamage();
         // Called to stop dashing
         Invoke("FinishedDashing", dashDuration);
 
@@ -240,7 +241,37 @@ public class RootMotionCharacterController : MonoBehaviour
         controller.Move(new Vector3(playerVelocity.x, 0, 0) * Time.deltaTime);
     }
 
+    private void FinishedDashing()
+    {
+        isDashing = false;
+        Physics.IgnoreLayerCollision(3, 6, false);
+        this.playerVelocity.x = this.playerVelocity.x / dashStopForce;
+    }
 
+    private void DashDamage()
+    {
+        
+        Vector3 dashStart = new Vector3(this.transform.position.x, (this.transform.position.y + 0.75f), this.transform.position.z);
+        float distance = this.transform.rotation.y <= 0 ? distance = -7.3f : distance = 7.3f;
+        Vector3 dashEnd = new Vector3((this.transform.position.x + distance), (this.transform.position.y + 0.75f), this.transform.position.z);
+        //Debug.DrawLine(dashStart, dashEnd, Color.blue, 2.5f);
+
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(dashStart, dashEnd, 7.3f);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            RaycastHit hit = hits[i];
+            Debug.Log(hit.transform.tag);
+        }
+
+
+        
+    }
+
+    private void DashCooldown()
+    {
+        canDash = true;
+    }
     // Attacks
     private void StartSecondaryAttack()
     {
@@ -348,16 +379,7 @@ public class RootMotionCharacterController : MonoBehaviour
 
     }
 
-    private void FinishedDashing()
-    {
-        isDashing = false;
-        this.playerVelocity.x = this.playerVelocity.x / dashStopForce;
-    }
-
-    private void DashCooldown()
-    {
-        canDash = true;
-    }
+    
 
     private void ResetAttack()
     {

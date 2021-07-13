@@ -13,12 +13,10 @@ public class CraftingAvailable : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         crafting.canCraft = true;
-        Debug.Log(crafting.canCraft);
     }
 
     private void OnTriggerExit(Collider other)
     {
         crafting.canCraft = false;
-        Debug.Log(crafting.canCraft);
     }
 }

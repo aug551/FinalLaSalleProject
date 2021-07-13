@@ -14,7 +14,7 @@ public class LoadLevel : MonoBehaviour
             instance = GameManager.instance;
         }
 
-        instance.GetEnemies();
+        //instance.GetEnemies();
     }
 
     // Update is called once per frame
