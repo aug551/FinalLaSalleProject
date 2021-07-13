@@ -80,7 +80,6 @@ public class Archer : MonoBehaviour
         anim.SetBool("isAttacking", true);
 
         Vector3 direction = (player.position) - orbit.GetLocalPos().position;
-
         RaycastHit hit;
         projectileRay = new Ray(orbit.GetLocalPos().position, Vector3.Normalize(direction) * 10f);
 
@@ -89,6 +88,7 @@ public class Archer : MonoBehaviour
             lr.SetPosition(0, orbit.GetLocalPos().position);
             lr.SetPosition(1, hit.point);
             projectileDirection = Vector3.Normalize(hit.point - orbit.GetLocalPos().position);
+            Debug.Log(hit.transform.tag);
         }
 
         lr.startWidth = Mathf.Lerp(0, 0.1f, interp);

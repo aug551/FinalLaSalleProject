@@ -224,7 +224,7 @@ public class RootMotionCharacterController : MonoBehaviour
     private void StartDash()
     {
         anim.applyRootMotion = false;
-        Physics.IgnoreLayerCollision(3, 6, true);
+        Physics.IgnoreLayerCollision(3, 6, true); //Reference https://docs.unity3d.com/ScriptReference/Physics.IgnoreLayerCollision.html
         DashDamage();
         // Called to stop dashing
         Invoke("FinishedDashing", dashDuration);
@@ -250,18 +250,22 @@ public class RootMotionCharacterController : MonoBehaviour
 
     private void DashDamage()
     {
-        
         Vector3 dashStart = new Vector3(this.transform.position.x, (this.transform.position.y + 0.75f), this.transform.position.z);
-        float distance = this.transform.rotation.y <= 0 ? distance = -7.3f : distance = 7.3f;
-        Vector3 dashEnd = new Vector3((this.transform.position.x + distance), (this.transform.position.y + 0.75f), this.transform.position.z);
-        //Debug.DrawLine(dashStart, dashEnd, Color.blue, 2.5f);
+        //float distance = this.transform.rotation.y <= 0 ? distance = -7.3f : distance = 7.3f;
+        //Vector3 dashEnd = new Vector3((this.transform.position.x + distance), (this.transform.position.y + 0.75f), this.transform.position.z);
+        //Debug.DrawLine(dashStart, dashEnd, Color.blue, 2.5f); 
+        Vector3 forward = transform.TransformDirection(Vector3.forward * 7.3f); //Refernce https://docs.unity3d.com/ScriptReference/Transform.TransformDirection.html
+        //Debug.DrawRay(dashStart, forward, Color.green, 1.0f);
 
-        RaycastHit[] hits;
-        hits = Physics.RaycastAll(dashStart, dashEnd, 7.3f);
+        RaycastHit[] hits; //Refference https://docs.unity3d.com/ScriptReference/Physics.RaycastAll.html
+        hits = Physics.RaycastAll(dashStart, forward, 7.3f);
         for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
-            Debug.Log(hit.transform.tag);
+            if(hit.transform.TryGetComponent<EnemyHealth>(out EnemyHealth enemy))
+            {
+                hit.transform.GetComponent<EnemyHealth>().TakeDamage(50);
+            }
         }
 
 
