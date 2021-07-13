@@ -8,6 +8,7 @@ public class RootMotionCharacterController : MonoBehaviour
     private CharacterController controller;
     private GameObject grabbedObj;
     private TeleAttackDetect teleAtk;
+    private Controls controls;
 
     [SerializeField] private float runningSpeed = 1f;
 
@@ -59,7 +60,7 @@ public class RootMotionCharacterController : MonoBehaviour
         anim.SetFloat("RunSpeed", runningSpeed);
         controller = GetComponent<CharacterController>();
         teleAtk = GetComponentInChildren<TeleAttackDetect>();
-
+        controls = GetComponent<Controls>();
     }
 
     // Update is called once per frame
@@ -179,7 +180,7 @@ public class RootMotionCharacterController : MonoBehaviour
             }
         }
 
-        playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+        playerVelocity.y = Mathf.Sqrt(jumpHeight * -4.0f * gravity);
 
         currNVel = playerVelocity;
         this.isJumping = true;
@@ -191,7 +192,13 @@ public class RootMotionCharacterController : MonoBehaviour
         {
             AirControl();
         }
-
+      
+        int layerMask = 1 << 7;
+        RaycastHit hit;
+        if (Physics.Raycast(this.transform.position, Vector3.up, out hit, 2.1f, layerMask))
+        {
+            playerVelocity.y = -0.5f;
+        }
         canJump = false;
 
         canJump = CanWalljump || currentJumpAmount > 0;
@@ -282,19 +289,22 @@ public class RootMotionCharacterController : MonoBehaviour
         
         if (Input.GetButtonDown("Attack 2"))
         {
-            if(!teleAtk.holdingBlock)
+            if(!controls.isCraftingOpen)
             {
-                teleAtk.stopPull = false;
-                isGrabbing = true;
-                teleAtk.SetClosestObject();
-                if (teleAtk.Closest != null && grabbedObj == null)
+                if (!teleAtk.holdingBlock)
                 {
-                    grabbedObj = teleAtk.Closest;
+                    teleAtk.stopPull = false;
+                    isGrabbing = true;
+                    teleAtk.SetClosestObject();
+                    if (teleAtk.Closest != null && grabbedObj == null)
+                    {
+                        grabbedObj = teleAtk.Closest;
+                    }
                 }
-            }
-            else
-            {
-                teleAtk.ThrowBlock(teleAtk.closest.GetComponent<Rigidbody>());
+                else
+                {
+                    teleAtk.ThrowBlock(teleAtk.closest.GetComponent<Rigidbody>());
+                }
             }
         }
 
@@ -306,38 +316,41 @@ public class RootMotionCharacterController : MonoBehaviour
 
     private void HandlePrimaryAttack()
     {
+
         // Attack
-        if (anim.GetCurrentAnimatorClipInfo(1).Length > 0)
+        if (!controls.isCraftingOpen)
         {
-            int atkPhase = -1;
-
-            if (Input.GetButtonDown("Attack 1"))
+            if (anim.GetCurrentAnimatorClipInfo(1).Length > 0)
             {
-                if (anim.GetCurrentAnimatorClipInfo(1)[0].clip.name == "First Hit")
+                int atkPhase = -1;
+
+                if (Input.GetButtonDown("Attack 1"))
                 {
-                    atkPhase = 1;
-                }
-                else if (anim.GetCurrentAnimatorClipInfo(1)[0].clip.name == "Second Hit")
-                {
-                    atkPhase = 2;
+                    if (anim.GetCurrentAnimatorClipInfo(1)[0].clip.name == "First Hit")
+                    {
+                        atkPhase = 1;
+                    }
+                    else if (anim.GetCurrentAnimatorClipInfo(1)[0].clip.name == "Second Hit")
+                    {
+                        atkPhase = 2;
+                    }
+
+                    anim.SetBool("isAttacking", true);
+                    anim.SetInteger("AttackPhase", atkPhase);
                 }
 
-                anim.SetBool("isAttacking", true);
-                anim.SetInteger("AttackPhase", atkPhase);
             }
-
-
-        }
-        else
-        {
-            isAttacking = false;
-            anim.SetInteger("AttackPhase", -1);
-
-            if (Input.GetButtonDown("Attack 1"))
+            else
             {
-                anim.SetBool("isAttacking", true);
-                anim.SetInteger("AttackPhase", 0);
-                isAttacking = true;
+                isAttacking = false;
+                anim.SetInteger("AttackPhase", -1);
+
+                if (Input.GetButtonDown("Attack 1"))
+                {
+                    anim.SetBool("isAttacking", true);
+                    anim.SetInteger("AttackPhase", 0);
+                    isAttacking = true;
+                }
             }
         }
     }

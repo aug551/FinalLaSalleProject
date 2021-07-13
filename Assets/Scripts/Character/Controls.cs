@@ -11,6 +11,8 @@ public class Controls : MonoBehaviour
     CanvasGroup group;
     [SerializeField] GameObject pausePanel;
 
+    public bool isCraftingOpen = false;
+
     private bool isPaused = false;
 
     public bool isActive = false;
@@ -71,12 +73,14 @@ public class Controls : MonoBehaviour
             group.alpha = 1;
             group.blocksRaycasts = true;
             group.interactable = true;
+            isCraftingOpen = true;
         }
         else
         {
             group.alpha = 0;
             group.blocksRaycasts = false;
             group.interactable = false;
+            isCraftingOpen = false;
         }
     }
 
