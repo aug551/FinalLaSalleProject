@@ -17,6 +17,7 @@ TagManager:
   - Cube
   - Fire
   - Electricity
+  - Crafting
   layers:
   - Default
   - TransparentFX
@@ -24,8 +25,8 @@ TagManager:
   - player
   - Water
   - UI
-  - 
-  - 
+  - Enemy
+  - Ceiling
   - 
   - 
   - 

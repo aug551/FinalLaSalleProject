@@ -7,6 +7,7 @@ public class ThrowableBlock : MonoBehaviour
     public CubeExplode explode;
     public bool fired = false;
     public Vector3 currentForce;
+    public GameObject player;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,7 +20,8 @@ public class ThrowableBlock : MonoBehaviour
             }
             if (other.CompareTag("Player"))
             {
-                return;
+                other.GetComponent<CharacterHealth>().TakeDamage(20);
+                explode.Explode();
             }
             if (other.CompareTag("Wall"))
             {
@@ -31,5 +33,13 @@ public class ThrowableBlock : MonoBehaviour
     private void Start()
     {
         explode = GetComponent<CubeExplode>();
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    public void EnemyThrowBlock(Rigidbody cube)
+    {
+        cube.velocity = Vector3.zero;
+        cube.transform.LookAt(new Vector3 (player.transform.position.x, player.transform.position.y + 1.0f, player.transform.position.z));
+        cube.velocity = cube.transform.forward * 800f * Time.deltaTime;
     }
 }

@@ -331,7 +331,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 373402678877883967}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 4.05}
+  m_LocalPosition: {x: -0, y: 61.28, z: 9.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2419867643954146162}
@@ -1427,6 +1427,8 @@ GameObject:
   - component: {fileID: 2747092077082050070}
   - component: {fileID: 5322910986217002427}
   - component: {fileID: 7556709255601669099}
+  - component: {fileID: 2074975349}
+  - component: {fileID: 2074975355}
   m_Layer: 3
   m_Name: elVampiro
   m_TagString: Player
@@ -1459,6 +1461,7 @@ Transform:
   - {fileID: 3211413669869593350}
   - {fileID: 17820268}
   - {fileID: 359859655}
+  - {fileID: 995336328512014107}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -1511,8 +1514,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa2ddddfe5971e4eaafd8a8216e99c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runningSpeed: 1
-  gravity: -12
+  runningSpeed: 1.2
+  gravity: -20
   jumpHeight: 2
   airControl: 1
   jumpInputInfluence: 1
@@ -1560,6 +1563,39 @@ MonoBehaviour:
   hpSlider: {fileID: 0}
   gameOverPanel: {fileID: 0}
   characterStats: {fileID: 0}
+--- !u!114 &2074975349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3089126715573236168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23ab5e013e6d9f459dc9885ad1471b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  alreadyTele: 0
+  compare: 
+  actual: 
+--- !u!114 &2074975355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3089126715573236168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 602ab092aaea383489c1ff379104075a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryPanel: {fileID: 0}
+  crafitngPanel: {fileID: 0}
+  pausePanel: {fileID: 0}
+  isCraftingOpen: 0
+  isActive: 0
 --- !u!1 &3372715130783475953
 GameObject:
   m_ObjectHideFlags: 0
@@ -2917,6 +2953,65 @@ Transform:
   m_Father: {fileID: 7909809691429391334}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8341406311143413414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 995336328512014107}
+  - component: {fileID: 7179479990229687159}
+  - component: {fileID: 3881664765032104182}
+  m_Layer: 3
+  m_Name: ColliderObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &995336328512014107
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8341406311143413414}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2419867643954146162}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7179479990229687159
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8341406311143413414}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.40587458
+  m_Height: 2.3925283
+  m_Direction: 1
+  m_Center: {x: 0.39159256, y: 0.9213766, z: 0.1304335}
+--- !u!114 &3881664765032104182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8341406311143413414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a244a8908da2884ab330b3ee4a3cdcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 0}
 --- !u!1 &8393915258518559482
 GameObject:
   m_ObjectHideFlags: 0
@@ -3149,7 +3244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8882399695623070809}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.01, y: 13.74, z: 14.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2419867643954146162}
