@@ -16,17 +16,22 @@ public class CraftingUI : MonoBehaviour
     [SerializeField] MaterialSlots resultSlot;
     List<Item> items = new List<Item>();
     public Inventory inventory;
+    public bool canCraft = false;
 
     public void Craft()
     {
-        if (inventory.IsFull()) return;
-        if (currentRecipe)
+        Debug.Log(canCraft);
+        if(canCraft)
         {
-            if (currentRecipe.CanCraft(items))
+            if (inventory.IsFull()) return;
+            if (currentRecipe)
             {
-                CreateItem();
-                ConsumeMaterials(items);
-                resultSlot.RemoveFromSlot(currentRecipe.result);
+                if (currentRecipe.CanCraft(items))
+                {
+                    CreateItem();
+                    ConsumeMaterials(items);
+                    resultSlot.RemoveFromSlot(currentRecipe.result);
+                }
             }
         }
     }

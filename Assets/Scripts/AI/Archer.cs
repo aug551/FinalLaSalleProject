@@ -80,7 +80,6 @@ public class Archer : MonoBehaviour
         anim.SetBool("isAttacking", true);
 
         Vector3 direction = (player.position) - orbit.GetLocalPos().position;
-
         RaycastHit hit;
         projectileRay = new Ray(orbit.GetLocalPos().position, Vector3.Normalize(direction) * 10f);
 

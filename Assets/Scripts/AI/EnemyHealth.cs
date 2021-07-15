@@ -10,34 +10,42 @@ public class EnemyHealth : MonoBehaviour
     public GameObject itemString;
     private Animator animator;
 
-    public float attack = 10;
+    public float attack;
     public bool item = false;
 
     void Start()
     {
         MaxHealth = 100;
         currentHealth = MaxHealth;
-        //animator = GetComponent<Animator>();
+        attack = 10;
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
-            int generateItem = Random.Range(1, 3);
-            Debug.Log(generateItem);
-            if (generateItem == 1)
-            {
-                Instantiate(itemLeather, gameObject.transform.position, Quaternion.identity);
-
-            }
-            else
-            {
-                Instantiate(itemString, gameObject.transform.position, Quaternion.identity);
-            }
+            GenerateItem();
             Destroy(gameObject);
         }
+    }
+
+    public void GenerateItem()
+    {
+        int generateItem = Random.Range(1, 3);
+        if (generateItem == 1)
+        {
+            Instantiate(itemLeather, gameObject.transform.position, Quaternion.identity);
+
+        }
+        else
+        {
+            Instantiate(itemString, gameObject.transform.position, Quaternion.identity);
+        }
+    }
+
+    public void GetStats()
+    {
+        
     }
 }

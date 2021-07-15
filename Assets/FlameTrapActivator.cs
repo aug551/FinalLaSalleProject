@@ -55,7 +55,7 @@ public class FlameTrapActivator : MonoBehaviour
             
 
             countDownTime -= Time.deltaTime;
-            Debug.Log(countDownTime);
+            //Debug.Log(countDownTime);
 
             if (countDownTime <= 0)
             {
@@ -63,10 +63,6 @@ public class FlameTrapActivator : MonoBehaviour
                 rb.useGravity = true;
                 countDownUp = true;
                 
-
-
-
-
             }
         }
     }
@@ -76,11 +72,7 @@ public class FlameTrapActivator : MonoBehaviour
 
         if (other.CompareTag("Player") && countDownUp == true && canReset == true)
         {
-
-           
-            countDownTime = 3;
-            
-
+            countDownTime = 3;   
         }
 
 
@@ -92,5 +84,8 @@ public class FlameTrapActivator : MonoBehaviour
         ignitionParticles.Play();
         lightParticles.Play();
     }
+
+
+   
 }
 

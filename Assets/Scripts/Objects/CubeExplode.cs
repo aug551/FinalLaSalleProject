@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Refference : https://www.youtube.com/watch?v=s_v9JnTDCCY
+//Reference : https://www.youtube.com/watch?v=s_v9JnTDCCY
 public class CubeExplode : MonoBehaviour
 {
     float cubeSize = 0.2f;

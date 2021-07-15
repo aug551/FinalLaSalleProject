@@ -24,8 +24,7 @@ public class HallwayKnight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //osea q si creo una funcion q inicie la anim en vez q desde el start.
-        //notreAnimator.Play("SwordDown");
+        
         
     }
 

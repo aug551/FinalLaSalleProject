@@ -8,6 +8,7 @@ public class RootMotionCharacterController : MonoBehaviour
     private CharacterController controller;
     private GameObject grabbedObj;
     private TeleAttackDetect teleAtk;
+    private Controls controls;
 
     [SerializeField] private float runningSpeed = 1f;
 
@@ -30,7 +31,7 @@ public class RootMotionCharacterController : MonoBehaviour
     private bool isDashing = false;
     private bool canDash = true;
     [SerializeField] private float dashDistance = 5f;
-    [SerializeField] private float dashDuration = 0.20f;
+    [SerializeField] private float dashDuration = 0.40f;
     [SerializeField] private float dashStopForce = 3f;
     [SerializeField] private float dashCooldown = 5f;
 
@@ -48,6 +49,7 @@ public class RootMotionCharacterController : MonoBehaviour
     public bool CanWalljump { get => canWalljump; set => canWalljump = value; }
     public bool IsControlled { get => isControlled; set => isControlled = value; }
     public GameObject GrabbedObj { get => grabbedObj; set => grabbedObj = value; }
+    public bool IsDashing { get => isDashing; set => isDashing = value; }
 
 
 
@@ -57,9 +59,8 @@ public class RootMotionCharacterController : MonoBehaviour
         anim = GetComponent<Animator>();
         anim.SetFloat("RunSpeed", runningSpeed);
         controller = GetComponent<CharacterController>();
-        
         teleAtk = GetComponentInChildren<TeleAttackDetect>();
-
+        controls = GetComponent<Controls>();
     }
 
     // Update is called once per frame
@@ -179,7 +180,7 @@ public class RootMotionCharacterController : MonoBehaviour
             }
         }
 
-        playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+        playerVelocity.y = Mathf.Sqrt(jumpHeight * -4.0f * gravity);
 
         currNVel = playerVelocity;
         this.isJumping = true;
@@ -191,7 +192,13 @@ public class RootMotionCharacterController : MonoBehaviour
         {
             AirControl();
         }
-
+      
+        int layerMask = 1 << 7;
+        RaycastHit hit;
+        if (Physics.Raycast(this.transform.position, Vector3.up, out hit, 2.1f, layerMask))
+        {
+            playerVelocity.y = -0.5f;
+        }
         canJump = false;
 
         canJump = CanWalljump || currentJumpAmount > 0;
@@ -224,7 +231,8 @@ public class RootMotionCharacterController : MonoBehaviour
     private void StartDash()
     {
         anim.applyRootMotion = false;
-
+        Physics.IgnoreLayerCollision(3, 6, true); //Reference https://docs.unity3d.com/ScriptReference/Physics.IgnoreLayerCollision.html
+        DashDamage();
         // Called to stop dashing
         Invoke("FinishedDashing", dashDuration);
 
@@ -237,29 +245,66 @@ public class RootMotionCharacterController : MonoBehaviour
     private void Dash()
     {
         playerVelocity.x = (isJumping) ? (this.transform.forward.x * dashDistance) / 2 : this.transform.forward.x * dashDistance;
-        controller.Move(new Vector3(playerVelocity.x, this.transform.position.y, 0) * Time.deltaTime);
+        controller.Move(new Vector3(playerVelocity.x, 0, 0) * Time.deltaTime);
     }
 
+    private void FinishedDashing()
+    {
+        isDashing = false;
+        Physics.IgnoreLayerCollision(3, 6, false);
+        this.playerVelocity.x = this.playerVelocity.x / dashStopForce;
+    }
 
+    private void DashDamage()
+    {
+        Vector3 dashStart = new Vector3(this.transform.position.x, (this.transform.position.y + 0.75f), this.transform.position.z);
+        //float distance = this.transform.rotation.y <= 0 ? distance = -7.3f : distance = 7.3f;
+        //Vector3 dashEnd = new Vector3((this.transform.position.x + distance), (this.transform.position.y + 0.75f), this.transform.position.z);
+        //Debug.DrawLine(dashStart, dashEnd, Color.blue, 2.5f); 
+        Vector3 forward = transform.TransformDirection(Vector3.forward * 7.3f); //Refernce https://docs.unity3d.com/ScriptReference/Transform.TransformDirection.html
+        //Debug.DrawRay(dashStart, forward, Color.green, 1.0f);
+
+        RaycastHit[] hits; //Refference https://docs.unity3d.com/ScriptReference/Physics.RaycastAll.html
+        hits = Physics.RaycastAll(dashStart, forward, 7.3f);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            RaycastHit hit = hits[i];
+            if(hit.transform.TryGetComponent<EnemyHealth>(out EnemyHealth enemy))
+            {
+                hit.transform.GetComponent<EnemyHealth>().TakeDamage(50);
+            }
+        }
+
+
+        
+    }
+
+    private void DashCooldown()
+    {
+        canDash = true;
+    }
     // Attacks
     private void StartSecondaryAttack()
     {
         
         if (Input.GetButtonDown("Attack 2"))
         {
-            if(!teleAtk.holdingBlock)
+            if(!controls.isCraftingOpen)
             {
-                teleAtk.stopPull = false;
-                isGrabbing = true;
-                teleAtk.SetClosestObject();
-                if (teleAtk.Closest != null && grabbedObj == null)
+                if (!teleAtk.holdingBlock)
                 {
-                    grabbedObj = teleAtk.Closest;
+                    teleAtk.stopPull = false;
+                    isGrabbing = true;
+                    teleAtk.SetClosestObject();
+                    if (teleAtk.Closest != null && grabbedObj == null)
+                    {
+                        grabbedObj = teleAtk.Closest;
+                    }
                 }
-            }
-            else
-            {
-                teleAtk.ThrowBlock(teleAtk.closest.GetComponent<Rigidbody>());
+                else
+                {
+                    teleAtk.ThrowBlock(teleAtk.closest.GetComponent<Rigidbody>());
+                }
             }
         }
 
@@ -271,38 +316,41 @@ public class RootMotionCharacterController : MonoBehaviour
 
     private void HandlePrimaryAttack()
     {
+
         // Attack
-        if (anim.GetCurrentAnimatorClipInfo(1).Length > 0)
+        if (!controls.isCraftingOpen)
         {
-            int atkPhase = -1;
-
-            if (Input.GetButtonDown("Attack 1"))
+            if (anim.GetCurrentAnimatorClipInfo(1).Length > 0)
             {
-                if (anim.GetCurrentAnimatorClipInfo(1)[0].clip.name == "First Hit")
+                int atkPhase = -1;
+
+                if (Input.GetButtonDown("Attack 1"))
                 {
-                    atkPhase = 1;
-                }
-                else if (anim.GetCurrentAnimatorClipInfo(1)[0].clip.name == "Second Hit")
-                {
-                    atkPhase = 2;
+                    if (anim.GetCurrentAnimatorClipInfo(1)[0].clip.name == "First Hit")
+                    {
+                        atkPhase = 1;
+                    }
+                    else if (anim.GetCurrentAnimatorClipInfo(1)[0].clip.name == "Second Hit")
+                    {
+                        atkPhase = 2;
+                    }
+
+                    anim.SetBool("isAttacking", true);
+                    anim.SetInteger("AttackPhase", atkPhase);
                 }
 
-                anim.SetBool("isAttacking", true);
-                anim.SetInteger("AttackPhase", atkPhase);
             }
-
-
-        }
-        else
-        {
-            isAttacking = false;
-            anim.SetInteger("AttackPhase", -1);
-
-            if (Input.GetButtonDown("Attack 1"))
+            else
             {
-                anim.SetBool("isAttacking", true);
-                anim.SetInteger("AttackPhase", 0);
-                isAttacking = true;
+                isAttacking = false;
+                anim.SetInteger("AttackPhase", -1);
+
+                if (Input.GetButtonDown("Attack 1"))
+                {
+                    anim.SetBool("isAttacking", true);
+                    anim.SetInteger("AttackPhase", 0);
+                    isAttacking = true;
+                }
             }
         }
     }
@@ -348,16 +396,7 @@ public class RootMotionCharacterController : MonoBehaviour
 
     }
 
-    private void FinishedDashing()
-    {
-        isDashing = false;
-        this.playerVelocity.x = this.playerVelocity.x / dashStopForce;
-    }
-
-    private void DashCooldown()
-    {
-        canDash = true;
-    }
+    
 
     private void ResetAttack()
     {
@@ -373,7 +412,6 @@ public class RootMotionCharacterController : MonoBehaviour
             int crit = Random.Range(0, 100);
             if (crit<atk.CharacterStats.critChance)
             {
-                Debug.Log("crit");
                 foreach (EnemyHealth enemy in atk.Enemy)
                 {
                     if (enemy)
