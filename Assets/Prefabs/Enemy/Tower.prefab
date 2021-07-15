@@ -381,6 +381,7 @@ MonoBehaviour:
   itemLeather: {fileID: 2181059020417121920, guid: a58e645e4cb343b4da8918a6e60b8810, type: 3}
   itemString: {fileID: 7244651551123553768, guid: fd9d6a298c64caa4e97ca86b0602365e, type: 3}
   attack: 10
+  item: 0
 --- !u!1 &7972464282504719937
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public Player player;
-    private List<GameObject> listOfEnemies = new List<GameObject>();
 
     public Player Player { get => player; set => player = value; }
 
@@ -28,7 +27,10 @@ public class GameManager : MonoBehaviour
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         this.player.hp = player.GetComponent<CharacterHealth>().currentHealth;
-
+        this.player.position = player.transform.position;
+        this.player.level = -1;
+        this.player.enemies = GetEnemies();
+        Debug.Log(JsonUtility.ToJson(instance.player));
         GetComponentInChildren<SocketClient>().SaveGame();
     }
 
@@ -53,8 +55,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(index);
     }
 
-    public void GetEnemies()
+    public List<string> GetEnemies()
     {
+        List<string> listOfEnemies = new List<string>();
+
         Debug.Log(SceneManager.GetActiveScene().name);
         if (SceneManager.GetActiveScene().name.StartsWith("Level"))
         {
@@ -62,10 +66,16 @@ public class GameManager : MonoBehaviour
             listOfEnemies.Clear();
             foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
             {
-                listOfEnemies.Add(enemy);
+                listOfEnemies.Add(enemy.name);
             }
         }
         Debug.Log("Not a level.");
+        return listOfEnemies;
+    }
+
+    private void OnApplicationQuit()
+    {
+        if(SceneManager.GetActiveScene().name.StartsWith("Level")) SaveGame();
     }
 
 }

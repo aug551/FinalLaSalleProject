@@ -8,8 +8,10 @@ public class Player
     public string username;
     public string name;
     public string password;
-    public int level;
     public float hp;
+    public Vector3 position;
+    public int level;
+    public List<string> enemies = new List<string>();
 
     public Player(string username, string name, string password)
     {

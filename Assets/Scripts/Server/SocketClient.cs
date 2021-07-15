@@ -33,6 +33,9 @@ public class SocketClient : MonoBehaviour
     RSACryptoServiceProvider csp;
     string publicKeystr;
 
+    private bool isOffline = false;
+    public bool IsOffline { get => isOffline; }
+
 
     private void Start()
     {
@@ -40,7 +43,15 @@ public class SocketClient : MonoBehaviour
         invalidAccount.SetActive(false);
         existAccount.SetActive(false);
 
-        UpdatePublicKey();
+        try
+        {
+            UpdatePublicKey();
+        }
+        catch(SocketException e)
+        {
+            isOffline = true;
+            Debug.Log(e.Message);
+        }
     }
 
     private void UpdatePublicKey()
@@ -186,7 +197,6 @@ public class SocketClient : MonoBehaviour
         string _msg = "Create";
         instance.player = new Player(username, playerName, password);
         instance.player.hp = 100f;
-        instance.player.level = 1;
         _msg += JsonUtility.ToJson(instance.player);
         Debug.Log(_msg);
         Connect(host, port, instance);
@@ -195,20 +205,48 @@ public class SocketClient : MonoBehaviour
 
         existAccount.SetActive(reply.StartsWith("already_exists"));
 
-        if (reply.StartsWith("player_created")) instance.LoadScene("MainMenu");
+        if (reply.StartsWith("player_created"))
+        {
+            GetData();
+        }
 
         Disconnect();
     }
 
     public void SaveGame()
     {
-        string _msg = "Save";
-        _msg += JsonUtility.ToJson(instance.player);
-        Connect(host, port, instance);
-        Write(_msg);
-        string reply = Read();
-        Debug.Log(reply);
-        Disconnect();
+        if (!IsOffline)
+        {
+            string _msg = "Save";
+            _msg += JsonUtility.ToJson(instance.player);
+            Connect(host, port, instance);
+            Write(_msg);
+            string reply = Read();
+            Debug.Log(reply);
+            Disconnect();
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Level", instance.player.level);
+            PlayerPrefs.SetFloat("Hp", instance.player.hp);
+            PlayerPrefs.SetFloat("PositionX", instance.player.position.x);
+            PlayerPrefs.SetFloat("PositionY", instance.player.position.y);
+            PlayerPrefs.SetFloat("PositionZ", instance.player.position.z);
+
+            // Delete all enemies in playerprefs
+            for(int i = 0; PlayerPrefs.HasKey("Enemy" + i); i++)
+            {
+                PlayerPrefs.DeleteKey("Enemy" + i);
+            }
+
+            // Save all current enemies
+            for(int i = 0; i < instance.player.enemies.Count; i++)
+            {
+                PlayerPrefs.SetString("Enemy" + i, instance.player.enemies[i]);
+            }
+
+            PlayerPrefs.Save();
+        }
     }
 
     // Setting variables from input fields
@@ -227,6 +265,32 @@ public class SocketClient : MonoBehaviour
         this.password = password;
     }
 
+
+    public void PlayOffline()
+    {
+        instance.player = new Player("", "", "");
+
+        if (PlayerPrefs.HasKey("Level"))
+        {
+            instance.player.level = PlayerPrefs.GetInt("Level");
+            instance.player.hp = PlayerPrefs.GetFloat("Hp");
+            instance.player.position = new Vector3(
+                PlayerPrefs.GetFloat("PositionX"), PlayerPrefs.GetFloat("PositionY"), PlayerPrefs.GetFloat("PositionZ"));
+            
+            for (int i = 0; PlayerPrefs.HasKey("Enemy" + i); i++)
+            {
+                instance.player.enemies.Add(PlayerPrefs.GetString("Enemy" + i));
+            }
+        }
+        else
+        {
+            instance.player.level = 1;
+            instance.player.hp = 100f;
+
+        }
+
+        instance.LoadScene("MainMenu");
+    }
 }
 
 class PasswordFinder : IPasswordFinder

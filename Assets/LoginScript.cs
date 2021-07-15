@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class LoginScript : MonoBehaviour
 {
-    GameManager gameManager = GameManager.instance;
+    GameManager instance = GameManager.instance;
     [SerializeField] private GameObject loginPanel;
     [SerializeField] private GameObject createPanel;
+    [SerializeField] private GameObject offlinePanel;
 
     private void Start()
     {
-        LoginPlayer();
+        if (instance == null) { instance = GameManager.instance; }
+        if (instance.gameObject.GetComponent<SocketClient>().IsOffline)
+        {
+            NoConnection();
+        }
+        else
+        {
+            LoginPlayer();
+        }
     }
 
     public void LoginPlayer()
@@ -23,6 +32,13 @@ public class LoginScript : MonoBehaviour
     {
         loginPanel.SetActive(false);
         createPanel.SetActive(true);
+    }
+
+    public void NoConnection()
+    {
+        loginPanel.SetActive(false);
+        createPanel.SetActive(false);
+        offlinePanel.SetActive(true);
     }
 
 }
