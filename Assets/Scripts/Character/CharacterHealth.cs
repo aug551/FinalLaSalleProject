@@ -20,7 +20,7 @@ public class CharacterHealth : MonoBehaviour
     {
         characterStats = GetComponent<CharacterStats>();
         maxHealth = 100;
-        currentHealth = maxHealth;
+        currentHealth = PlayerPrefs.GetFloat("Hp");
         UpdateHpSlider();
         if (!instance) instance = GameManager.instance;
         //this.currentHealth = instance.player.hp;
