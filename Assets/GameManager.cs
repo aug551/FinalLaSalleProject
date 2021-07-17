@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -30,7 +31,6 @@ public class GameManager : MonoBehaviour
         this.player.position = player.transform.position;
         this.player.level = -1;
         this.player.enemies = GetEnemies();
-        Debug.Log(JsonUtility.ToJson(instance.player));
         GetComponentInChildren<SocketClient>().SaveGame();
     }
 
