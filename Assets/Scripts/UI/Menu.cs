@@ -93,7 +93,6 @@ public class Menu : MonoBehaviour
         {
             menu[i].SetActive(false);
         }
-
         HUD.SetActive(true);
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
