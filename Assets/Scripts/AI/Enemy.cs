@@ -94,7 +94,6 @@ public class Enemy : NPC
             if (distanceFromPlayer < aggroRadius || playerSight)
             {
                 PlayerAggro();
-                Debug.Log("hit");
             }
         }
         Idle();
@@ -155,11 +154,14 @@ public class Enemy : NPC
     {
         if(isIdle)
         {
+            this.isChasing = false;
+            agent.speed = 0;
             timeIdle += Time.deltaTime;
             if(timeIdle>=idleDuration)
             {
                 timeIdle = 0;
                 isIdle = false;
+                animator.SetBool("ChargeCooldown", false);
             }
         }
     }

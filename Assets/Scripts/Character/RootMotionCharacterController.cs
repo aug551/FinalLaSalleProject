@@ -266,12 +266,16 @@ public class RootMotionCharacterController : MonoBehaviour
 
         RaycastHit[] hits; //Refference https://docs.unity3d.com/ScriptReference/Physics.RaycastAll.html
         hits = Physics.RaycastAll(dashStart, forward, 7.3f);
+        string alreadyHit = null;
         for (int i = 0; i < hits.Length; i++)
         {
+            
             RaycastHit hit = hits[i];
-            if(hit.transform.TryGetComponent<EnemyHealth>(out EnemyHealth enemy))
+            Debug.Log(hit.transform.name);
+            if(hit.transform.TryGetComponent<EnemyHealth>(out EnemyHealth enemy) && alreadyHit!=hit.transform.name)
             {
                 hit.transform.GetComponent<EnemyHealth>().TakeDamage(50);
+                alreadyHit = hit.transform.name;
             }
         }
 
@@ -409,6 +413,7 @@ public class RootMotionCharacterController : MonoBehaviour
 
         if (atk.Enemy.Count > 0)
         {
+            Debug.Log("hit");
             int crit = Random.Range(0, 100);
             if (crit<atk.CharacterStats.critChance)
             {

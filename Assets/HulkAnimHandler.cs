@@ -47,7 +47,7 @@ public class HulkAnimHandler : EnemyAnimHandler
             timeCharging += Time.deltaTime;
             if (timeCharging >= timeCanCharge)
             {
-                //anim.SetBool("ChargeCooldown", true);
+                anim.SetBool("ChargeCooldown", true);
                 enemy.IsIdle = true;
                 timeCharging = 0;
             }

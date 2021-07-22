@@ -20,7 +20,7 @@ public class EnemyHealth : MonoBehaviour
         attack = 10;
     }
 
-    public virtual void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)
