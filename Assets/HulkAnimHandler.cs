@@ -10,7 +10,6 @@ public class HulkAnimHandler : EnemyAnimHandler
 
     private float timeCharging = 0.0f;
     private float timeCanCharge = 3.0f;
-    private bool alreadyHit = false;
 
     private void OnCollisionEnter(Collision collision)
     {
