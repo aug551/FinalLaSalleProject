@@ -134,7 +134,7 @@ public class RootMotionCharacterController : MonoBehaviour
     private void FinishedControl()
     {
         isControlled = false;
-        Debug.Log(IsControlled);
+
     }
     
     private void Move()

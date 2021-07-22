@@ -23,6 +23,9 @@ public class Enemy : NPC
     [SerializeField] float agentWalkSpeed;
     [SerializeField] float agentRunSpeed;
 
+    float timeIdle;
+    float idleDuration = 3.0f;
+
     [Header(" ")]
     //Distance Variables
     [SerializeField] Transform eyeTransfrom; //Where the monsters eyes are located
@@ -34,6 +37,7 @@ public class Enemy : NPC
     bool alreadyattacked;
     bool isChasing;
     bool isAttacking = false; // placeholder.. Change when there's a reply
+    bool isIdle = false;
 
     //other
     Animator animator;
@@ -48,6 +52,7 @@ public class Enemy : NPC
     public bool IsPatrolling { get => base.Patrolling; }
     public bool IsChasing { get => isChasing; }
     public bool IsAttacking { get => isAttacking; }
+    public bool IsIdle { get => isIdle; set => isIdle = value; }
 
     protected override void Awake()
     {
@@ -76,18 +81,23 @@ public class Enemy : NPC
         //else { playerSeen = false; }
 
         //Patrolling
-        if (distanceFromPlayer > aggroRadius && !playerSight)
+        if(!isIdle)
         {
-            base.Patrolling = true; 
-            agent.speed = agentWalkSpeed;
-            isChasing = false;
+            if (distanceFromPlayer > aggroRadius && !playerSight)
+            {
+                base.Patrolling = true;
+                agent.speed = agentWalkSpeed;
+                isChasing = false;
+            }
+            else { base.Patrolling = false; agent.speed = agentRunSpeed; }
+            //Aggro
+            if (distanceFromPlayer < aggroRadius || playerSight)
+            {
+                PlayerAggro();
+                Debug.Log("hit");
+            }
         }
-        else { base.Patrolling = false; agent.speed = agentRunSpeed; }
-        //Aggro
-        if (distanceFromPlayer < aggroRadius || playerSight)
-        {
-            PlayerAggro();
-        }
+        Idle();
     }
 
     void FixedUpdate()
@@ -125,12 +135,10 @@ public class Enemy : NPC
             Collider[] colliders = Physics.OverlapBox(atkCollider.bounds.center, atkCollider.bounds.extents, atkCollider.transform.rotation, playermask);   
             foreach (Collider col in colliders)
             {
-                Debug.Log("hit");
                 if (col.tag == "Player")
                 {
                     if (col.gameObject.TryGetComponent<CharacterHealth>(out CharacterHealth playerhealth))
                     {
-                        Debug.Log("hit");
                         playerhealth.TakeDamage(enemy.attack);
                     }
                 }
@@ -141,5 +149,18 @@ public class Enemy : NPC
     void AttackCD()
     {
         alreadyattacked = false;
+    }
+
+    void Idle()
+    {
+        if(isIdle)
+        {
+            timeIdle += Time.deltaTime;
+            if(timeIdle>=idleDuration)
+            {
+                timeIdle = 0;
+                isIdle = false;
+            }
+        }
     }
 }
