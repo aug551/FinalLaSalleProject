@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//Santiago Alvarez Cardenas
 public class EnemyCube : MonoBehaviour
 {
     [SerializeField] int speed;

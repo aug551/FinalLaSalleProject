@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Santiago Alvarez Cardenas
 public class FlameTrapActivator : MonoBehaviour
 {
     public Rigidbody rb;
