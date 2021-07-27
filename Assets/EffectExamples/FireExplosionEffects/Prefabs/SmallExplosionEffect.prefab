@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 199000011921653214}
   m_Layer: 0
   m_Name: Embers
-  m_TagString: Fire
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4761,7 +4761,7 @@ GameObject:
   - component: {fileID: 199000010351236460}
   m_Layer: 0
   m_Name: Fire
-  m_TagString: Fire
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9558,7 +9558,7 @@ GameObject:
   - component: {fileID: 199000012837251388}
   m_Layer: 0
   m_Name: Light
-  m_TagString: Fire
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14433,7 +14433,7 @@ GameObject:
   - component: {fileID: -1240437486912330991}
   m_Layer: 0
   m_Name: SmallExplosionEffect
-  m_TagString: Fire
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18112,7 +18112,7 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 1
   TriggerModule:

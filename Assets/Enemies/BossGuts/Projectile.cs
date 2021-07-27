@@ -30,7 +30,7 @@ public class Projectile : MonoBehaviour
     {
         if(other.tag=="Player")
         {
-            Debug.Log("Burn, Vampire!");
+            //Debug.Log("Burn, Vampire!");
             other.GetComponent<CharacterHealth>().TakeDamage(10);
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
