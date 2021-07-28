@@ -38,10 +38,11 @@ public class LoadLevel : MonoBehaviour
             enemiesToDestroy.Clear();
         }
 
-        if (instance.player.position != Vector3.zero || instance.player.position != null)
+        if (instance.player.position != Vector3.zero)
         {
             GameObject.FindGameObjectWithTag("Player").transform.position = instance.player.position;
         }
+        
 
     }
 
