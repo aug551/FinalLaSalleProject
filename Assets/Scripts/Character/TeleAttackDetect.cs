@@ -177,7 +177,10 @@ public class TeleAttackDetect : MonoBehaviour
                 enemyrigid.velocity = new Vector3(enemyrigid.transform.forward.x, enemyrigid.transform.forward.y, enemyrigid.transform.forward.z) * 8000f * Time.deltaTime;
                 if (Vector3.Distance(enemyrigid.transform.position, blockHolder.transform.position) < 1.5f)
                 {
-                    enemyrigid.velocity = Vector3.zero;
+                    enemyrigid.isKinematic = true;
+                    //enemyrigid.velocity = Vector3.zero;
+                    enemyrigid.transform.position = blockHolder.transform.position;
+                    enemyrigid.transform.LookAt(GetMousePosition());
                     holdingBlock = true;
                 }
             }
@@ -189,8 +192,7 @@ public class TeleAttackDetect : MonoBehaviour
         canGetBlock = false;
         enemiesInRange.Remove(closest);
         closest.tag = "Untagged";
-        mousePos = Input.mousePosition;
-        mousePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Mathf.Abs(Camera.main.transform.position.z)));
+        GetMousePosition();
         cube.useGravity = false;
         cube.isKinematic = false;
         cube.transform.LookAt(mousePos);
@@ -201,5 +203,11 @@ public class TeleAttackDetect : MonoBehaviour
         rmc.GrabbedObj = null;
     }
 
-    
+    private Vector3 GetMousePosition()
+    {
+        mousePos = Input.mousePosition;
+        mousePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Mathf.Abs(Camera.main.transform.position.z)));
+        return mousePos;
+    }
+
 }
