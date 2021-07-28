@@ -40,7 +40,7 @@ public class SkullEnemy : MonoBehaviour
         ball.transform.parent = null;
         ball.GetComponent<Rigidbody>().velocity=(rotationBall*100*Time.deltaTime);
 
-        Debug.Log(rotationBall);
+        //Debug.Log(rotationBall);
 
         //rotationBall = transform.LookAt(target);
 

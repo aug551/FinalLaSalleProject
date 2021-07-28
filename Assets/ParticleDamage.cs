@@ -6,7 +6,8 @@ using UnityEngine;
 public class ParticleDamage : MonoBehaviour
 {
     public Animator anim;
-    
+
+   
 
     // Start is called before the first frame update
     void Start()

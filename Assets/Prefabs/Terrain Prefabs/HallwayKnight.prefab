@@ -1949,8 +1949,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.4867148, y: 2.2979245, z: 2.1488292}
-  m_Center: {x: 0.7433475, y: 0.6489589, z: 0.57441366}
+  m_Size: {x: 3.695394, y: 1.2764986, z: 2.0164998}
+  m_Center: {x: 0.6355996, y: 1.1596695, z: 1.1389005}
 --- !u!114 &7197377593017318128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1965,8 +1965,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notreAnimator: {fileID: 3641350928701185456}
   frontCollider: {fileID: 7197377593017318129}
-  player: {fileID: 0}
-  attackTimes: 3
+  player: {fileID: 2419867643954146162, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
+  attackTimes: 20
   swordCollider: {fileID: 7197377593390668881}
 --- !u!1 &8024221483255443326
 GameObject:

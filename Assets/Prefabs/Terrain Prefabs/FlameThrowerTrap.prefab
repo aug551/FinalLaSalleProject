@@ -1,24 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &5294115852941668047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8102027878532333952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f67640cafa0ec624580f2ac050c990ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 8730652449682589603}
-  canReset: 0
-  countDownTime: 1
-  secForReset: 5
-  flamesParticles: {fileID: 5460356880976259584}
-  ignitionParticles: {fileID: 5460356869166767680}
-  lightParticles: {fileID: 5460544198939973710}
 --- !u!1 &5295098260072301254
 GameObject:
   m_ObjectHideFlags: 0
@@ -9913,7 +9894,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5293506013036939742}
-  - component: {fileID: 5294115853448300500}
   m_Layer: 0
   m_Name: FlameThrowerTrap
   m_TagString: Untagged
@@ -9940,18 +9920,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &5294115853448300500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5295098263632536938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12560c759d33b30468da8aed700fc270, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5295098263673247424
 GameObject:
   m_ObjectHideFlags: 0
@@ -19588,6 +19556,25 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &5294115852941668047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8102027878532333952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f67640cafa0ec624580f2ac050c990ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 8730652449682589603}
+  canReset: 0
+  countDownTime: 1
+  secForReset: 5
+  flamesParticles: {fileID: 5460356880976259584}
+  ignitionParticles: {fileID: 5460356869166767680}
+  lightParticles: {fileID: 5460544198939973710}
 --- !u!1001 &2780130546142503217
 PrefabInstance:
   m_ObjectHideFlags: 0

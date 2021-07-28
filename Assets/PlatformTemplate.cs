@@ -11,6 +11,7 @@ public class PlatformTemplate : MonoBehaviour
     private Vector3 startingPosition;
     public float secForReset;
     //private bool resetTimeFinished=false;
+    private Quaternion angle;
 
 
 
@@ -20,6 +21,7 @@ public class PlatformTemplate : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         startingPosition = transform.position;
+        angle = this.transform.rotation;
 
     }
 
@@ -36,6 +38,7 @@ public class PlatformTemplate : MonoBehaviour
             if(secForReset<=0)
             {
                 transform.position = startingPosition;
+                transform.rotation = angle;
                 rb.isKinematic = true;
                 rb.useGravity = false;
                 secForReset = 0;
