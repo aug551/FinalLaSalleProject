@@ -46,14 +46,21 @@ public class TimedFireTrap : MonoBehaviour
             {
                 TurnOn();
                 StartCoroutine(countDownOn);
+
+                timeOffUp = false;
             }
-            else if (timeOnUp == true && timeOffUp ==false)
+            if (timeOnUp == true && timeOffUp ==false)
             {
                 TurnOff();
                 StartCoroutine(countDownOff);
+
+                
+            }if(timeOffUp==true && timeOnUp==true)
+            {
+                timeOnUp = false;
             }
         }
-
+        
     }
 
     private IEnumerator StartCountDown(float secOn)
@@ -61,8 +68,9 @@ public class TimedFireTrap : MonoBehaviour
         timeOnUp = false;
 
         yield return new WaitForSeconds(secOn);
-
+       
         timeOnUp = true;
+        
         Debug.Log("CountDownFinished");
     }
 
@@ -72,7 +80,8 @@ public class TimedFireTrap : MonoBehaviour
 
         yield return new WaitForSeconds(secOff);
 
-        timeOffUp = true;
+        //if(secOff)
+        //timeOffUp = true;
     }
 
     private void TurnOn()
