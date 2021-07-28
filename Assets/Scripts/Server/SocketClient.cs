@@ -20,6 +20,8 @@ public class SocketClient : MonoBehaviour
 
     [SerializeField] private GameObject invalidAccount;
     [SerializeField] private GameObject existAccount;
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject loginCanvas;
     
 
     string host = "psg551.com";
@@ -160,7 +162,7 @@ public class SocketClient : MonoBehaviour
 
 
     // Server Methods
-    private void GetData()
+    public void GetData()
     {
         string _msg = "Open";
         instance.player = new Player(username, null, password);
@@ -185,14 +187,14 @@ public class SocketClient : MonoBehaviour
         else
         {
             instance.Player = Player.CreateFromJSON(reply);
-            instance.LoadScene("MainMenu");
+            LoadMainMenu(1);
         }
 
 
         Disconnect();
     }
 
-    private void CreateNew()
+    public void CreateNew()
     {
         string _msg = "Create";
         instance.player = new Player(username, playerName, password);
@@ -276,7 +278,7 @@ public class SocketClient : MonoBehaviour
             instance.player.hp = PlayerPrefs.GetFloat("Hp");
             instance.player.position = new Vector3(
                 PlayerPrefs.GetFloat("PositionX"), PlayerPrefs.GetFloat("PositionY"), PlayerPrefs.GetFloat("PositionZ"));
-            
+
             for (int i = 0; PlayerPrefs.HasKey("Enemy" + i); i++)
             {
                 instance.player.enemies.Add(PlayerPrefs.GetString("Enemy" + i));
@@ -289,7 +291,13 @@ public class SocketClient : MonoBehaviour
 
         }
 
-        instance.LoadScene("MainMenu");
+        LoadMainMenu(0);
+    }
+
+    private void LoadMainMenu(int status)
+    {
+        mainMenu.SetActive(true);
+        loginCanvas.SetActive(false);
     }
 }
 
