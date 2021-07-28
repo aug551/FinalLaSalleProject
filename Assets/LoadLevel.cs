@@ -5,6 +5,8 @@ using UnityEngine;
 public class LoadLevel : MonoBehaviour
 {
     GameManager instance;
+    GameObject[] enemiesInLevel;
+    [SerializeField] private GameObject nextLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +48,12 @@ public class LoadLevel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        enemiesInLevel = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemiesInLevel.Length <= 0)
+        {
+            Debug.Log("Empty");
+            nextLevel.SetActive(true);
+        }
     }
 
     public void SaveGame()

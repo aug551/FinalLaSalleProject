@@ -142,7 +142,10 @@ public class RootMotionCharacterController : MonoBehaviour
         // Move Left-Right or Idle
         if (Input.GetButton("Horizontal")) // && !IsGrabbing
         {
-            anim.SetBool("Move", true);
+            if (controller.isGrounded)
+            {
+                anim.SetBool("Move", true);
+            }
             this.transform.eulerAngles =
                 (Input.GetAxis("Horizontal") > 0) ? new Vector3(0, -90, 0) : new Vector3(0, 90, 0);
 
@@ -187,6 +190,8 @@ public class RootMotionCharacterController : MonoBehaviour
     }
     private void Jump()
     {
+        
+
         // For controlling mid-air
         if (airControl)
         {
@@ -278,8 +283,6 @@ public class RootMotionCharacterController : MonoBehaviour
                 alreadyHit = hit.transform.name;
             }
         }
-
-
         
     }
 
@@ -374,10 +377,6 @@ public class RootMotionCharacterController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
         }
     }
-
-
-
-
 
 
 
