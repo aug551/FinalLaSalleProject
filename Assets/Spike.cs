@@ -9,7 +9,7 @@ public class Spike : MonoBehaviour
     void Start()
     {
         spike = this.gameObject.GetComponent<BoxCollider>();
-        Invoke("DestroySpike", 0.3f);
+        Invoke("DestroySpike", 0.25f);
     }
     private void OnTriggerEnter(Collider other)
     {
