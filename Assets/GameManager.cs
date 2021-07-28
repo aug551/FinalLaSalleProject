@@ -78,4 +78,8 @@ public class GameManager : MonoBehaviour
         if(SceneManager.GetActiveScene().name.StartsWith("Level")) SaveGame();
     }
 
+    public void LoadNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 }

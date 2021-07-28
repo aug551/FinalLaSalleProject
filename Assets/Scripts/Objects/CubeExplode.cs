@@ -62,5 +62,6 @@ public class CubeExplode : MonoBehaviour
         piece.AddComponent<Rigidbody>();
         piece.GetComponent<Rigidbody>().mass = cubeSize;
         piece.AddComponent<DestroyAfter2>();
+        piece.GetComponent<Renderer>().material = this.GetComponent<Renderer>().material;
     }
 }

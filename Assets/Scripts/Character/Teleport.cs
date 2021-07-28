@@ -13,7 +13,7 @@ public class Teleport : MonoBehaviour
 
     void Start()
     {
-        //homeTele = GameObject.Find("HomeTeleport").gameObject;
+        homeTele = GameObject.Find("HomeTeleport").gameObject;
         player = GameObject.Find("Player").gameObject;
         lastTele = Vector3.zero;
     }
