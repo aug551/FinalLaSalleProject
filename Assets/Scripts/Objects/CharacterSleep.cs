@@ -22,7 +22,6 @@ public class CharacterSleep : MonoBehaviour
                 if (canSleep)
                 {
                     isAsleep = true;
-                    //MovePlayer();
                 }
             }
             else
@@ -44,11 +43,5 @@ public class CharacterSleep : MonoBehaviour
     {
         canSleep = false;
         isAsleep = false;
-    }
-
-    void MovePlayer()
-    {
-        player.transform.position = this.gameObject.transform.position;
-        player.transform.Rotate(0, 90, 0);
     }
 }

@@ -596,7 +596,7 @@ Transform:
   m_LocalScale: {x: 0.05835866, y: 2.6665592, z: 1.4438999}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &49325196
 Rigidbody:
@@ -1615,23 +1615,31 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1796616291}
     m_Modifications:
     - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.78000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.78000003
       objectReference: {fileID: 0}
     - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.315481
+      value: -28.189371
       objectReference: {fileID: 0}
     - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 48.622383
+      value: 23.6657
       objectReference: {fileID: 0}
     - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.4968953
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1639,7 +1647,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1647,7 +1655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1661,9 +1669,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4197254772943555354, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: points.Array.data[0]
+      value: 
+      objectReference: {fileID: 540966530}
+    - target: {fileID: 4197254772943555354, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: points.Array.data[1]
+      value: 
+      objectReference: {fileID: 577231557}
     - target: {fileID: 4197254772943555355, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
       propertyPath: m_Name
-      value: Hulk_Enemy
+      value: Hulk_Enemy (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
@@ -1672,6 +1688,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 147507719937881678, guid: f2d0f742161a0a4469902cd5707458f1, type: 3}
   m_PrefabInstance: {fileID: 853164614}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &198776336
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1796616291}
+    m_Modifications:
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.78000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.78000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 23.6657
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197254772943555354, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: points.Array.data[0]
+      value: 
+      objectReference: {fileID: 945226765}
+    - target: {fileID: 4197254772943555354, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: points.Array.data[1]
+      value: 
+      objectReference: {fileID: 508227277}
+    - target: {fileID: 4197254772943555355, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_Name
+      value: Hulk_Enemy (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
 --- !u!1001 &202802743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1798,6 +1887,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4afbd361bbed8b4bba13186814248b5, type: 3}
+--- !u!4 &206418666 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+  m_PrefabInstance: {fileID: 1973820600}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &210817444 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 1d402e25e58b8d144a8cee4a12633996, type: 3}
@@ -2016,7 +2110,7 @@ Transform:
   m_LocalScale: {x: 0.05835866, y: 2.6665592, z: 1.4438999}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!59 &273671050
 HingeJoint:
@@ -2137,6 +2231,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 562248451940684981, guid: 44f9ecbcb043c8e4cb99f8aef941907f, type: 3}
   m_PrefabInstance: {fileID: 1949334346}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &278666649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 278666650}
+  m_Layer: 0
+  m_Name: HulkEnemyWaypoint3 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &278666650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278666649}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -20.89452, y: 19.137617, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1796616291}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &288917704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2367,7 +2491,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &315537654
 MonoBehaviour:
@@ -3096,7 +3220,7 @@ Transform:
   m_LocalScale: {x: 0.05835866, y: 2.3316395, z: 1.4438999}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &353074053 stripped
 Transform:
@@ -3800,36 +3924,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2d0f742161a0a4469902cd5707458f1, type: 3}
---- !u!1 &428319134
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 428319135}
-  m_Layer: 0
-  m_Name: HulkEnemyWaypoint1 (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &428319135
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428319134}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.86, y: 23.77, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1796616291}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &433101083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4140,36 +4234,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4afbd361bbed8b4bba13186814248b5, type: 3}
---- !u!1 &447343211
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 447343212}
-  m_Layer: 0
-  m_Name: HulkEnemyWaypoint1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &447343212
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 447343211}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.36, y: 13.64, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1796616291}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &452249957
 GameObject:
   m_ObjectHideFlags: 0
@@ -4431,7 +4495,7 @@ RectTransform:
   - {fileID: 319141994}
   - {fileID: 555319952}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4772,6 +4836,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
   m_PrefabInstance: {fileID: 844032559}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &508227276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 508227277}
+  m_Layer: 0
+  m_Name: HulkEnemyWaypoint1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &508227277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508227276}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.0445194, y: 23.543318, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1796616291}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &515766648 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6918094583513030524, guid: 1a22229b3822e3e42a3dc8021c0b9e8b, type: 3}
@@ -4850,6 +4944,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2d0f742161a0a4469902cd5707458f1, type: 3}
+--- !u!1 &540966529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 540966530}
+  m_Layer: 0
+  m_Name: HulkEnemyWaypoint4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &540966530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540966529}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -20.97389, y: 23.543318, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1796616291}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &550093165
 GameObject:
   m_ObjectHideFlags: 0
@@ -5177,6 +5301,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 562248451940684981, guid: 44f9ecbcb043c8e4cb99f8aef941907f, type: 3}
   m_PrefabInstance: {fileID: 335828808}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &577231556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 577231557}
+  m_Layer: 0
+  m_Name: HulkEnemyWaypoint4 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &577231557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577231556}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -34.82389, y: 23.543318, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1796616291}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &584425846 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 798745396252515299, guid: cfccf539ae0733440a02679ec83776a5, type: 3}
@@ -6780,6 +6934,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 713055449}
   m_CullTransparentMesh: 1
+--- !u!4 &716038809 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+  m_PrefabInstance: {fileID: 177576110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &720351915
 GameObject:
   m_ObjectHideFlags: 0
@@ -6814,7 +6973,7 @@ Transform:
   - {fileID: 103180628}
   - {fileID: 1855180045}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &727190970
 PrefabInstance:
@@ -7250,13 +7409,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 786729140}
-  m_LocalRotation: {x: 1.7022484e-11, y: 0.9998907, z: 0.014787015, w: -0.0000000011510521}
+  m_LocalRotation: {x: -5.0635344e-19, y: 0.9998907, z: 0.014787012, w: 1.5582349e-16}
   m_LocalPosition: {x: 0, y: 2, z: 14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1345203980}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!1 &788777656 stripped
 GameObject:
@@ -7509,6 +7668,36 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &819823230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 819823231}
+  m_Layer: 0
+  m_Name: HulkEnemyWaypoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &819823231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819823230}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.0445194, y: 13.817617, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1796616291}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &820954994 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 705912893004800712, guid: 1ea1f6c7f2ce5b44c9c5714c0e1d6936, type: 3}
@@ -8191,11 +8380,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 906772055}
   m_CullTransparentMesh: 1
---- !u!4 &907903875 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-  m_PrefabInstance: {fileID: 1406304933}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &916022181 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 147507719937881678, guid: c4afbd361bbed8b4bba13186814248b5, type: 3}
@@ -8232,6 +8416,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1 &945226764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 945226765}
+  m_Layer: 0
+  m_Name: HulkEnemyWaypoint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &945226765
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945226764}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.805481, y: 23.543318, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1796616291}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &945919445
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9404,7 +9618,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1075400938
 MonoBehaviour:
@@ -9511,12 +9725,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094075544}
-  m_LocalRotation: {x: 1.7022484e-11, y: 0.9998907, z: 0.014787015, w: -0.0000000011510521}
+  m_LocalRotation: {x: -5.0635344e-19, y: 0.9998907, z: 0.014787012, w: 1.5582349e-16}
   m_LocalPosition: {x: 0, y: 2, z: 14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1094075548
 MonoBehaviour:
@@ -9998,6 +10212,36 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1169780490}
   m_Mesh: {fileID: -1550514412580984892, guid: e917cb8368f90b04a94e2177ba825a33, type: 3}
+--- !u!1 &1179484655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1179484656}
+  m_Layer: 0
+  m_Name: HulkEnemyWaypoint3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1179484656
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179484655}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.06, y: 19.137617, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1796616291}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1182948046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10243,71 +10487,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 147507719937881678, guid: c4afbd361bbed8b4bba13186814248b5, type: 3}
   m_PrefabInstance: {fileID: 164831297}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1192066561
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1796616291}
-    m_Modifications:
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.78000003
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.78000003
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.3133073
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 23.841097
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4197254772943555355, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_Name
-      value: Hulk_Enemy
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
 --- !u!4 &1192459158 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 798745396252515299, guid: cfccf539ae0733440a02679ec83776a5, type: 3}
@@ -11161,11 +11340,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 147507719937881678, guid: c4afbd361bbed8b4bba13186814248b5, type: 3}
   m_PrefabInstance: {fileID: 1188732728}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1327942429 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-  m_PrefabInstance: {fileID: 1192066561}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1333592593
 GameObject:
   m_ObjectHideFlags: 0
@@ -11676,36 +11850,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7200045910487832728, guid: de8d4dc59604f9d4f94174122f79eb5e, type: 3}
   m_PrefabInstance: {fileID: 623673611}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1358430372
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1358430373}
-  m_Layer: 0
-  m_Name: HulkEnemyWaypoint1 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1358430373
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1358430372}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -29.11, y: 13.92, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1796616291}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1364180727
 GameObject:
   m_ObjectHideFlags: 0
@@ -11938,79 +12082,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 147507719937881678, guid: f2d0f742161a0a4469902cd5707458f1, type: 3}
   m_PrefabInstance: {fileID: 1888581930}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1406304933
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1796616291}
-    m_Modifications:
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.78000003
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.78000003
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -13.96
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 14.49449
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4197254772943555354, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: points.Array.data[0]
-      value: 
-      objectReference: {fileID: 447343212}
-    - target: {fileID: 4197254772943555354, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: points.Array.data[1]
-      value: 
-      objectReference: {fileID: 1358430373}
-    - target: {fileID: 4197254772943555355, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
-      propertyPath: m_Name
-      value: Hulk_Enemy (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
 --- !u!4 &1412415429 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 798745396252515299, guid: cfccf539ae0733440a02679ec83776a5, type: 3}
@@ -12238,6 +12309,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 147507719937881678, guid: c4afbd361bbed8b4bba13186814248b5, type: 3}
   m_PrefabInstance: {fileID: 245876670}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1432007712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1432007713}
+  m_Layer: 0
+  m_Name: HulkEnemyWaypoint2 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1432007713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432007712}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -20.89452, y: 13.817617, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1796616291}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1433207136 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 147507719937881678, guid: c4afbd361bbed8b4bba13186814248b5, type: 3}
@@ -12850,6 +12951,11 @@ Rigidbody:
 Transform:
   m_CorrespondingSourceObject: {fileID: 147507719937881678, guid: f2d0f742161a0a4469902cd5707458f1, type: 3}
   m_PrefabInstance: {fileID: 72939221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1531188969 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+  m_PrefabInstance: {fileID: 198776336}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1534680239 stripped
 Transform:
@@ -15186,7 +15292,7 @@ Transform:
   m_Children:
   - {fileID: 210817444}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1760532388
 MonoBehaviour:
@@ -15554,14 +15660,20 @@ Transform:
   - {fileID: 502098519}
   - {fileID: 1204875257}
   - {fileID: 2143756480}
-  - {fileID: 907903875}
-  - {fileID: 447343212}
-  - {fileID: 1358430373}
-  - {fileID: 1327942429}
-  - {fileID: 428319135}
-  - {fileID: 2099998140}
+  - {fileID: 1531188969}
+  - {fileID: 945226765}
+  - {fileID: 508227277}
+  - {fileID: 1952094746}
+  - {fileID: 819823231}
+  - {fileID: 1432007713}
+  - {fileID: 206418666}
+  - {fileID: 1179484656}
+  - {fileID: 278666650}
+  - {fileID: 716038809}
+  - {fileID: 540966530}
+  - {fileID: 577231557}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1811097541
 PrefabInstance:
@@ -15840,7 +15952,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2419867643954146162, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.87
+      value: 4.93
       objectReference: {fileID: 0}
     - target: {fileID: 2419867643954146162, guid: 2f943b4aab1eb4748863249931730e30, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16790,6 +16902,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44f9ecbcb043c8e4cb99f8aef941907f, type: 3}
+--- !u!4 &1952094746 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+  m_PrefabInstance: {fileID: 2145298696}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1952670725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17081,6 +17198,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1970873327}
   m_CullTransparentMesh: 1
+--- !u!1001 &1973820600
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1796616291}
+    m_Modifications:
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.78000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.78000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -14.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 19.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197254772943555354, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: points.Array.data[0]
+      value: 
+      objectReference: {fileID: 1179484656}
+    - target: {fileID: 4197254772943555354, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: points.Array.data[1]
+      value: 
+      objectReference: {fileID: 278666650}
+    - target: {fileID: 4197254772943555355, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_Name
+      value: Hulk_Enemy (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
 --- !u!1001 &1975822866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17606,7 +17796,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2066391743 stripped
 Transform:
@@ -17945,36 +18135,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 798745396252515299, guid: cfccf539ae0733440a02679ec83776a5, type: 3}
   m_PrefabInstance: {fileID: 1137061122}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2099998139
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2099998140}
-  m_Layer: 0
-  m_Name: HulkEnemyWaypoint1 (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2099998140
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2099998139}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.56, y: 23.551, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1796616291}
-  m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2100024323
 GameObject:
   m_ObjectHideFlags: 0
@@ -18370,6 +18530,79 @@ Transform:
   m_Father: {fileID: 1796616291}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2145298696
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1796616291}
+    m_Modifications:
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.78000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.78000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -14.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563601121222939041, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197254772943555354, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: points.Array.data[0]
+      value: 
+      objectReference: {fileID: 819823231}
+    - target: {fileID: 4197254772943555354, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: points.Array.data[1]
+      value: 
+      objectReference: {fileID: 1432007713}
+    - target: {fileID: 4197254772943555355, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
+      propertyPath: m_Name
+      value: Hulk_Enemy (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 09437963341c6194aad3f6fcb8798728, type: 3}
 --- !u!1001 &3227874635478311843
 PrefabInstance:
   m_ObjectHideFlags: 0

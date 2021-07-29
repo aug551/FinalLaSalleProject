@@ -78,18 +78,15 @@ public class Archer : MonoBehaviour
     void Aim(float interp)
     {
         anim.SetBool("isAttacking", true);
-
         Vector3 direction = (player.position) - orbit.GetLocalPos().position;
         RaycastHit hit;
         projectileRay = new Ray(orbit.GetLocalPos().position, Vector3.Normalize(direction) * 10f);
-
         if (!alreadyShot && Physics.Raycast(projectileRay, out hit, 25f))
         {
             lr.SetPosition(0, orbit.GetLocalPos().position);
             lr.SetPosition(1, hit.point);
             projectileDirection = Vector3.Normalize(hit.point - orbit.GetLocalPos().position);
         }
-
         lr.startWidth = Mathf.Lerp(0, 0.1f, interp);
         lr.endWidth = Mathf.Lerp(0, 0.1f, interp);
     }
@@ -107,7 +104,6 @@ public class Archer : MonoBehaviour
             lr.SetPosition(0, orbit.GetLocalPos().position);
             lr.SetPosition(1, projectileDirection * 25f);
         }
-
         Invoke("SummonProjectile", 0.2f);
         Invoke("ShootCooldown", firingDelay);
     }
@@ -117,13 +113,10 @@ public class Archer : MonoBehaviour
         lr.startWidth = 0f;
         lr.endWidth = 0f;
         interT = 0f;
-
         GameObject projectile = Instantiate(arrow, orbit.GetLocalPos().position, Quaternion.identity);
         Rigidbody rigid = projectile.GetComponent<Rigidbody>();
         projectile.transform.LookAt(player.transform.position);
         rigid.AddForce(projectile.transform.forward * this.projectileSpeed, ForceMode.Impulse);
-
-
     }
 
     private void ShootCooldown()
