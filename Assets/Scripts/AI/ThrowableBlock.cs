@@ -8,6 +8,7 @@ public class ThrowableBlock : MonoBehaviour
     public bool fired = false;
     public Vector3 currentForce;
     public GameObject player;
+    private bool enemyblock = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,11 +21,19 @@ public class ThrowableBlock : MonoBehaviour
             }
             if (other.CompareTag("Player"))
             {
-                other.GetComponent<CharacterHealth>().TakeDamage(20);
+                if (this.enemyblock)
+                {
+                    other.GetComponent<CharacterHealth>().TakeDamage(20);
+                }
                 explode.Explode();
             }
             if (other.CompareTag("Wall"))
             {
+                explode.Explode();
+            }
+            if (other.CompareTag("Cube"))
+            {
+                other.GetComponent<ThrowableBlock>().explode.Explode();
                 explode.Explode();
             }
         }
@@ -41,5 +50,6 @@ public class ThrowableBlock : MonoBehaviour
         cube.velocity = Vector3.zero;
         cube.transform.LookAt(new Vector3 (player.transform.position.x, player.transform.position.y + 1.0f, player.transform.position.z));
         cube.velocity = cube.transform.forward * 800f * Time.deltaTime;
+        enemyblock = true;
     }
 }

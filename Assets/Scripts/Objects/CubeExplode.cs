@@ -6,7 +6,7 @@ using UnityEngine;
 public class CubeExplode : MonoBehaviour
 {
     float cubeSize = 0.2f;
-    float cubesInRow = 4;
+    float cubesInRow = 2;
 
     float cubePivotDistance;
     Vector3 cubesPivot;
@@ -28,7 +28,7 @@ public class CubeExplode : MonoBehaviour
     public void Explode()
     {
         gameObject.SetActive(false);
-        for (int x = 0; x<cubesInRow; x++)
+        for (int x = 0; x < cubesInRow; x++)
         {
             for (int y = 0; y < cubesInRow; y++)
             {
@@ -49,6 +49,8 @@ public class CubeExplode : MonoBehaviour
             }
         }
 
+        Destroy(this.gameObject);
+
     }
 
     void CreatePiece(int x, int y, int z)
@@ -62,6 +64,6 @@ public class CubeExplode : MonoBehaviour
         piece.AddComponent<Rigidbody>();
         piece.GetComponent<Rigidbody>().mass = cubeSize;
         piece.AddComponent<DestroyAfter2>();
-        piece.GetComponent<Renderer>().material = this.GetComponent<Renderer>().material;
+        piece.GetComponent<Renderer>().material = this.GetComponentInChildren<Renderer>().material;
     }
 }

@@ -28,7 +28,6 @@ public class LockedDoor : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("entered");
         text.enabled = true;
         text.text = "Need Key to enter";
         if (inventory.ContainsItem(key))

@@ -62,6 +62,14 @@ public class TeleAttackDetect : MonoBehaviour
                 timeElasped = 0;
             }
         }
+        foreach(GameObject g in enemiesInRange)
+        {
+            if (!g)
+            {
+                enemiesInRange.Remove(g);
+                break;
+            }
+        }
     }
 
     public void SetClosestObject()
@@ -137,10 +145,10 @@ public class TeleAttackDetect : MonoBehaviour
 
     private void HandleSecondaryAttack()
     {
-        // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
         if (rmc.GrabbedObj && rmc.IsGrabbing)
         {
             Rigidbody enemyrigid = rmc.GrabbedObj.GetComponent<Rigidbody>();
+            enemyrigid.GetComponent<Collider>().isTrigger = true;
             if (closest.TryGetComponent<CubeCooldown>(out CubeCooldown cube))
             {
                 if (!closest.GetComponent<CubeCooldown>().onCooldown)

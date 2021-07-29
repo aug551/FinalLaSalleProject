@@ -276,7 +276,6 @@ public class RootMotionCharacterController : MonoBehaviour
         {
             
             RaycastHit hit = hits[i];
-            Debug.Log(hit.transform.name);
             if(hit.transform.TryGetComponent<EnemyHealth>(out EnemyHealth enemy) && alreadyHit!=hit.transform.name)
             {
                 hit.transform.GetComponent<EnemyHealth>().TakeDamage(50);
