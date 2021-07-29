@@ -26,7 +26,7 @@ public class TimedFireTrap : MonoBehaviour
     private void Update()
     {
         Timer();
-        Debug.Log("Timer: " + seconds);
+        //Debug.Log("Timer: " + seconds);
     }
 
 
