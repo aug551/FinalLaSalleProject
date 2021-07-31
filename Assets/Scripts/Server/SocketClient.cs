@@ -71,23 +71,28 @@ public class SocketClient : MonoBehaviour
         //string serverKey = Read();
         Debug.Log(serverKey);
 
-        if (File.Exists(path_to_key))
-        {
-            StreamReader sReader = new StreamReader(path_to_key);
-            publicKeystr = sReader.ReadToEnd();
-            Debug.Log(publicKeystr == serverKey);
-            if (publicKeystr != serverKey)
-            {
-                File.WriteAllText(path_to_key, serverKey);
-                publicKeystr = serverKey;
-            }
-            sReader.Close();
-        }
-        else
-        {
-            File.WriteAllText(path_to_key, serverKey);
-            publicKeystr = serverKey;
-        }
+        //if (File.Exists(path_to_key))
+        //{
+        //    StreamReader sReader = new StreamReader(path_to_key);
+        //    publicKeystr = sReader.ReadToEnd();
+        //    Debug.Log(publicKeystr == serverKey);
+        //    if (publicKeystr != serverKey)
+        //    {
+        //        File.WriteAllText(path_to_key, serverKey);
+        //        publicKeystr = serverKey;
+        //    }
+        //    sReader.Close();
+        //}
+        //else
+        //{
+        //    File.WriteAllText(path_to_key, serverKey);
+        //    publicKeystr = serverKey;
+        //}
+
+        PlayerPrefs.SetString("key", serverKey);
+        PlayerPrefs.Save();
+
+        publicKeystr = serverKey;
 
         TextReader textReader = new StringReader(publicKeystr);
         PemReader pemReader = new PemReader(textReader, new PasswordFinder("platformgame"));
