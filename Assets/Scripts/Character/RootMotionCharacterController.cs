@@ -190,14 +190,11 @@ public class RootMotionCharacterController : MonoBehaviour
     }
     private void Jump()
     {
-        
-
         // For controlling mid-air
         if (airControl)
         {
             AirControl();
         }
-      
         int layerMask = 1 << 7;
         RaycastHit hit;
         if (Physics.Raycast(this.transform.position, Vector3.up, out hit, 2.1f, layerMask))
@@ -205,11 +202,10 @@ public class RootMotionCharacterController : MonoBehaviour
             playerVelocity.y = -0.5f;
         }
         canJump = false;
-
         canJump = CanWalljump || currentJumpAmount > 0;
-
         controller.Move(new Vector3(playerVelocity.x, playerVelocity.y, 0) * Time.deltaTime);
     }
+
     private void AirControl()
     {
         if (Input.GetButton("Horizontal"))
@@ -240,10 +236,8 @@ public class RootMotionCharacterController : MonoBehaviour
         DashDamage();
         // Called to stop dashing
         Invoke("FinishedDashing", dashDuration);
-
         // Called to give cooldowns to the dash
         Invoke("DashCooldown", dashCooldown);
-
         this.isDashing = true;
         this.canDash = false;
     }
@@ -265,16 +259,12 @@ public class RootMotionCharacterController : MonoBehaviour
         Vector3 dashStart = new Vector3(this.transform.position.x, (this.transform.position.y + 0.75f), this.transform.position.z);
         //float distance = this.transform.rotation.y <= 0 ? distance = -7.3f : distance = 7.3f;
         //Vector3 dashEnd = new Vector3((this.transform.position.x + distance), (this.transform.position.y + 0.75f), this.transform.position.z);
-        //Debug.DrawLine(dashStart, dashEnd, Color.blue, 2.5f); 
         Vector3 forward = transform.TransformDirection(Vector3.forward * 7.3f); //Refernce https://docs.unity3d.com/ScriptReference/Transform.TransformDirection.html
-        //Debug.DrawRay(dashStart, forward, Color.green, 1.0f);
-
         RaycastHit[] hits; //Refference https://docs.unity3d.com/ScriptReference/Physics.RaycastAll.html
         hits = Physics.RaycastAll(dashStart, forward, 7.3f);
         string alreadyHit = null;
         for (int i = 0; i < hits.Length; i++)
         {
-            
             RaycastHit hit = hits[i];
             if(hit.transform.TryGetComponent<EnemyHealth>(out EnemyHealth enemy) && alreadyHit!=hit.transform.name)
             {
@@ -282,7 +272,6 @@ public class RootMotionCharacterController : MonoBehaviour
                 alreadyHit = hit.transform.name;
             }
         }
-        
     }
 
     private void DashCooldown()
