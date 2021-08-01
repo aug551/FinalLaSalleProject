@@ -13,7 +13,7 @@ public class Menu : MonoBehaviour
     private void Awake()
     {
         isPaused = false;
-        if (SceneManager.GetActiveScene().buildIndex >= 1)
+        if (SceneManager.GetActiveScene().buildIndex != 0)
         {
             gameScene = true;
         }

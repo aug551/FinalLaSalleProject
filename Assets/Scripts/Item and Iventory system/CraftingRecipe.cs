@@ -12,10 +12,10 @@ public class CraftingRecipe : ScriptableObject
     // Author: Kevin Charron https://www.youtube.com/watch?v=gZsJ_rG5hdo
     //=============================================================================
 
-    [Header("The int variable is for the amount needed of each (Ex: Amount needed for item[0] = int[0] ")] //might not use this afterall
+    [Header("The int variable is for the amount needed of each (Ex: Amount needed for item[0] = int[0] ")]
 
     [SerializeField] public List<Item> materialNeeded;
-    [SerializeField] public List<int> amoutneeded; //might not use this afterall
+    [SerializeField] public List<int> amoutneeded;
     [SerializeField] public Item result;
 
 
